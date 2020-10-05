@@ -10,7 +10,7 @@ public class Landmark {
 	private String category;
 	private String name;
 	private String description;
-	//private String venueType;
+	private String venueType;
 	private List<String> images;
 	//pendingApproval default should be true until an Admin approves the landmark addition.
 	private boolean pendingApproval;
@@ -49,6 +49,12 @@ public class Landmark {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getVenueType() {
+		return venueType;
+	}
+	public void setVenueType(String venueType) {
+		this.venueType = venueType;
 	}
 	public List<String> getImages() {
 		return images;
