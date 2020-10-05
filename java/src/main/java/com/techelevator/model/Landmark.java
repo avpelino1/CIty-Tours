@@ -12,6 +12,7 @@ public class Landmark {
 	private String description;
 	//private String venueType;
 	private List<String> images;
+	//pendingApproval default should be true until an Admin approves the landmark addition.
 	private boolean pendingApproval;
 	public Long getId() {
 		return id;
