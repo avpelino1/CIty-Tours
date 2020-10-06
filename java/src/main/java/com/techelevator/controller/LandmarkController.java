@@ -7,22 +7,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LandmarkController {
 
-	@RequestMapping(value="/landmarks/all", method=RequestMethod.GET)
+	@RequestMapping(path="/landmarks/all", method=RequestMethod.GET)
 	public void allLandmarks() {}
 	
-	@RequestMapping(value="/landmarks/:id", method=RequestMethod.GET)
+	@RequestMapping(path="/landmarks/:id", method=RequestMethod.GET)
 	public void landmarkDetails() {}
 	
-	@RequestMapping(value="/landmarks/add", method=RequestMethod.POST)
+	@RequestMapping(path="/landmarks/add", method=RequestMethod.POST)
 	public void addLandmark() {}
 	
-	@RequestMapping(value="/landmarks/pending", method=RequestMethod.GET)
+	@RequestMapping(path="/landmarks/pending", method=RequestMethod.GET)
 	public void pendingLandmarks() {}
 	
-	@RequestMapping(value="/landmarks/pending/:id/approve", method=RequestMethod.PUT)
+	@RequestMapping(path="/landmarks/pending/:id/approve", method=RequestMethod.PUT)
 	public void approvePendingLandmark() {}
 	
-	@RequestMapping(value="/landmarks/pending/:id/deny", method=RequestMethod.DELETE)
+	@RequestMapping(path="/landmarks/pending/:id/deny", method=RequestMethod.DELETE)
 	public void denyPendingLandmark() {}
 	
 }
