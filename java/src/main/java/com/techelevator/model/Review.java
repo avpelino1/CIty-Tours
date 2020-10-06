@@ -8,8 +8,8 @@ public class Review {
 	private String title;
 	private String description;
 	private List<String> images;
-	private Long thumbsUp;
-	private Long thumbsDown;
+	private boolean thumbsUp;
+	private boolean thumbsDown;
 	private Long landmarkId;
 	
 	public Long getId() {
@@ -36,16 +36,16 @@ public class Review {
 	public void setImages(List<String> images) {
 		this.images = images;
 	}
-	public Long getThumbsUp() {
+	public boolean getThumbsUp() {
 		return thumbsUp;
 	}
-	public void setThumbsUp(Long thumbsUp) {
+	public void setThumbsUp(boolean thumbsUp) {
 		this.thumbsUp = thumbsUp;
 	}
-	public Long getThumbsDown() {
+	public boolean getThumbsDown() {
 		return thumbsDown;
 	}
-	public void setThumbsDown(Long thumbsDown) {
+	public void setThumbsDown(boolean thumbsDown) {
 		this.thumbsDown = thumbsDown;
 	}
 	public Long getLandmarkId() {
