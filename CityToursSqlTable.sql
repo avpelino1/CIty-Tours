@@ -86,3 +86,12 @@ CONSTRAINT fk_review_id FOREIGN KEY (review_id) REFERENCES review
 
 );
 
+CREATE TABLE accessibility
+(
+itinerary_id int,
+user_id int,
+
+CONSTRAINT fk_itinerary_id FOREIGN KEY (itinerary_id) REFERENCES itinerary,
+CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users
+
+);

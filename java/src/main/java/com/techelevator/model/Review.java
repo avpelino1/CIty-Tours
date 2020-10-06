@@ -7,7 +7,6 @@ public class Review {
 	private Long id;
 	private String title;
 	private String description;
-	private List<String> images;
 	private boolean thumbsUp;
 	private boolean thumbsDown;
 	private Long landmarkId;
@@ -29,12 +28,6 @@ public class Review {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public List<String> getImages() {
-		return images;
-	}
-	public void setImages(List<String> images) {
-		this.images = images;
 	}
 	public boolean getThumbsUp() {
 		return thumbsUp;
