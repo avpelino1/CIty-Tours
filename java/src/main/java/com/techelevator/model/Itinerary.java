@@ -12,6 +12,15 @@ public class Itinerary {
 	private LocalDate date;
 	private Long userId;
 	
+	public Itinerary(Long id, String name, String startingLocation, List<Landmark> destinations, LocalDate date, Long userId) {
+		this.itineraryId = id;
+		this.name = name;
+		this.startingLocation = startingLocation;
+		this.destinations = destinations;
+		this.date = date;
+		this.userId = userId;
+	}
+	
 	public Long getItineraryId() {
 		return itineraryId;
 	}
