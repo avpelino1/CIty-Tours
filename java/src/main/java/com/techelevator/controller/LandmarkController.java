@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ public class LandmarkController {
 	@RequestMapping(path="/landmarks/add", method=RequestMethod.POST)
 	public void addLandmark() {}
 	
+	@PreAuthorize("ROLE_ADMIN")
 	@RequestMapping(path="/landmarks/pending", method=RequestMethod.GET)
 	public void pendingLandmarks() {}
 	
