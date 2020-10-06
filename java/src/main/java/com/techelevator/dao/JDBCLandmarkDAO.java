@@ -50,6 +50,7 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 		landmark.setName(results.getString("name"));
 		landmark.setDescription(results.getString("description"));
 		landmark.setVenueType(results.getString("venue_type"));
+		landmark.setPendingApproval(results.getBoolean("pending_approval"));
 		landmark.setImages(mapRowToImages(imgResults, results.getLong("landmark_id")));
 		landmark.setBusinessHours(mapRowToHours(operatingResults, results.getLong("landmark_id")));
 		
@@ -58,17 +59,30 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 	
 	public List<Images> mapRowToImages(SqlRowSet results, Long landmark_id) {
 		List<Images> images = new ArrayList<>();
+		Images image = new Images();
 		
 		while (results.next()) {
-			if (results.getLong("landmark_id").equals(landmark_id)) {
-				
+			if (results.getLong("landmark_id") == landmark_id) {
+				image.setLandmarkId(results.getLong("landmark_id"));
+				image.setImgUrl(results.getString("img_url"));
+				images.add(image);
 			}
 		}
-		
+		return images;
 	}
 	
 	public List<BusinessHours> mapRowToHours(SqlRowSet results, Long landmark_id) {
+		List<BusinessHours> hoursOfOperation = new ArrayList<>();
+		BusinessHours hours = new BusinessHours();
 		
+		while (results.next()) {
+			if(results.getLong("landmark_id") == landmark_id) {
+				hours.setDay(results.getLong("day_of"));
+				hours.setOpen_time(results.getTime("open_time").toLocalTime());
+				hours.setClose_time(results.getTime("close_time").toLocalTime());
+			}
+		}
+		return hoursOfOperation;
 	}
 	
 }
