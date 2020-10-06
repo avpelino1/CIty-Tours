@@ -8,10 +8,12 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 import com.techelevator.model.Itinerary;
 import com.techelevator.model.Landmark;
 
+@Component
 public class JDBCItineraryDAO implements ItineraryDAO {
 	
 	private JdbcTemplate jdbc;

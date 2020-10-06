@@ -1,14 +1,24 @@
 package com.techelevator.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.techelevator.dao.LandmarkDAO;
+import com.techelevator.model.Landmark;
+
 @RestController
 public class LandmarkController {
 
+	LandmarkDAO landmarkDAO;
+	
 	@RequestMapping(path="/landmarks/all", method=RequestMethod.GET)
-	public void allLandmarks() {}
+	public List<Landmark> allLandmarks() {
+		List<Landmark> output = landmarkDAO.getAllLandmarks();
+		return output;
+	}
 	
 	@RequestMapping(path="/landmarks/:id", method=RequestMethod.GET)
 	public void landmarkDetails() {}
