@@ -6,8 +6,8 @@ public class BusinessHours {
 
 	private Long landmarkId;
 	private Long day;
-	private LocalTime open_time;
-	private LocalTime close_time;
+	private LocalTime open_time; //can be null = closed
+	private LocalTime close_time; //can be null = closed
 	
 	public Long getLandmarkId() {
 		return landmarkId;

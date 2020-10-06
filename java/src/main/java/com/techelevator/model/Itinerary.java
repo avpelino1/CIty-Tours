@@ -8,9 +8,10 @@ public class Itinerary {
 	private Long itineraryId;
 	private String name;
 	private String startingLocation;
-	private List<String> destinations;
+	private List<Landmark> destinations;
 	private LocalDate date;
 	private Long userId;
+	
 	public Long getItineraryId() {
 		return itineraryId;
 	}
@@ -29,10 +30,10 @@ public class Itinerary {
 	public void setStartingLocation(String startingLocation) {
 		this.startingLocation = startingLocation;
 	}
-	public List<String> getDestinations() {
+	public List<Landmark> getDestinations() {
 		return destinations;
 	}
-	public void setDestinations(List<String> destinations) {
+	public void setDestinations(List<Landmark> destinations) {
 		this.destinations = destinations;
 	}
 	public LocalDate getDate() {

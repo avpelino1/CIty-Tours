@@ -7,13 +7,13 @@ public class Landmark {
 	private Long id;
 	private List<BusinessHours> businessHours;
 	private String address;
-	private String category;
 	private String name;
 	private String description;
 	private String venueType;
 	private List<String> images;
 	//pendingApproval default should be true until an Admin approves the landmark addition.
 	private boolean pendingApproval;
+	
 	public Long getId() {
 		return id;
 	}
@@ -31,12 +31,6 @@ public class Landmark {
 	}
 	public void setAddress(String address) {
 		this.address = address;
-	}
-	public String getCategory() {
-		return category;
-	}
-	public void setCategory(String category) {
-		this.category = category;
 	}
 	public String getName() {
 		return name;
