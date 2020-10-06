@@ -44,12 +44,38 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 			Long id = result.getLong("itinerary_id");
 			String name = result.getString("name");
 			String startingLocation = result.getString("starting_location");
-			List<Landmark> destinations = result.getObject("destinations");
+			List<Landmark> destinations = retrieveItineraryLandmarks(id);
 			LocalDate date = result.getDate("date_of").toLocalDate();
 			Long userId = result.getLong("user_id");
 			
 			Itinerary itinerary = new Itinerary(id, name, startingLocation, destinations, date, userId);
 			output.add(itinerary);
+		}
+		return output;
+	}
+	
+	@Override
+	public List<Landmark> retrieveItineraryLandmarks(Long itineraryID){
+		List<Landmark> output = new ArrayList<Landmark>();
+		String sql = "SELECT landmark_id FROM destinations WHERE itineraryID = ?";
+		SqlRowSet row = jdbc.queryForRowSet(sql, itineraryID);
+		List<Long> landmarkIDs = new ArrayList<Long>();
+		while(row.next()) {
+			Long landmarkID = row.getLong("landmark_id");
+			landmarkIDs.add(landmarkID);
+		}
+		for (Long landmarkID : landmarkIDs) {
+			String sql1 = "SELECT * FROM landmark WHERE landmark_id = ?";
+			SqlRowSet row1 = jdbc.queryForRowSet(sql, landmarkID);
+			while(row1.next()) {
+				Landmark landmark = new Landmark();
+				landmark.setId(row1.getLong("landmark_id"));
+				landmark.setAddress(row1.getString("address"));
+				landmark.setName(row1.getString("name"));
+				landmark.setDescription(row1.getString("description"));
+				landmark.setVenueType(row1.getString("venue_type"));
+				output.add(landmark);
+			}
 		}
 		return output;
 	}
@@ -64,7 +90,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 			Long id2 = result.getLong("itinerary_id");
 			String name = result.getString("name");
 			String startingLocation = result.getString("starting_location");
-			List<Landmark> destinations = result.getObject("destinations");
+			List<Landmark> destinations = retrieveItineraryLandmarks(id2);
 			LocalDate date = result.getDate("date_of").toLocalDate();
 			Long userId = result.getLong("user_id");
 			
