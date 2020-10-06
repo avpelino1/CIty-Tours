@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import com.techelevator.model.BusinessHours;
+import com.techelevator.model.Images;
 import com.techelevator.model.Landmark;
 
 @Component
@@ -22,33 +24,51 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 	
 	public List<Landmark> getAllLandmarks() {
 		List<Landmark> allLandmarks = new ArrayList<>();
-		String sql = "SELECT * FROM Landmark";
 		
+		String sql = "SELECT * FROM Landmark";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		
-		while (results.next()) {
-			Landmark landmark = mapRowToLandmark(results);
+		String sqlImg = "SELECT * FROM Images WHERE landmark_id IS NOT NULL";
+		SqlRowSet imgResults = jdbcTemplate.queryForRowSet(sqlImg);
+		
+		String sqlOperating= "SELECT * FROM buisness_hours";
+		SqlRowSet operatingResults = jdbcTemplate.queryForRowSet(sqlOperating);
+		
+		while (results.next() || imgResults.next()) {
+			Landmark landmark = mapRowToLandmark(results, imgResults, operatingResults);
 			allLandmarks.add(landmark);
 		}
+		
 		
 		return allLandmarks;
 	}
 	
-	public Landmark mapRowToLandmark(SqlRowSet results) {
+	public Landmark mapRowToLandmark(SqlRowSet results, SqlRowSet imgResults, SqlRowSet operatingResults) {
 		Landmark landmark = new Landmark();
 		landmark.setId(results.getLong("landmark_id"));
 		landmark.setAddress(results.getString("address"));
 		landmark.setName(results.getString("name"));
 		landmark.setDescription(results.getString("description"));
 		landmark.setVenueType(results.getString("venue_type"));
-		landmark.setImages(getImages((Object)results.getArray("images")));
+		landmark.setImages(mapRowToImages(imgResults, results.getLong("landmark_id")));
+		landmark.setBusinessHours(mapRowToHours(operatingResults, results.getLong("landmark_id")));
 		
 		return landmark;
 	}
 	
-//	public List<String> getImages(Object images) {
-//		for (String string : images) {
-//			
-//		}
+	public List<Images> mapRowToImages(SqlRowSet results, Long landmark_id) {
+		List<Images> images = new ArrayList<>();
+		
+		while (results.next()) {
+			if (results.getLong("landmark_id").equals(landmark_id)) {
+				
+			}
+		}
+		
 	}
+	
+	public List<BusinessHours> mapRowToHours(SqlRowSet results, Long landmark_id) {
+		
+	}
+	
 }

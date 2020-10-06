@@ -10,7 +10,7 @@ public class Landmark {
 	private String name;
 	private String description;
 	private String venueType;
-	private List<String> images;
+	private List<Images> images;
 	//pendingApproval default should be true until an Admin approves the landmark addition.
 	private boolean pendingApproval;
 	
@@ -50,10 +50,10 @@ public class Landmark {
 	public void setVenueType(String venueType) {
 		this.venueType = venueType;
 	}
-	public List<String> getImages() {
+	public List<Images> getImages() {
 		return images;
 	}
-	public void setImages(List<String> images) {
+	public void setImages(List<Images> images) {
 		this.images = images;
 	}
 	public boolean isPendingApproval() {
