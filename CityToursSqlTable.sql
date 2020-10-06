@@ -5,21 +5,23 @@ name varchar(100) NOT NULL,
 description varchar,
 address varchar,
 venue_type varchar(64) NOT NULL,
-images varchar[],
 pending_approval boolean,
 
 CONSTRAINT pk_landmark_id PRIMARY KEY (landmark_id)
 
 );
 
+
+
 ----------
+
+
 
 CREATE TABLE itinerary
 (
 itinerary_id serial NOT NULL,
 name varchar(64),
 starting_point varchar NOT NULL,
-destinations int[],
 date_of DATE NOT NULL,
 user_id int NOT NULL,
 
@@ -31,16 +33,16 @@ CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users
 
 ----------
 
+
 CREATE TABLE review
 (
 review_id serial NOT NULL,
 title varchar,
 description varchar,
-thumbs_up int,
-thumbs_down int,
-share boolean,
+thumbs_up boolean,
+thumbs_down boolean,
+share int,
 landmark_id int,
-images varchar[],
 
 CONSTRAINT pk_review_id PRIMARY KEY (review_id),
 CONSTRAINT fk_landmark_id FOREIGN KEY (landmark_id) REFERENCES landmark
@@ -59,3 +61,28 @@ close_time time,
 CONSTRAINT fk_landmark_id FOREIGN KEY (landmark_id) REFERENCES landmark,
 CONSTRAINT day_of check(day_of > 0 AND day_of < 8)
 );
+
+----------
+
+CREATE TABLE destinations
+(
+itinerary_id int,
+landmark_id int,
+
+CONSTRAINT fk_landmark_id FOREIGN KEY (landmark_id) REFERENCES landmark,
+CONSTRAINT fk_itinerary_id FOREIGN KEY (itinerary_id) REFERENCES itinerary
+);
+
+----------
+
+CREATE TABLE images
+(
+landmark_id int,
+review_id int,
+image_url varchar,
+
+CONSTRAINT fk_landmark_id FOREIGN KEY (landmark_id) REFERENCES landmark,
+CONSTRAINT fk_review_id FOREIGN KEY (review_id) REFERENCES review
+
+);
+
