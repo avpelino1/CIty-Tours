@@ -25,7 +25,7 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 	public List<Landmark> getAllLandmarks() {
 		List<Landmark> allLandmarks = new ArrayList<>();
 		
-		String sql = "SELECT * FROM Landmark";
+		String sql = "SELECT * FROM landmark";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		
 		String sqlImg = "SELECT * FROM Images WHERE landmark_id IS NOT NULL";
