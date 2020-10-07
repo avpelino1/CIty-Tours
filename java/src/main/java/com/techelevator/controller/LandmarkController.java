@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +13,8 @@ import com.techelevator.model.Landmark;
 
 @RestController
 public class LandmarkController {
-
+	
+	@Autowired
 	LandmarkDAO landmarkDAO;
 	
 	@RequestMapping(path="/landmarks/all", method=RequestMethod.GET)
