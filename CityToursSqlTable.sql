@@ -24,6 +24,7 @@ name varchar(64),
 starting_point varchar NOT NULL,
 date_of DATE NOT NULL,
 user_id int NOT NULL,
+share int,
 
 CONSTRAINT pk_itinerary_id PRIMARY KEY (itinerary_id),
 CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users
@@ -41,7 +42,6 @@ title varchar,
 description varchar,
 thumbs_up boolean,
 thumbs_down boolean,
-share int,
 landmark_id int,
 
 CONSTRAINT pk_review_id PRIMARY KEY (review_id),
