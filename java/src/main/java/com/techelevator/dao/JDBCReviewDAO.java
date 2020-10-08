@@ -13,9 +13,9 @@ import com.techelevator.model.Review;
 
 @Component
 public class JDBCReviewDAO implements ReviewDAO {
-	
+
 	private JdbcTemplate jdbc;
-	
+
 	public JDBCReviewDAO(DataSource datasource) {
 		jdbc = new JdbcTemplate(datasource);
 	}
@@ -25,7 +25,7 @@ public class JDBCReviewDAO implements ReviewDAO {
 		List<Review> reviews = new ArrayList<Review>();
 		String sql = "SELECT * FROM review WHERE landmark_id = ?";
 		SqlRowSet row = jdbc.queryForRowSet(sql, landmarkID);
-		while(row.next()) {
+		while (row.next()) {
 			Review review = new Review();
 			review.setId(row.getLong("review_id"));
 			review.setTitle(row.getString("title"));
@@ -41,7 +41,8 @@ public class JDBCReviewDAO implements ReviewDAO {
 	@Override
 	public void addReview(Review review) {
 		String sql = "INSERT INTO reviews(title, description, thumbs_up, thumbs_down, landmark_id) VALUES(?, ?, ?, ?, ?)";
-		jdbc.update(sql, review.getTitle(), review.getDescription(), review.getThumbsUp(), review.getThumbsDown(), review.getLandmarkId());
+		jdbc.update(sql, review.getTitle(), review.getDescription(), review.getThumbsUp(), review.getThumbsDown(),
+				review.getLandmarkId());
 	}
 
 }
