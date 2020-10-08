@@ -22,6 +22,8 @@ public class ItineraryController {
 	public List<Itinerary> retrieveAllItinerary() {
 		return itineraryDAO.retrieveAllItinerary();
 	}
+	
+	
 
 	@RequestMapping(path="/itinerary/create", method=RequestMethod.POST)
 	public void createItinerary(@RequestBody Itinerary itinerary) {
