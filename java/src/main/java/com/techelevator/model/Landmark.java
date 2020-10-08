@@ -4,6 +4,12 @@ import java.util.List;
 
 public class Landmark {
 
+	@Override
+	public String toString() {
+		return "Landmark [id=" + id + ", businessHours=" + businessHours + ", address=" + address + ", name=" + name
+				+ ", description=" + description + ", venueType=" + venueType + ", images=" + images
+				+ ", pendingApproval=" + pendingApproval + "]";
+	}
 	private Long id;
 	private List<BusinessHours> businessHours;
 	private String address;

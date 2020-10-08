@@ -17,33 +17,37 @@ import com.techelevator.model.Landmark;
 public class JDBCLandmarkDAO implements LandmarkDAO {
 
 	private JdbcTemplate jdbcTemplate;
-	
+
 	public JDBCLandmarkDAO(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
+
 	public List<Landmark> getAllLandmarks() {
 		List<Landmark> allLandmarks = new ArrayList<>();
-		
-		String sql = "SELECT * FROM landmark";
+
+		// SQL Select to retrieve all the landmarks that have been approved.
+		String sql = "SELECT * FROM landmark WHERE pending_approval = false";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
-		
-		String sqlImg = "SELECT * FROM Images WHERE landmark_id IS NOT NULL";
-		SqlRowSet imgResults = jdbcTemplate.queryForRowSet(sqlImg);
-		
-		String sqlOperating= "SELECT * FROM buisness_hours";
-		SqlRowSet operatingResults = jdbcTemplate.queryForRowSet(sqlOperating);
-		
-		while (results.next() || imgResults.next()) {
-			Landmark landmark = mapRowToLandmark(results, imgResults, operatingResults);
+
+		// Populate list of landmarks
+		while (results.next()) {
+			Landmark landmark = mapRowToLandmark(results);
 			allLandmarks.add(landmark);
 		}
-		
-		
+
+		// Iterate through each item in the landmark list and for each item
+		// go ahead and run a query to extract the business hours.
+		for (Landmark landmark : allLandmarks) {
+			// mapping hours table of respective landmark to landmark object
+			mapRowToHours(landmark);
+			// mapping image locations of respective landmark to landmark object
+			mapRowToImages(landmark);
+		}
+
 		return allLandmarks;
 	}
-	
-	public Landmark mapRowToLandmark(SqlRowSet results, SqlRowSet imgResults, SqlRowSet operatingResults) {
+
+	public Landmark mapRowToLandmark(SqlRowSet results) {
 		Landmark landmark = new Landmark();
 		landmark.setId(results.getLong("landmark_id"));
 		landmark.setAddress(results.getString("address"));
@@ -51,38 +55,126 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 		landmark.setDescription(results.getString("description"));
 		landmark.setVenueType(results.getString("venue_type"));
 		landmark.setPendingApproval(results.getBoolean("pending_approval"));
-		landmark.setImages(mapRowToImages(imgResults, results.getLong("landmark_id")));
-		landmark.setBusinessHours(mapRowToHours(operatingResults, results.getLong("landmark_id")));
-		
+
 		return landmark;
 	}
-	
-	public List<Images> mapRowToImages(SqlRowSet results, Long landmark_id) {
+
+	public Landmark mapRowToImages(Landmark landmark) {
 		List<Images> images = new ArrayList<>();
-		Images image = new Images();
-		
-		while (results.next()) {
-			if (results.getLong("landmark_id") == landmark_id) {
-				image.setLandmarkId(results.getLong("landmark_id"));
-				image.setImgUrl(results.getString("img_url"));
-				images.add(image);
-			}
+
+		// Sql select to retrieve the associated images with matching landmarkId
+		String imagesSql = "SELECT * from images where landmark_id = ?";
+		SqlRowSet imageResults = jdbcTemplate.queryForRowSet(imagesSql, landmark.getId());
+
+		// while loop to parse through the results and create images array for landmark
+		// object
+		while (imageResults.next()) {
+			Images image = new Images();
+			image.setLandmarkId(imageResults.getLong("landmark_id"));
+			image.setImgUrl(imageResults.getString("image_url"));
+			images.add(image);
 		}
-		return images;
+		// modified landmark object with image location array
+		landmark.setImages(images);
+
+		return landmark;
 	}
-	
-	public List<BusinessHours> mapRowToHours(SqlRowSet results, Long landmark_id) {
+
+	public Landmark mapRowToHours(Landmark landmark) {
 		List<BusinessHours> hoursOfOperation = new ArrayList<>();
-		BusinessHours hours = new BusinessHours();
+
+		// SQL select to retrieve all the hours for a landmark based on id
+		String businessHourSQL = "SELECT * FROM business_hours where landmark_id = ?";
+		SqlRowSet businessHourResults = jdbcTemplate.queryForRowSet(businessHourSQL, landmark.getId());
+
+		// while loop to create a business hours array and attach to landmark object
+		while (businessHourResults.next()) {
+
+			BusinessHours hours = new BusinessHours();
+			hours.setLandmarkId(businessHourResults.getLong("landmark_id"));
+			hours.setDay(businessHourResults.getLong("day_of"));
+			if (businessHourResults.getTime("open_time") == null) {
+				hours.setOpen_time(null);
+			} else {
+				hours.setOpen_time(businessHourResults.getTime("open_time").toLocalTime());
+			}
+			if (businessHourResults.getTime("close_time") == null) {
+				hours.setClose_time(null);
+			} else {
+				hours.setClose_time(businessHourResults.getTime("close_time").toLocalTime());
+			}
+
+			hoursOfOperation.add(hours);
+		}
+		// modifying existing landmark object with business hours array added
+		landmark.setBusinessHours(hoursOfOperation);
+
+		return landmark;
+	}
+
+	public Landmark getLandmarkById(Long id) {
 		
-		while (results.next()) {
-			if(results.getLong("landmark_id") == landmark_id) {
-				hours.setDay(results.getLong("day_of"));
-				hours.setOpen_time(results.getTime("open_time").toLocalTime());
-				hours.setClose_time(results.getTime("close_time").toLocalTime());
+		for (Landmark landmark : getAllLandmarks()) {
+			if (landmark.getId() == id) {
+				return landmark;
 			}
 		}
-		return hoursOfOperation;
+		return null;
 	}
-	
+
+	public void addLandmark(Landmark landmark) {
+		//SQL statement to insert new landmark object from user -- pending_approval is set to true as it needs to be approved before it will be displayed
+		String landmarkInsert = "INSERT INTO landmark (name, description, address, venue_type, pending_approval) VALUES (?, ?, ?, ?, true) RETURNING landmark_id";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(landmarkInsert, landmark.getName(), landmark.getDescription(),
+				landmark.getAddress(), landmark.getVenueType());
+		Long landmarkId = 0L;
+		
+		//the above sqlrowset returns a landmark_id which will get populated below
+		if (result.next()) {
+			landmarkId = result.getLong("landmark_id");
+		}
+
+		//after the above is successful, there is now a new landmark_id that can be used to attach to the business hours
+		String landmarkHoursInsert = "INSERT INTO business_hours (landmark_id, day_of, open_time, close_time) VALUES (?, ?, ?, ?)";
+		//for each loop runs through the business hours array to insert 7 business hour rows for each day of the week
+		for (BusinessHours hours : landmark.getBusinessHours()) {
+			jdbcTemplate.update(landmarkHoursInsert, landmarkId, hours.getDay(), hours.getOpen_time(),
+					hours.getClose_time());
+		}
+	}
+
+	public List<Landmark> getPendingLandmarks() {
+		List<Landmark> allLandmarks = new ArrayList<>();
+		
+		String sql = "SELECT * FROM landmark WHERE pending_approval = true";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+		// Populate list of landmarks
+		while (results.next()) {
+			Landmark landmark = mapRowToLandmark(results);
+			System.out.println(landmark);
+			allLandmarks.add(landmark);
+		}
+
+
+		for (Landmark landmark : allLandmarks) {
+			mapRowToHours(landmark);
+		}
+
+		return allLandmarks;
+	}
+
+	public void approveLandmark(Long id) {
+		String approveLandmark = "UPDATE landmark SET pending_approval = false WHERE landmark_id = ?";
+
+		jdbcTemplate.update(approveLandmark, id);
+	}
+
+	public void deleteLandmark(Long id) {
+		String deleteLandmark = "DELETE FROM landmark WHERE landmark_id = ?";
+		String deleteHours = "DELETE FROM business_hours WHERE landmark_id = ?";
+
+		jdbcTemplate.update(deleteLandmark, id);
+		jdbcTemplate.update(deleteHours, id);
+	}
 }
