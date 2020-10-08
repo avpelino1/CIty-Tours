@@ -1,6 +1,6 @@
 <template>
   <div>
-               <div v-for = 'landmark in landmarks' v-bind:key='landmark.id'>
+    <div v-for = 'landmark in landmarks' v-bind:key='landmark.id'/>
 
   </div>
 </template>

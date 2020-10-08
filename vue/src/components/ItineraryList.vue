@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import itineraryService from '../services/ItineraryService.vue';
+import itineraryService from '../services/ItineraryService.js';
 
 export default {
     name: 'itinerary-list',
