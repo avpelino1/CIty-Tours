@@ -1,6 +1,14 @@
 <template>
   <div>
-      <h1>placeholder</h1>
+      <h1>View Available Itineraries</h1>
+
+      <div class='itinerary-list' v-for='itinerary in myItineraries' v-bind:key="itinerary.id">
+          {{itinerary.name}} <br>
+          {{itinerary.starting_point}}
+          {{itinerary.date_of}}
+          {{itinerary.user_id}}
+
+  </div>
   </div>
 </template>
 
@@ -14,6 +22,12 @@ export default {
             myItineraries: [],
             myFriendsItineraries: []
         }
+    },
+    methods:{
+        getMyItineraries() {
+            itineraryService.getItineraries();
+        }
+
     },
     created(){
         itineraryService.getMyItineraries().then((response)=>{
