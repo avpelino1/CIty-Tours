@@ -19,7 +19,7 @@ import com.techelevator.model.Itinerary;
 public class ItineraryController {
 	
 	@Autowired
-	ItineraryDAO itineraryDAO;
+	private ItineraryDAO itineraryDAO;
 	
 	@RequestMapping(path="", method=RequestMethod.GET)
 	public List<Itinerary> retrieveAllItinerary() {

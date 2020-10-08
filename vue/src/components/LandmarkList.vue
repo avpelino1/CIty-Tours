@@ -9,7 +9,7 @@
     </div>
 
     <h2>Want to add a landmark? Fill out this form!</h2>
-    <form v-on:submit.prevent>
+    <form v-on:submit.prevent='createLandmark'>
       <div class='field'>
         <label for = 'name'>Name</label>
         <input type='text' name='name' v-model='newLandmark.name'/>
@@ -37,7 +37,7 @@
         </select>
       </div>
       <div class='actions'>
-         <button type='submit' v-on:click='createLandmark()'>Click here to add a Landmark!</button>
+         <button>Click here to add a Landmark!</button>
       </div>
     </form>
 
@@ -56,6 +56,14 @@ export default {
       landmarks: [],
       newLandmark: {}
     }
+  },
+
+  methods: {
+      createLandmark() {
+
+          landmarkService.createLandmark(this.newLandmark);
+      }
+
   },
   created(){
     landmarkService.getLandmarks().then((response)=>{

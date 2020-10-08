@@ -1,22 +1,17 @@
 package com.techelevator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Landmark {
 
-	@Override
-	public String toString() {
-		return "Landmark [id=" + id + ", businessHours=" + businessHours + ", address=" + address + ", name=" + name
-				+ ", description=" + description + ", venueType=" + venueType + ", images=" + images
-				+ ", pendingApproval=" + pendingApproval + "]";
-	}
 	private Long id;
-	private List<BusinessHours> businessHours;
+	private List<BusinessHours> businessHours = new ArrayList<BusinessHours>();
 	private String address;
 	private String name;
 	private String description;
 	private String venueType;
-	private List<Images> images;
+	private List<Images> images  = new ArrayList<Images>();;
 	//pendingApproval default should be true until an Admin approves the landmark addition.
 	private boolean pendingApproval;
 	

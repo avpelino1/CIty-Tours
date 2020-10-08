@@ -20,10 +20,10 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	private JdbcTemplate jdbcTemplate;
 	private LoginDTO loginDTO;
 	private UserDAO userDAO;
-	private Long currentUserId = userDAO.findByUsername(loginDTO.getUsername()).getId();
+//private Long currentUserId = userDAO.findByUsername(loginDTO.getUsername()).getId();
 	
 	public JDBCItineraryDAO(DataSource datasource) {
-		jdbcTemplate = new JdbcTemplate(datasource);
+		this.jdbcTemplate = new JdbcTemplate(datasource);
 	}
 
 	@Override
@@ -55,22 +55,24 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 
 	@Override
 	public List<Itinerary> retrieveAllUserItinerary() {
-		String sql = "SELECT * FROM itinerary WHERE user_id = ?";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, currentUserId);
-		List<Itinerary> output = new ArrayList<>();
+//		String sql = "SELECT * FROM itinerary WHERE user_id = ?";
+//		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, currentUserId);
+//		List<Itinerary> output = new ArrayList<>();
+//		
+//		while(result.next()) {
+//			Long id = result.getLong("itinerary_id");
+//			String name = result.getString("name");
+//			String startingLocation = result.getString("starting_location");
+//			List<Landmark> destinations = retrieveItineraryLandmarks(id);
+//			LocalDate date = result.getDate("date_of").toLocalDate();
+//			Long userId = result.getLong("user_id");
+//			
+//			Itinerary itinerary = new Itinerary(id, name, startingLocation, destinations, date, userId);
+//			output.add(itinerary);
+//		}
+//		return output;
 		
-		while(result.next()) {
-			Long id = result.getLong("itinerary_id");
-			String name = result.getString("name");
-			String startingLocation = result.getString("starting_location");
-			List<Landmark> destinations = retrieveItineraryLandmarks(id);
-			LocalDate date = result.getDate("date_of").toLocalDate();
-			Long userId = result.getLong("user_id");
-			
-			Itinerary itinerary = new Itinerary(id, name, startingLocation, destinations, date, userId);
-			output.add(itinerary);
-		}
-		return output;
+		return null;
 	}
 	
 	@Override

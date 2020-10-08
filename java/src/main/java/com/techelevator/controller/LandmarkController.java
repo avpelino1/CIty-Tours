@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.dao.LandmarkDAO;
+import com.techelevator.model.LandMarkWeb;
 import com.techelevator.model.Landmark;
 
 @CrossOrigin
@@ -40,6 +41,7 @@ public class LandmarkController {
 	@RequestMapping(path="/add", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void addLandmark(@RequestBody Landmark landmark) {
+		System.out.println(landmark.getName());
 		landmarkDAO.addLandmark(landmark);
 	}
 	
