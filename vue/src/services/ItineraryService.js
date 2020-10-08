@@ -13,4 +13,4 @@ export default {
         return axios.post('/login', itinerary)
     },
 
-    }
+}
