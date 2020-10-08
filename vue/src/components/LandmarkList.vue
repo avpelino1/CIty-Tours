@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1>List of Landmarks</h1>
-    <div v-for = 'landmark in landmarks' v-bind:key='landmark.id'/>
+    <div v-for = 'landmark in landmarks' v-bind:key='landmark.id'>
+        {{landmark.name}} <br>
+    </div>
 
     <h2>Want to add a landmark? Fill out this form!</h2>
     <form v-on:submit.prevent>
@@ -35,6 +37,9 @@
          <button type='submit' v-on:click='createLandmark()'>Click here to add a Landmark!</button>
       </div>
     </form>
+
+
+
   </div>
 </template>
 

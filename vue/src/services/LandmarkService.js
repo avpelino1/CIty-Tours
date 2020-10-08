@@ -10,7 +10,7 @@ export default {
     },
    
     createLandmark(landmark) {
-        return axios.post('/landmark/add', landmark);
+        return http.post('/landmark/add', landmark);
     },
 
     getOneLandmark() {
