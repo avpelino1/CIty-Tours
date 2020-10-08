@@ -12,15 +12,14 @@ import org.springframework.stereotype.Component;
 
 import com.techelevator.model.Itinerary;
 import com.techelevator.model.Landmark;
-import com.techelevator.model.LoginDTO;
 
 @Component
 public class JDBCItineraryDAO implements ItineraryDAO {
 	
 	private JdbcTemplate jdbcTemplate;
-	private LoginDTO loginDTO;
 	private UserDAO userDAO;
-//private Long currentUserId = userDAO.findByUsername(loginDTO.getUsername()).getId();
+	private Long currentUserId;
+	private LandmarkDAO landmarkDAO;
 	
 	public JDBCItineraryDAO(DataSource datasource) {
 		this.jdbcTemplate = new JdbcTemplate(datasource);
@@ -31,11 +30,13 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		String name = itinerary.getName();
 		String startingLocation = itinerary.getStartingLocation();
 		LocalDate date = itinerary.getDate();
-		Long userId = itinerary.getUserId();
 		
-		String sql = "INSERT INTO itinerary(name, starting_location, date, user_id)"
+		//works if the logged in user creates a itinerary, otherwise need a new way to retrieve the logged in user's name to get the id
+		currentUserId = (long) userDAO.findIdByUsername(itinerary.getUsername());
+		
+		String sql = "INSERT INTO itinerary(name, starting_point, date, user_id)"
 				+ " VALUES (?, ?, ?, ?) RETURNING itinerary_id";
-		SqlRowSet itinerarySql = jdbcTemplate.queryForRowSet(sql, name, startingLocation, date, userId);
+		SqlRowSet itinerarySql = jdbcTemplate.queryForRowSet(sql, name, startingLocation, date, currentUserId);
 		
 		Long itineraryId = 0L;
 		
@@ -55,40 +56,37 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 
 	@Override
 	public List<Itinerary> retrieveAllUserItinerary() {
-//		String sql = "SELECT * FROM itinerary WHERE user_id = ?";
-//		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, currentUserId);
-//		List<Itinerary> output = new ArrayList<>();
-//		
-//		while(result.next()) {
-//			Long id = result.getLong("itinerary_id");
-//			String name = result.getString("name");
-//			String startingLocation = result.getString("starting_location");
-//			List<Landmark> destinations = retrieveItineraryLandmarks(id);
-//			LocalDate date = result.getDate("date_of").toLocalDate();
-//			Long userId = result.getLong("user_id");
-//			
-//			Itinerary itinerary = new Itinerary(id, name, startingLocation, destinations, date, userId);
-//			output.add(itinerary);
-//		}
-//		return output;
+		String sql = "SELECT * FROM itinerary WHERE user_id = ?";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, currentUserId);
+		List<Itinerary> output = new ArrayList<>();
 		
-		return null;
+		while(result.next()) {
+			Itinerary itinerary = new Itinerary();
+			itinerary.setItineraryId(result.getLong("itinerary_id"));
+			itinerary.setName(result.getString("name"));
+			itinerary.setStartingLocation(result.getString("starting_point"));
+			itinerary.setDestinations(retrieveItineraryLandmarks(result.getLong("id")));
+			itinerary.setDate(result.getDate("date_of").toLocalDate());
+			itinerary.setUserId(result.getLong("user_id"));
+			output.add(itinerary);
+		}
+		return output;
 	}
 	
 	@Override
 	public List<Itinerary> retrieveSharedItineraries() {
 		List<Itinerary> output = new ArrayList<>();
-		List<Integer> itineraryIds = new ArrayList<>();
+		List<Long> itineraryIds = new ArrayList<>();
 		
 		String sql = "SELECT * FROM accessibility WHERE user_id = ?";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, currentUserId);
 		
 		while (result.next() ) {
-			int id = result.getInt("itinerary_id");
+			Long id = result.getLong("itinerary_id");
 			itineraryIds.add(id);
 		}
 		
-		for (int id : itineraryIds) {
+		for (Long id : itineraryIds) {
 			output.add(retrieveItinerary(id));
 		}
 		
@@ -96,72 +94,70 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	}
 	
 	@Override
+	public Itinerary retrieveItinerary(Long id) {
+		String sql = "SELECT * FROM itinerary WHERE itinerary_id = ?";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
+		Itinerary itinerary = new Itinerary();
+		
+		while(result.next()) {
+			itinerary.setItineraryId(result.getLong("itinerary_id"));
+			itinerary.setName(result.getString("name"));
+			itinerary.setStartingLocation(result.getString("starting_location"));
+			itinerary.setDestinations(retrieveItineraryLandmarks(result.getLong("id")));
+			itinerary.setDate(result.getDate("date_of").toLocalDate());
+			itinerary.setUserId(result.getLong("user_id"));
+		}
+		
+		return itinerary;
+	}
+	
+	@Override
 	public List<Landmark> retrieveItineraryLandmarks(Long itineraryID){
 		List<Landmark> output = new ArrayList<Landmark>();
 		String sql = "SELECT landmark_id FROM destinations WHERE itineraryID = ?";
+		
 		SqlRowSet row = jdbcTemplate.queryForRowSet(sql, itineraryID);
+		
 		List<Long> landmarkIDs = new ArrayList<Long>();
+		
 		while(row.next()) {
 			Long landmarkID = row.getLong("landmark_id");
 			landmarkIDs.add(landmarkID);
 		}
-		for (Long landmarkID : landmarkIDs) {
-			String sql1 = "SELECT * FROM landmark WHERE landmark_id = ?";
-			SqlRowSet row1 = jdbcTemplate.queryForRowSet(sql, landmarkID);
-			while(row1.next()) {
-				Landmark landmark = new Landmark();
-				landmark.setId(row1.getLong("landmark_id"));
-				landmark.setAddress(row1.getString("address"));
-				landmark.setName(row1.getString("name"));
-				landmark.setDescription(row1.getString("description"));
-				landmark.setVenueType(row1.getString("venue_type"));
-				output.add(landmark);
-			}
-		}
-		return output;
-	}
-
-	@Override
-	public Itinerary retrieveItinerary(int id) {
-		String sql = "SELECT * FROM itinerary WHERE itinerary_id = ?";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
-		Itinerary output = null;
 		
-		while(result.next()) {
-			Long id2 = result.getLong("itinerary_id");
-			String name = result.getString("name");
-			String startingLocation = result.getString("starting_location");
-			List<Landmark> destinations = retrieveItineraryLandmarks(id2);
-			LocalDate date = result.getDate("date_of").toLocalDate();
-			Long userId = result.getLong("user_id");
-			
-			output = new Itinerary(id2, name, startingLocation, destinations, date, userId);
+		for (Long landmarkID : landmarkIDs) {
+			output.add(landmarkDAO.getLandmarkById(landmarkID));
 		}
 		return output;
 	}
 
 	@Override
-	public void updateItinerary(Itinerary itinerary, int id) {
-		String sql = "UPDATE itinerary SET name = ?, starting_location = ?, destinations = ?, date = ? WHERE itinerary_id = ?";
+	public void updateItinerary(Itinerary itinerary, Long id) {
+		String sql = "UPDATE itinerary SET name = ?, starting_point = ?, date_of = ? WHERE itinerary_id = ?";
 		String name = itinerary.getName();
 		String startingLocation = itinerary.getStartingLocation();
-		List<Landmark> destinations = itinerary.getDestinations();
 		LocalDate date = itinerary.getDate();
-		Long userId = itinerary.getUserId();
 		
-		jdbcTemplate.update(sql, name, startingLocation, destinations, date, id);
+		jdbcTemplate.update(sql, name, startingLocation, date, id);
 		
+		jdbcTemplate.update("DELETE FROM destinations WHERE itinerary_id = ?", id);
+		
+		for (Landmark landmark : itinerary.getDestinations()) {
+			String destination = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (?, ?)";
+			jdbcTemplate.update(destination, id, landmark.getId());
+		}
 	}
 
 	@Override
-	public void deleteItinerary(int id) {
+	public void deleteItinerary(Long id) {
 		String sql = "DELETE FROM itinerary WHERE itinerary_id = ?";
+		String destinationDelete = "DELETE FROM destinations WHERE itinerary_id=?";
 		String sqlAccessibility = "DELETE FROM accessibility WHERE itinerary_id = ?";
 		
 		jdbcTemplate.update(sql, id);
+		jdbcTemplate.update(destinationDelete, id);
 		jdbcTemplate.update(sqlAccessibility, id);
 	}
-
 
 	
 }

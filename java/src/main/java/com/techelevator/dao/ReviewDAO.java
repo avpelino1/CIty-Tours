@@ -8,7 +8,7 @@ import com.techelevator.model.Review;
 
 public interface ReviewDAO {
 
-	public List<Review> landmarkReviews(int landmarkID);
+	public List<Review> landmarkReviews(Long landmarkID);
 	
 	public void addReview(Review review);
 	

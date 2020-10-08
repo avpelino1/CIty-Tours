@@ -19,4 +19,8 @@ public interface LandmarkDAO {
 	public void approveLandmark(Long id);
 	
 	public void deleteLandmark(Long id);
+	
+	public Long landmarkThumbsUp(Long landmarkId);
+	
+	public Long landmarkThumbsDown(Long landmarkId);
 }

@@ -22,7 +22,7 @@ public class ReviewController {
 	ReviewDAO reviewDAO;
 	
 	@RequestMapping(path="/{id}", method=RequestMethod.GET)
-	public List<Review> landmarkReviews(@PathVariable int id) {
+	public List<Review> landmarkReviews(@PathVariable Long id) {
 		List<Review> output = reviewDAO.landmarkReviews(id);
 		return output;
 	}

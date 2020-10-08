@@ -21,9 +21,9 @@ public class JDBCReviewDAO implements ReviewDAO {
 	}
 
 	@Override
-	public List<Review> landmarkReviews(int landmarkID) {
+	public List<Review> landmarkReviews(Long landmarkID) {
 		List<Review> reviews = new ArrayList<Review>();
-		String sql = "SELECT * FROM review WHERE landmark_id = ?";
+		String sql = "SELECT * FROM review WHERE landmark_id = ? AND title IS NOT NULL";
 		SqlRowSet row = jdbc.queryForRowSet(sql, landmarkID);
 		while (row.next()) {
 			Review review = new Review();
@@ -40,9 +40,24 @@ public class JDBCReviewDAO implements ReviewDAO {
 
 	@Override
 	public void addReview(Review review) {
-		String sql = "INSERT INTO reviews(title, description, thumbs_up, thumbs_down, landmark_id) VALUES(?, ?, ?, ?, ?)";
+		
+		if (review.getTitle().isEmpty() || review.getTitle() == null) {
+			String sql = "INSERT INTO review(thumbs_up, thumbs_down, landmark_id) VALUES(?, ?, ?)";
+			boolean thumbsUp = false;
+			boolean thumbsDown = false;
+			
+			if (review.getThumbsUp()) {
+				thumbsUp = true;
+			} else {
+				thumbsDown = true;
+			}
+			
+			jdbc.update(sql, thumbsUp, thumbsDown, review.getLandmarkId());
+		} else {
+		String sql = "INSERT INTO review(title, description, thumbs_up, thumbs_down, landmark_id) VALUES(?, ?, ?, ?, ?)";
 		jdbc.update(sql, review.getTitle(), review.getDescription(), review.getThumbsUp(), review.getThumbsDown(),
 				review.getLandmarkId());
+		}
 	}
 
 }

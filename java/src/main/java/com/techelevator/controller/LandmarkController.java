@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.dao.LandmarkDAO;
-import com.techelevator.model.LandMarkWeb;
 import com.techelevator.model.Landmark;
 
+@PreAuthorize("permitAll()")
 @CrossOrigin
 @RestController
 @RequestMapping("/landmarks")
@@ -25,7 +25,6 @@ public class LandmarkController {
 	@Autowired
 	LandmarkDAO landmarkDAO;
 	
-	@PreAuthorize("permitAll()")
 	@RequestMapping(path="/all", method=RequestMethod.GET)
 	public List<Landmark> allLandmarks() {
 		List<Landmark> output = landmarkDAO.getAllLandmarks();
@@ -38,6 +37,7 @@ public class LandmarkController {
 		return landmark;
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(path="/add", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void addLandmark(@RequestBody Landmark landmark) {
@@ -51,16 +51,28 @@ public class LandmarkController {
 		return landmarkDAO.getPendingLandmarks();
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(path="/pending/{id}/approve", method=RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public void approvePendingLandmark(@PathVariable Long id) {
 		landmarkDAO.approveLandmark(id);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(path="/pending/{id}/deny", method=RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void denyPendingLandmark(@PathVariable Long id) {
 		landmarkDAO.deleteLandmark(id);
+	}
+	
+	@RequestMapping(path="/thumbsUp/{id}", method=RequestMethod.GET)
+	public Long landmarkGetThumbsUp(@PathVariable Long id) {
+		return landmarkDAO.landmarkThumbsUp(id);
+	}
+	
+	@RequestMapping(path="/thumbsDown/{id}", method=RequestMethod.GET)
+	public Long landmarkGetThumbsDown(@PathVariable Long id) {
+		return landmarkDAO.landmarkThumbsDown(id);
 	}
 	
 }

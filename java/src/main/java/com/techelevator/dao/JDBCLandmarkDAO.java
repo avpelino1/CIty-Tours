@@ -177,4 +177,24 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 		jdbcTemplate.update(deleteLandmark, id);
 		jdbcTemplate.update(deleteHours, id);
 	}
+
+	public Long landmarkThumbsUp(Long landmarkId) {
+		String Sql = "SELECT COUNT(thumbs_up) FROM review WHERE landmark_id = ? AND thumbs_up = true";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(Sql, landmarkId);
+		
+		if (result.next()) {
+			return result.getLong("count");
+		}
+		return null;
+	}
+	
+	public Long landmarkThumbsDown(Long landmarkId) {
+		String Sql = "SELECT COUNT(thumbs_down) FROM review WHERE landmark_id = ? AND thumbs_down = true";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(Sql, landmarkId);
+		
+		if (result.next()) {
+			return result.getLong("count");
+		}
+		return null;
+	}
 }

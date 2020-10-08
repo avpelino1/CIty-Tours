@@ -11,15 +11,7 @@ public class Itinerary {
 	private List<Landmark> destinations;
 	private LocalDate date;
 	private Long userId;
-	
-	public Itinerary(Long id, String name, String startingLocation, List<Landmark> destinations, LocalDate date, Long userId) {
-		this.itineraryId = id;
-		this.name = name;
-		this.startingLocation = startingLocation;
-		this.destinations = destinations;
-		this.date = date;
-		this.userId = userId;
-	}
+	private String username;
 	
 	public Long getItineraryId() {
 		return itineraryId;
@@ -58,5 +50,11 @@ public class Itinerary {
 		this.userId = userId;
 	}
 	
-	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 }

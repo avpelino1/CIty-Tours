@@ -17,10 +17,10 @@ public interface ItineraryDAO {
 	
 	public List<Landmark> retrieveItineraryLandmarks(Long itineraryID);
 	
-	public Itinerary retrieveItinerary(int id);
+	public Itinerary retrieveItinerary(Long id);
 	
-	public void updateItinerary(Itinerary itinerary, int id);
+	public void updateItinerary(Itinerary itinerary, Long id);
 	
-	public void deleteItinerary(int id);
+	public void deleteItinerary(Long id);
 	
 }
