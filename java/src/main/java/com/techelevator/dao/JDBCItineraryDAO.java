@@ -12,34 +12,51 @@ import org.springframework.stereotype.Component;
 
 import com.techelevator.model.Itinerary;
 import com.techelevator.model.Landmark;
+import com.techelevator.model.LoginDTO;
 
 @Component
 public class JDBCItineraryDAO implements ItineraryDAO {
 	
-	private JdbcTemplate jdbc;
+	private JdbcTemplate jdbcTemplate;
+	private LoginDTO loginDTO;
+	private UserDAO userDAO;
+	private Long currentUserId = userDAO.findByUsername(loginDTO.getUsername()).getId();
 	
 	public JDBCItineraryDAO(DataSource datasource) {
-		jdbc = new JdbcTemplate(datasource);
+		jdbcTemplate = new JdbcTemplate(datasource);
 	}
 
 	@Override
 	public void createItinerary(Itinerary itinerary) {
 		String name = itinerary.getName();
 		String startingLocation = itinerary.getStartingLocation();
-		List<Landmark> destinations = itinerary.getDestinations();
 		LocalDate date = itinerary.getDate();
 		Long userId = itinerary.getUserId();
 		
-		String sql = "INSERT INTO itinerary(name, starting_location, destinations, date, user_id)"
-				+ " VALUES (?, ?, ?, ?, ?)";
-		jdbc.update(sql, name, startingLocation, destinations, date, userId);
+		String sql = "INSERT INTO itinerary(name, starting_location, date, user_id)"
+				+ " VALUES (?, ?, ?, ?) RETURNING itinerary_id";
+		SqlRowSet itinerarySql = jdbcTemplate.queryForRowSet(sql, name, startingLocation, date, userId);
+		
+		Long itineraryId = 0L;
+		
+		if (itinerarySql.next()) {
+			itineraryId = itinerarySql.getLong("itinerary_id");
+		}
+		
+		List<Landmark> destinations = itinerary.getDestinations();
+		
+		String destinationInsert = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (? ,?)";
+		
+		for (Landmark landmark : destinations) {
+			jdbcTemplate.update(destinationInsert, itineraryId, landmark.getId());
+		}
 		
 	}
 
 	@Override
-	public List<Itinerary> retrieveAllItinerary() {
-		String sql = "SELECT * FROM itinerary";
-		SqlRowSet result = jdbc.queryForRowSet(sql);
+	public List<Itinerary> retrieveAllUserItinerary() {
+		String sql = "SELECT * FROM itinerary WHERE user_id = ?";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, currentUserId);
 		List<Itinerary> output = new ArrayList<>();
 		
 		while(result.next()) {
@@ -57,10 +74,30 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	}
 	
 	@Override
+	public List<Itinerary> retrieveSharedItineraries() {
+		List<Itinerary> output = new ArrayList<>();
+		List<Integer> itineraryIds = new ArrayList<>();
+		
+		String sql = "SELECT * FROM accessibility WHERE user_id = ?";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql);
+		
+		while (result.next() ) {
+			int id = result.getInt("itinerary_id");
+			itineraryIds.add(id);
+		}
+		
+		for (int id : itineraryIds) {
+			output.add(retrieveItinerary(id));
+		}
+		
+		return output;
+	}
+	
+	@Override
 	public List<Landmark> retrieveItineraryLandmarks(Long itineraryID){
 		List<Landmark> output = new ArrayList<Landmark>();
 		String sql = "SELECT landmark_id FROM destinations WHERE itineraryID = ?";
-		SqlRowSet row = jdbc.queryForRowSet(sql, itineraryID);
+		SqlRowSet row = jdbcTemplate.queryForRowSet(sql, itineraryID);
 		List<Long> landmarkIDs = new ArrayList<Long>();
 		while(row.next()) {
 			Long landmarkID = row.getLong("landmark_id");
@@ -68,7 +105,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		}
 		for (Long landmarkID : landmarkIDs) {
 			String sql1 = "SELECT * FROM landmark WHERE landmark_id = ?";
-			SqlRowSet row1 = jdbc.queryForRowSet(sql, landmarkID);
+			SqlRowSet row1 = jdbcTemplate.queryForRowSet(sql, landmarkID);
 			while(row1.next()) {
 				Landmark landmark = new Landmark();
 				landmark.setId(row1.getLong("landmark_id"));
@@ -85,7 +122,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	@Override
 	public Itinerary retrieveItinerary(int id) {
 		String sql = "SELECT * FROM itinerary WHERE itinerary_id = ?";
-		SqlRowSet result = jdbc.queryForRowSet(sql, id);
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
 		Itinerary output = null;
 		
 		while(result.next()) {
@@ -110,17 +147,19 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		LocalDate date = itinerary.getDate();
 		Long userId = itinerary.getUserId();
 		
-		jdbc.update(sql, name, startingLocation, destinations, date, id);
+		jdbcTemplate.update(sql, name, startingLocation, destinations, date, id);
 		
 	}
 
 	@Override
 	public void deleteItinerary(int id) {
 		String sql = "DELETE FROM itinerary WHERE itinerary_id = ?";
+		String sqlAccessibility = "DELETE FROM accessibility WHERE itinerary_id = ?";
 		
-		jdbc.update(sql, id);
-		
+		jdbcTemplate.update(sql, id);
+		jdbcTemplate.update(sqlAccessibility, id);
 	}
+
 
 	
 }

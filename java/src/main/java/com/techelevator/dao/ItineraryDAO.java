@@ -11,7 +11,9 @@ public interface ItineraryDAO {
 
 	public void createItinerary(Itinerary itinerary);
 	
-	public List<Itinerary> retrieveAllItinerary();
+	public List<Itinerary> retrieveAllUserItinerary();
+	
+	public List<Itinerary> retrieveSharedItineraries();
 	
 	public List<Landmark> retrieveItineraryLandmarks(Long itineraryID);
 	
