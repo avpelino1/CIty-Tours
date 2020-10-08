@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import authService from '../services/AuthService';
+//import authService from '../services/AuthService';
 
 export default {
     name: 'landmark',

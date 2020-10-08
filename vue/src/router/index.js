@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store/index'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
-import store from '../store/index'
+import Itinerary from '../views/Itinerary.vue'
+import Landmark from '../views/Landmark.vue'
 
 Vue.use(Router)
 
@@ -53,6 +55,22 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+      path: "/itinerary",
+      name: "itinerary",
+      component: Itinerary,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/landmark",
+      name: "landmark",
+      component: Landmark,
+      meta: {
+        requiresAuth: false
+      }
+    }
   ]
 })
 

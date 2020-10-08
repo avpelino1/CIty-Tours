@@ -78,7 +78,6 @@ CONSTRAINT fk_itinerary_id FOREIGN KEY (itinerary_id) REFERENCES itinerary
 CREATE TABLE images
 (
 landmark_id int,
-review_id int,
 image_url varchar,
 
 CONSTRAINT fk_landmark_id FOREIGN KEY (landmark_id) REFERENCES landmark,

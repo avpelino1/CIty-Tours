@@ -10,6 +10,13 @@ public interface LandmarkDAO {
 
 	public List<Landmark> getAllLandmarks();
 	
+	public Landmark getLandmarkById(Long id);
 	
+	public void addLandmark(Landmark landmark);
+
+	public List<Landmark> getPendingLandmarks();
 	
+	public void approveLandmark(Long id);
+	
+	public void deleteLandmark(Long id);
 }
