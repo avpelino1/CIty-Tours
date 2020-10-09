@@ -14,7 +14,7 @@ export default {
         return http.post('/landmarks/add', landmark);
     },
 
-    getOneLandmark() {
+    getOneLandmark(id) {
         return http.get('/landmarks/:id');
     },
 
