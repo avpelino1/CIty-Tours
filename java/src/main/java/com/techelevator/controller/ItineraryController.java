@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,13 @@ public class ItineraryController {
 	private ItineraryDAO itineraryDAO;
 	
 	@RequestMapping(path="/all", method=RequestMethod.GET)
-	public List<Itinerary> retrieveAllItinerary() {
-		return itineraryDAO.retrieveAllUserItinerary();
+	public List<Itinerary> retrieveAllItinerary(Principal principal) {
+		return itineraryDAO.retrieveAllUserItinerary(principal.getName());
 	}
 
 	@RequestMapping(path="/shared", method=RequestMethod.GET)
-	public List<Itinerary> retrieveSharedItineraries() {
-		return itineraryDAO.retrieveSharedItineraries();
+	public List<Itinerary> retrieveSharedItineraries(Principal principal) {
+		return itineraryDAO.retrieveSharedItineraries(principal.getName());
 	}
 	
 	@RequestMapping(path="/create", method=RequestMethod.POST)
@@ -39,13 +40,22 @@ public class ItineraryController {
 	}
 	
 	@RequestMapping(path="/{id}/update", method=RequestMethod.PUT)
-	public void updateItinerary(@RequestBody Itinerary newItinerary, @PathVariable Long id) {
-		itineraryDAO.updateItinerary(newItinerary, id);
+	public void updateItinerary(@RequestBody Itinerary newItinerary, @PathVariable Long id, Principal principal) {
+		itineraryDAO.updateItinerary(newItinerary, id, principal.getName());
 	}
 	
 	@RequestMapping(path="/{id}/delete", method=RequestMethod.DELETE)
-	public void deleteItinerary(@PathVariable Long id) {
-		itineraryDAO.deleteItinerary(id);
+	public void deleteItinerary(@PathVariable Long id, Principal principal) {
+		itineraryDAO.deleteItinerary(id, principal.getName());
 	}
 	
+	@RequestMapping(path="/{id}/share/{shareUsername}", method=RequestMethod.POST)
+	public void shareItinerary(@PathVariable Long id, @PathVariable String shareUsername, Principal principal) {
+		itineraryDAO.shareItinerary(id, shareUsername, principal.getName());
+	}
+	
+	@RequestMapping(path="/{id}/removeShare/{shareUsername}", method=RequestMethod.POST)
+	public void removeShare(@PathVariable Long id, @PathVariable String shareUsername, Principal principal) {
+		itineraryDAO.removeSharedItinerary(id, shareUsername, principal.getName());
+	}
 }

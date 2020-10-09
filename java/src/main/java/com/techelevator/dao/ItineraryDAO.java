@@ -11,16 +11,19 @@ public interface ItineraryDAO {
 
 	public void createItinerary(Itinerary itinerary);
 	
-	public List<Itinerary> retrieveAllUserItinerary();
+	public List<Itinerary> retrieveAllUserItinerary(String username);
 	
-	public List<Itinerary> retrieveSharedItineraries();
+	public List<Itinerary> retrieveSharedItineraries(String username);
 	
 	public List<Landmark> retrieveItineraryLandmarks(Long itineraryID);
 	
 	public Itinerary retrieveItinerary(Long id);
 	
-	public void updateItinerary(Itinerary itinerary, Long id);
+	public void updateItinerary(Itinerary itinerary, Long id, String username);
 	
-	public void deleteItinerary(Long id);
+	public void deleteItinerary(Long id, String username);
 	
+	public void shareItinerary(Long itineraryId, String shareUsername, String username);
+	
+	public void removeSharedItinerary(Long itineraryId, String shareUsername, String username);
 }

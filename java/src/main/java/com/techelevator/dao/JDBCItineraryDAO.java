@@ -55,7 +55,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	}
 
 	@Override
-	public List<Itinerary> retrieveAllUserItinerary() {
+	public List<Itinerary> retrieveAllUserItinerary(String username) {
 		String sql = "SELECT * FROM itinerary WHERE user_id = ?";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, currentUserId);
 		List<Itinerary> output = new ArrayList<>();
@@ -74,7 +74,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	}
 	
 	@Override
-	public List<Itinerary> retrieveSharedItineraries() {
+	public List<Itinerary> retrieveSharedItineraries(String username) {
 		List<Itinerary> output = new ArrayList<>();
 		List<Long> itineraryIds = new ArrayList<>();
 		
@@ -132,7 +132,8 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	}
 
 	@Override
-	public void updateItinerary(Itinerary itinerary, Long id) {
+	public void updateItinerary(Itinerary itinerary, Long id, String username) {
+		if (itinerary.getUsername().equals(username)) {
 		String sql = "UPDATE itinerary SET name = ?, starting_point = ?, date_of = ? WHERE itinerary_id = ?";
 		String name = itinerary.getName();
 		String startingLocation = itinerary.getStartingLocation();
@@ -146,18 +147,38 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 			String destination = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (?, ?)";
 			jdbcTemplate.update(destination, id, landmark.getId());
 		}
+		}
 	}
 
 	@Override
-	public void deleteItinerary(Long id) {
-		String sql = "DELETE FROM itinerary WHERE itinerary_id = ?";
-		String destinationDelete = "DELETE FROM destinations WHERE itinerary_id=?";
-		String sqlAccessibility = "DELETE FROM accessibility WHERE itinerary_id = ?";
+	public void deleteItinerary(Long itineraryId, String username) {
+		if (retrieveItinerary(itineraryId).getUsername().equals(username)) {
 		
-		jdbcTemplate.update(sql, id);
-		jdbcTemplate.update(destinationDelete, id);
-		jdbcTemplate.update(sqlAccessibility, id);
+			String sql = "DELETE FROM itinerary WHERE itinerary_id = ?";
+			String destinationDelete = "DELETE FROM destinations WHERE itinerary_id=?";
+			String sqlAccessibility = "DELETE FROM accessibility WHERE itinerary_id = ?";
+			
+			jdbcTemplate.update(sql, itineraryId);
+			jdbcTemplate.update(destinationDelete, itineraryId);
+			jdbcTemplate.update(sqlAccessibility, itineraryId);
+		}
 	}
 
+	@Override
+	public void shareItinerary(Long itineraryId, String shareUsername, String username) {
+		if (retrieveItinerary(itineraryId).getUsername().equals(username)) {
+			String sql = "INSERT INTO accessibility(itinerary_id, user_id)";
+			
+			jdbcTemplate.update(sql, itineraryId, userDAO.findIdByUsername(shareUsername));
+		}
+	}
 	
+	@Override
+	public void removeSharedItinerary(Long itineraryId, String shareUsername, String username) {
+		if (retrieveItinerary(itineraryId).getUsername().equals(username)) {
+			String sql = "DELETE FROM accessibility WHERE itinerary_id = ? AND user_id = ?";
+			
+			jdbcTemplate.update(sql, itineraryId, userDAO.findIdByUsername(shareUsername));
+		}
+	}
 }
