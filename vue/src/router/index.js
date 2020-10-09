@@ -78,7 +78,7 @@ const router = new Router({
     component: LandmarkDetails,
     meta: {
       requiresAuth: false
-    }
+      }
     }
   ]
 })
