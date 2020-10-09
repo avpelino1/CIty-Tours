@@ -5,7 +5,7 @@ import java.time.LocalTime;
 public class BusinessHours {
 
 	private Long landmarkId;
-	private Long day;
+	private String day;
 	private LocalTime open_time; //can be null = closed
 	private LocalTime close_time; //can be null = closed
 	
@@ -15,10 +15,10 @@ public class BusinessHours {
 	public void setLandmarkId(Long landmarkId) {
 		this.landmarkId = landmarkId;
 	}
-	public Long getDay() {
+	public String getDay() {
 		return day;
 	}
-	public void setDay(Long day) {
+	public void setDay(String day) {
 		this.day = day;
 	}
 	public LocalTime getOpen_time() {

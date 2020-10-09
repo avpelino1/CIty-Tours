@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,10 +90,10 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 
 		// while loop to create a business hours array and attach to landmark object
 		while (businessHourResults.next()) {
-
+			
 			BusinessHours hours = new BusinessHours();
 			hours.setLandmarkId(businessHourResults.getLong("landmark_id"));
-			hours.setDay(businessHourResults.getLong("day_of"));
+			hours.setDay(dayOfWeek(businessHourResults.getLong("day_of")));
 			if (businessHourResults.getTime("open_time") == null) {
 				hours.setOpen_time(null);
 			} else {
@@ -194,6 +195,25 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 		
 		if (result.next()) {
 			return result.getLong("count");
+		}
+		return null;
+	}
+	
+	public String dayOfWeek(Long day) {
+		if (day == 1) {
+			return "Monday";
+		} else if (day == 2) {
+			return "Tuesday";
+		} else if (day == 3) {
+			return "Wednesday";
+		} else if (day == 4) {
+			return "Thursday";
+		} else if (day == 5) {
+			return "Friday";
+		} else if (day == 6) {
+			return "Saturday";
+		} else if (day == 7) {
+			return "Sunday";
 		}
 		return null;
 	}

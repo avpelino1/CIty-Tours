@@ -11,7 +11,7 @@ public class Landmark {
 	private String name;
 	private String description;
 	private String venueType;
-	private List<Images> images  = new ArrayList<Images>();;
+	private List<Images> images  = new ArrayList<Images>();
 	//pendingApproval default should be true until an Admin approves the landmark addition.
 	private boolean pendingApproval;
 	
