@@ -69,15 +69,15 @@ export default {
       },
 
       retrieveAllLandmarks() {
-        landmarkService.getLandmarks().then(response => {
-
+        landmarkService.getLandmarks().then((response) => {
+            this.landmarks = response.date;
         })
 
       },
 
       retrieveOneLandmark() {
-        landmarkService.getOneLandmark().then(response => {
-          
+        landmarkService.getOneLandmark().then((response) => {
+          this.newLandmark = response.data;
         })
 
       }

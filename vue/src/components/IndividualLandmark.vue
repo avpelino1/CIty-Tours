@@ -33,7 +33,7 @@ export default {
     created() {
         getLandmark() {
             landmarkService.getOneLandmark(this.$route.params.id);
-        },
+        }
     
     }
 
