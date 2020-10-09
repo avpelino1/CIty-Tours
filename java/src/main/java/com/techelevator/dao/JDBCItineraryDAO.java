@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,11 @@ import com.techelevator.model.Landmark;
 public class JDBCItineraryDAO implements ItineraryDAO {
 	
 	private JdbcTemplate jdbcTemplate;
+	
+	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
 	private LandmarkDAO landmarkDAO;
 	
 	public JDBCItineraryDAO(DataSource datasource) {
@@ -66,7 +71,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 			itinerary.setItineraryId(result.getLong("itinerary_id"));
 			itinerary.setName(result.getString("name"));
 			itinerary.setStartingLocation(result.getString("starting_point"));
-			itinerary.setDestinations(retrieveItineraryLandmarks(result.getLong("id")));
+			itinerary.setDestinations(retrieveItineraryLandmarks(result.getLong("itinerary_id")));
 			itinerary.setDate(result.getDate("date_of").toLocalDate());
 			itinerary.setUserId(result.getLong("user_id"));
 			output.add(itinerary);
@@ -116,7 +121,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	@Override
 	public List<Landmark> retrieveItineraryLandmarks(Long itineraryID){
 		List<Landmark> output = new ArrayList<Landmark>();
-		String sql = "SELECT landmark_id FROM destinations WHERE itineraryID = ?";
+		String sql = "SELECT landmark_id FROM destinations WHERE itinerary_id = ?";
 		
 		SqlRowSet row = jdbcTemplate.queryForRowSet(sql, itineraryID);
 		
