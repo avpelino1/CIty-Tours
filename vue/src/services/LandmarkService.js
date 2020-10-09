@@ -15,7 +15,7 @@ export default {
     },
 
     getOneLandmark(id) {
-        return http.get('/landmarks/:id');
+        return http.get(`/landmarks/${id}`);
     },
 
     pendingLandmarks() {

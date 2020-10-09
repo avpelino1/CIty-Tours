@@ -75,10 +75,8 @@ export default {
 
       },
 
-      retrieveOneLandmark() {
-        landmarkService.getOneLandmark().then((response) => {
-          this.newLandmark = response.data;
-        })
+      retrieveOneLandmark(id) {
+        landmarkService.getOneLandmark(id);
 
       }
 
