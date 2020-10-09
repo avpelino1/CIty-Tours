@@ -1,6 +1,7 @@
 package com.techelevator.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Itinerary {
@@ -8,7 +9,7 @@ public class Itinerary {
 	private Long itineraryId;
 	private String name;
 	private String startingLocation;
-	private List<Landmark> destinations;
+	private List<Landmark> destinations = new ArrayList<>();
 	private LocalDate date;
 	private Long userId;
 	private String username;
