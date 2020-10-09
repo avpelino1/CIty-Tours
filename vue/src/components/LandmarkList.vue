@@ -60,9 +60,24 @@ export default {
   },
 
   methods: {
+    
       createLandmark() {
 
           landmarkService.createLandmark(this.newLandmark);
+      },
+
+      retrieveAllLandmarks() {
+        landmarkService.getLandmarks().then(response => {
+
+        })
+
+      },
+
+      retrieveOneLandmark() {
+        landmarkService.getOneLandmark().then(response => {
+          
+        })
+
       }
 
   },
