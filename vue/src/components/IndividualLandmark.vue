@@ -5,9 +5,17 @@
     {{ landmark.description }} <br>
     {{ landmark.address }} <br>
     {{ landmark.venue_type }} <br>
-    {{ landmark.business_hours }} <br>
-    {{ landmark.images }}  <!-- write a loop to display all images -->
 
+    <div class='business-hours' v-for='hours in landmark.business_hours' v-bind:key='hours.business_hours'>
+        console.log(hours);
+        {{ landmark.business_hours }} 
+    </div>
+
+    <div class='landmark-images' v-for='images in landmark.images' v-bind:key='images.imgUrl'>
+        console.log(images);
+        <img src={{ images.imgUrl }} />
+        
+    </div>
     
   </div>
 </template>
