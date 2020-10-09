@@ -2,12 +2,13 @@
   <div>
     <h1>View Available Itineraries</h1>
     <h2>View Personal Itineraries</h2>
-    <div class='itinerary-list' v-for='itinerary in myItineraries' v-bind:key="itinerary.id">
+    <div class='itinerary-list' v-for='itinerary in myItineraries' v-bind:key="itinerary.itineraryId">
         <h3 class = 'sub-header'>{{itinerary.name}} </h3>
-        {{itinerary.starting_point}} <br>
-        {{itinerary.date_of}} <br>
-        {{itinerary.user_id}} <br>
-        <button> Delete this Itinerary? </button>
+        {{itinerary.startingLocation}} <br>
+        {{itinerary.date}} <br>
+        {{itinerary.userId}} <br>
+        {{itinerary.itineraryId}} <br>
+        <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete this Itinerary? </button>
     </div>
     <h2>View Friends' Itineraries</h2>
     <div class='itinerary-list' v-for='itinerary in myFriendsItineraries' v-bind:key="itinerary.id">
@@ -57,6 +58,9 @@ export default {
     methods:{
         createItinerary() {
             itineraryService.getItineraries();
+        },
+        deleteItinerary(id) {
+            itineraryService.deleteItinerary(id);
         }
 
     },

@@ -74,7 +74,7 @@ public class ItineraryController {
 		}
 	}
 	
-	@RequestMapping(path="/{id}/removeShare/{shareUsername}", method=RequestMethod.POST)
+	@RequestMapping(path="/{id}/removeShare/{shareUsername}", method=RequestMethod.DELETE)
 	public Boolean removeShare(@PathVariable Long id, @PathVariable String shareUsername, Principal principal) {
 		try {
 			itineraryDAO.removeSharedItinerary(id, shareUsername, principal.getName());

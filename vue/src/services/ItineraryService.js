@@ -1,28 +1,28 @@
 import axios from 'axios';
 
 const http = axios.create({
-    baseURL: "http://localhost:8080"
+    baseURL: "http://localhost:8080/itinerary"
 });
 
 export default {
     getMyItineraries(){
-        return http.get('/itinerary/all');
+        return http.get('/all');
     },
 
     getFriendsItineraries(){
-        return http.get('/itinerary/shared');
+        return http.get('/shared');
     },
    
     createItinerary(itinerary) {
-        return http.post('/itinerary/create', itinerary)
+        return http.post('/create', itinerary)
     },
 
     updateItinerary(itinerary) {
-        return http.post('/itinerary/:id/update', itinerary)
+        return http.post(`/${itinerary.id}/update`, itinerary)
     },
 
-    deleteItinerary() {
-        return http.delete('/itinerary/:id')
+    deleteItinerary(id) {
+        return http.delete(`/${id}/delete`)
     }
 
 }

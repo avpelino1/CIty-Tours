@@ -109,8 +109,8 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		while(result.next()) {
 			itinerary.setItineraryId(result.getLong("itinerary_id"));
 			itinerary.setName(result.getString("name"));
-			itinerary.setStartingLocation(result.getString("starting_location"));
-			itinerary.setDestinations(retrieveItineraryLandmarks(result.getLong("id")));
+			itinerary.setStartingLocation(result.getString("starting_point"));
+			itinerary.setDestinations(retrieveItineraryLandmarks(result.getLong("itinerary_id")));
 			itinerary.setDate(result.getDate("date_of").toLocalDate());
 			itinerary.setUserId(result.getLong("user_id"));
 		}
@@ -161,15 +161,15 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 
 	@Override
 	public void deleteItinerary(Long itineraryId, String username) throws IOException {
-		if (retrieveItinerary(itineraryId).getUsername().equals(username)) {
+		if (retrieveItinerary(itineraryId).getUserId() == (userDAO.findIdByUsername(username))) {
 		
 			String sql = "DELETE FROM itinerary WHERE itinerary_id = ?";
 			String destinationDelete = "DELETE FROM destinations WHERE itinerary_id=?";
 			String sqlAccessibility = "DELETE FROM accessibility WHERE itinerary_id = ?";
 			
-			jdbcTemplate.update(sql, itineraryId);
 			jdbcTemplate.update(destinationDelete, itineraryId);
 			jdbcTemplate.update(sqlAccessibility, itineraryId);
+			jdbcTemplate.update(sql, itineraryId);
 		} else {
 			throw new IOException();
 		}
@@ -177,7 +177,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 
 	@Override
 	public void shareItinerary(Long itineraryId, String shareUsername, String username) throws IOException {
-		if (retrieveItinerary(itineraryId).getUsername().equals(username)) {
+		if (retrieveItinerary(itineraryId).getUserId() == (userDAO.findIdByUsername(username))) {
 			String sql = "INSERT INTO accessibility(itinerary_id, user_id)";
 			
 			jdbcTemplate.update(sql, itineraryId, userDAO.findIdByUsername(shareUsername));
@@ -188,7 +188,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	
 	@Override
 	public void removeSharedItinerary(Long itineraryId, String shareUsername, String username) throws IOException {
-		if (retrieveItinerary(itineraryId).getUsername().equals(username)) {
+		if (retrieveItinerary(itineraryId).getUserId() == (userDAO.findIdByUsername(username))) {
 			String sql = "DELETE FROM accessibility WHERE itinerary_id = ? AND user_id = ?";
 			
 			jdbcTemplate.update(sql, itineraryId, userDAO.findIdByUsername(shareUsername));
