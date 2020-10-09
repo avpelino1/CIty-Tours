@@ -27,4 +27,6 @@ public interface ItineraryDAO {
 	public void shareItinerary(Long itineraryId, String shareUsername, String username) throws IOException;
 	
 	public void removeSharedItinerary(Long itineraryId, String shareUsername, String username) throws IOException;
+	
+	public Itinerary getPublicItinerary(Long itineraryId) throws IOException;
 }

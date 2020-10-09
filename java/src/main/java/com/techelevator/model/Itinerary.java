@@ -13,6 +13,7 @@ public class Itinerary {
 	private LocalDate date;
 	private Long userId;
 	private String username;
+	private Long share;
 	
 	public Long getItineraryId() {
 		return itineraryId;
@@ -58,4 +59,11 @@ public class Itinerary {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public Long getShare() {
+		return share;
+	}
+	public void setShare(Long share) {
+		this.share = share;
+	}
+	
 }

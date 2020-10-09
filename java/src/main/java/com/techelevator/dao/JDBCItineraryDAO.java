@@ -67,13 +67,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		List<Itinerary> output = new ArrayList<>();
 		
 		while(result.next()) {
-			Itinerary itinerary = new Itinerary();
-			itinerary.setItineraryId(result.getLong("itinerary_id"));
-			itinerary.setName(result.getString("name"));
-			itinerary.setStartingLocation(result.getString("starting_point"));
-			itinerary.setDestinations(retrieveItineraryLandmarks(result.getLong("itinerary_id")));
-			itinerary.setDate(result.getDate("date_of").toLocalDate());
-			itinerary.setUserId(result.getLong("user_id"));
+			Itinerary itinerary = mapRowToItinerary(result);
 			output.add(itinerary);
 		}
 		return output;
@@ -106,13 +100,8 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
 		Itinerary itinerary = new Itinerary();
 		
-		while(result.next()) {
-			itinerary.setItineraryId(result.getLong("itinerary_id"));
-			itinerary.setName(result.getString("name"));
-			itinerary.setStartingLocation(result.getString("starting_point"));
-			itinerary.setDestinations(retrieveItineraryLandmarks(result.getLong("itinerary_id")));
-			itinerary.setDate(result.getDate("date_of").toLocalDate());
-			itinerary.setUserId(result.getLong("user_id"));
+		if (result.next()) {
+			itinerary = mapRowToItinerary(result);
 		}
 		
 		return itinerary;
@@ -195,5 +184,27 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		} else {
 			throw new IOException();
 		}
+	}
+	
+	@Override
+	public Itinerary getPublicItinerary(Long itineraryId) throws IOException {
+		if (retrieveItinerary(itineraryId).getShare() == 2) {
+			return retrieveItinerary(itineraryId);
+		} else {
+			return null;
+		}
+	}
+	
+	public Itinerary mapRowToItinerary(SqlRowSet result) {
+		Itinerary itinerary = new Itinerary();
+		itinerary.setItineraryId(result.getLong("itinerary_id"));
+		itinerary.setName(result.getString("name"));
+		itinerary.setStartingLocation(result.getString("starting_point"));
+		itinerary.setDestinations(retrieveItineraryLandmarks(result.getLong("itinerary_id")));
+		itinerary.setDate(result.getDate("date_of").toLocalDate());
+		itinerary.setUserId(result.getLong("user_id"));
+		itinerary.setShare(result.getLong("share"));
+		
+		return itinerary;
 	}
 }

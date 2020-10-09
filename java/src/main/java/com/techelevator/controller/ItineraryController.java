@@ -84,4 +84,17 @@ public class ItineraryController {
 			//front end if false; then tell them it's unauthorized
 		}
 	}
+	
+	@PreAuthorize("permitAll()")
+	@RequestMapping(path="/{id}", method=RequestMethod.GET)
+	public Itinerary sharePublicItinerary(@PathVariable Long id) {
+		try {
+			return itineraryDAO.getPublicItinerary(id);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+			//if null then unauthorized
+		}
+	}
 }
