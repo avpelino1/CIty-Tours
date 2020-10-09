@@ -5,12 +5,24 @@ const http = axios.create({
 });
 
 export default {
-    getItineraries(){
-        return http.get('/itinerary');
+    getMyItineraries(){
+        return http.get('/itinerary/all');
+    },
+
+    getFriendsItineraries(){
+        return http.get('/itinerary/shared');
     },
    
     createItinerary(itinerary) {
-        return axios.post('/login', itinerary)
+        return http.post('/itinerary/create', itinerary)
     },
+
+    updateItinerary(itinerary) {
+        return http.post('/itinerary/:id/update', itinerary)
+    },
+
+    deleteItinerary() {
+        return http.delete('/itinerary/:id')
+    }
 
 }
