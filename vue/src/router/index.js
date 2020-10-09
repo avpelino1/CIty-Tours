@@ -7,6 +7,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import Itinerary from '../views/Itinerary.vue'
 import Landmark from '../views/Landmark.vue'
+import LandmarkDetails from '../views/LandmarkDetails.vue'
 
 Vue.use(Router)
 
@@ -71,6 +72,14 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+    path: "/landmark/details",
+    name: "landmark-details",
+    component: LandmarkDetails,
+    meta: {
+      requiresAuth: false
+      }
+    }
   ]
 })
 
