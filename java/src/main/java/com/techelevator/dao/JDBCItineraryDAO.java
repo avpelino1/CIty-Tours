@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,6 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	
 	private JdbcTemplate jdbcTemplate;
 	private UserDAO userDAO;
-	private Long currentUserId;
 	private LandmarkDAO landmarkDAO;
 	
 	public JDBCItineraryDAO(DataSource datasource) {
@@ -32,7 +32,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		LocalDate date = itinerary.getDate();
 		
 		//works if the logged in user creates a itinerary, otherwise need a new way to retrieve the logged in user's name to get the id
-		currentUserId = (long) userDAO.findIdByUsername(itinerary.getUsername());
+		Long currentUserId = (long) userDAO.findIdByUsername(itinerary.getUsername());
 		
 		String sql = "INSERT INTO itinerary(name, starting_point, date, user_id)"
 				+ " VALUES (?, ?, ?, ?) RETURNING itinerary_id";
@@ -57,6 +57,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	@Override
 	public List<Itinerary> retrieveAllUserItinerary(String username) {
 		String sql = "SELECT * FROM itinerary WHERE user_id = ?";
+		Long currentUserId = (long) userDAO.findIdByUsername(username);
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, currentUserId);
 		List<Itinerary> output = new ArrayList<>();
 		
@@ -77,6 +78,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	public List<Itinerary> retrieveSharedItineraries(String username) {
 		List<Itinerary> output = new ArrayList<>();
 		List<Long> itineraryIds = new ArrayList<>();
+		Long currentUserId = (long) userDAO.findIdByUsername(username);
 		
 		String sql = "SELECT * FROM accessibility WHERE user_id = ?";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, currentUserId);
@@ -132,7 +134,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	}
 
 	@Override
-	public void updateItinerary(Itinerary itinerary, Long id, String username) {
+	public void updateItinerary(Itinerary itinerary, Long id, String username) throws IOException {
 		if (itinerary.getUsername().equals(username)) {
 		String sql = "UPDATE itinerary SET name = ?, starting_point = ?, date_of = ? WHERE itinerary_id = ?";
 		String name = itinerary.getName();
@@ -147,11 +149,13 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 			String destination = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (?, ?)";
 			jdbcTemplate.update(destination, id, landmark.getId());
 		}
+		} else {
+			throw new IOException();
 		}
 	}
 
 	@Override
-	public void deleteItinerary(Long itineraryId, String username) {
+	public void deleteItinerary(Long itineraryId, String username) throws IOException {
 		if (retrieveItinerary(itineraryId).getUsername().equals(username)) {
 		
 			String sql = "DELETE FROM itinerary WHERE itinerary_id = ?";
@@ -161,24 +165,30 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 			jdbcTemplate.update(sql, itineraryId);
 			jdbcTemplate.update(destinationDelete, itineraryId);
 			jdbcTemplate.update(sqlAccessibility, itineraryId);
+		} else {
+			throw new IOException();
 		}
 	}
 
 	@Override
-	public void shareItinerary(Long itineraryId, String shareUsername, String username) {
+	public void shareItinerary(Long itineraryId, String shareUsername, String username) throws IOException {
 		if (retrieveItinerary(itineraryId).getUsername().equals(username)) {
 			String sql = "INSERT INTO accessibility(itinerary_id, user_id)";
 			
 			jdbcTemplate.update(sql, itineraryId, userDAO.findIdByUsername(shareUsername));
+		} else {
+			throw new IOException();
 		}
 	}
 	
 	@Override
-	public void removeSharedItinerary(Long itineraryId, String shareUsername, String username) {
+	public void removeSharedItinerary(Long itineraryId, String shareUsername, String username) throws IOException {
 		if (retrieveItinerary(itineraryId).getUsername().equals(username)) {
 			String sql = "DELETE FROM accessibility WHERE itinerary_id = ? AND user_id = ?";
 			
 			jdbcTemplate.update(sql, itineraryId, userDAO.findIdByUsername(shareUsername));
+		} else {
+			throw new IOException();
 		}
 	}
 }

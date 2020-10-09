@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -19,11 +20,11 @@ public interface ItineraryDAO {
 	
 	public Itinerary retrieveItinerary(Long id);
 	
-	public void updateItinerary(Itinerary itinerary, Long id, String username);
+	public void updateItinerary(Itinerary itinerary, Long id, String username) throws IOException;
 	
-	public void deleteItinerary(Long id, String username);
+	public void deleteItinerary(Long id, String username) throws IOException;
 	
-	public void shareItinerary(Long itineraryId, String shareUsername, String username);
+	public void shareItinerary(Long itineraryId, String shareUsername, String username) throws IOException;
 	
-	public void removeSharedItinerary(Long itineraryId, String shareUsername, String username);
+	public void removeSharedItinerary(Long itineraryId, String shareUsername, String username) throws IOException;
 }
