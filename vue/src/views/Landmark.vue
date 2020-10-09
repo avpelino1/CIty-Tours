@@ -4,6 +4,7 @@
 
 <landmark-map/>
 <landmark-list/>
+<landmark-form/>
       
   </div>
 </template>
@@ -11,12 +12,14 @@
 <script>
 import LandmarkList from '@/components/LandmarkList.vue';
 import LandmarkMap from '@/components/LandmarkMap.vue';
+import LandmarkForm from '@/components/LandmarkForm.vue';
 
 export default {
     name: 'landmark',
     components: {
       LandmarkList,
-      LandmarkMap
+      LandmarkMap,
+      LandmarkForm
     }
 }
 
