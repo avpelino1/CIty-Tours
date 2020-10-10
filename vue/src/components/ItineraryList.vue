@@ -1,21 +1,35 @@
 <template>
   <div>
     <h1>View Available Itineraries</h1>
+
     <h2>View Personal Itineraries</h2>
     <div class='itinerary-list' v-for='itinerary in myItineraries' v-bind:key="itinerary.itineraryId">
-        <h3 class = 'sub-header'>{{itinerary.name}} </h3>
-        {{itinerary.startingLocation}} <br>
-        {{itinerary.date}} <br>
-        {{itinerary.userId}} <br>
-        {{itinerary.itineraryId}} <br>
-        <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete this Itinerary? </button>
+        <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
+        Starting Location: {{itinerary.startingLocation}} <br>
+        Date: {{itinerary.date}} <br><br>
+        User ID: {{itinerary.userId}} <br>
+        Itinerary ID: {{itinerary.itineraryId}} <br>
+        <p>***MAP GOES HERE***</p>
+        <p> Add/Remove Landmarks: </p>
+
+        <form>
+            <input type="checkbox"/>
+            <label for="landmark"> landmark name </label>
+        </form>
+
+        <br>
+
+        <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
     </div>
+
     <h2>View Friends' Itineraries</h2>
     <div class='itinerary-list' v-for='itinerary in myFriendsItineraries' v-bind:key="itinerary.id">
-        <h3 class = 'sub-header'>{{itinerary.name}} </h3>
-        {{itinerary.starting_point}} <br>
-        {{itinerary.date_of}} <br>
-        {{itinerary.user_id}} <br>
+        <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
+        Starting Location: {{itinerary.startingLocation}} <br>
+        Date: {{itinerary.date}} <br><br>
+        User ID: {{itinerary.userId}} <br>
+        Itinerary ID: {{itinerary.itineraryId}} <br>
+        <p>***MAP GOES HERE***</p>
     </div>
     
     <h2>Create a New Itinerary</h2>
@@ -57,10 +71,13 @@ export default {
     },
     methods:{
         createItinerary() {
-            itineraryService.getItineraries();
+            itineraryService.createItinerary(this.newItinerary);
         },
         deleteItinerary(id) {
             itineraryService.deleteItinerary(id);
+        },
+        getItineraryLandmarks(id){
+            itineraryService.getItineraryLandmarks(id);
         }
 
     },

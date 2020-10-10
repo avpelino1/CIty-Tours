@@ -12,13 +12,17 @@ export default {
     getFriendsItineraries(){
         return http.get('/shared');
     },
+
+    getItineraryLandmarks(id){
+        return http.get(`/destinations/${id}`);
+    },
    
     createItinerary(itinerary) {
         return http.post('/create', itinerary)
     },
 
     updateItinerary(itinerary) {
-        return http.post(`/${itinerary.id}/update`, itinerary)
+        return http.put(`/${itinerary.id}/update`, itinerary)
     },
 
     deleteItinerary(id) {

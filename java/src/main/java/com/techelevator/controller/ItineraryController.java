@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.dao.ItineraryDAO;
 import com.techelevator.model.Itinerary;
+import com.techelevator.model.Landmark;
 
 @PreAuthorize("isAuthenticated()")
 @CrossOrigin
@@ -28,6 +29,11 @@ public class ItineraryController {
 	@RequestMapping(path="/all", method=RequestMethod.GET)
 	public List<Itinerary> retrieveAllItinerary(Principal principal) {
 		return itineraryDAO.retrieveAllUserItinerary(principal.getName());
+	}
+	
+	@RequestMapping(path="/destinations/{id}", method=RequestMethod.GET)
+	public List<Landmark> retrieveDestinations(@PathVariable Long id){
+		return itineraryDAO.retrieveItineraryLandmarks(id);
 	}
 
 	@RequestMapping(path="/shared", method=RequestMethod.GET)
