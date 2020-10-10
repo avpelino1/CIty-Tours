@@ -11,9 +11,11 @@ public class Landmark {
 	private String name;
 	private String description;
 	private String venueType;
-	private List<Images> images  = new ArrayList<Images>();;
+	private List<Images> images  = new ArrayList<Images>();
 	//pendingApproval default should be true until an Admin approves the landmark addition.
 	private boolean pendingApproval;
+	private Long thumbsUp;
+	private Long thumbsDown;
 	
 	public Long getId() {
 		return id;
@@ -62,6 +64,18 @@ public class Landmark {
 	}
 	public void setPendingApproval(boolean pendingApproval) {
 		this.pendingApproval = pendingApproval;
+	}
+	public Long getThumbsUp() {
+		return thumbsUp;
+	}
+	public void setThumbsUp(Long thumbsUp) {
+		this.thumbsUp = thumbsUp;
+	}
+	public Long getThumbsDown() {
+		return thumbsDown;
+	}
+	public void setThumbsDown(Long thumbsDown) {
+		this.thumbsDown = thumbsDown;
 	}
 	
 	

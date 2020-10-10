@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +43,10 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 			mapRowToHours(landmark);
 			// mapping image locations of respective landmark to landmark object
 			mapRowToImages(landmark);
+			//mapping thumbsUp count to landmark
+			mapRowToThumbsUp(landmark);
+			//mapping thumbsUp count to landmark
+			mapRowToThumbsDown(landmark);
 		}
 
 		return allLandmarks;
@@ -89,10 +94,10 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 
 		// while loop to create a business hours array and attach to landmark object
 		while (businessHourResults.next()) {
-
+			
 			BusinessHours hours = new BusinessHours();
 			hours.setLandmarkId(businessHourResults.getLong("landmark_id"));
-			hours.setDay(businessHourResults.getLong("day_of"));
+			hours.setDay(dayOfWeek(businessHourResults.getLong("day_of")));
 			if (businessHourResults.getTime("open_time") == null) {
 				hours.setOpen_time(null);
 			} else {
@@ -178,22 +183,41 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 		jdbcTemplate.update(deleteHours, id);
 	}
 
-	public Long landmarkThumbsUp(Long landmarkId) {
+	public Landmark mapRowToThumbsUp(Landmark landmark) {
 		String Sql = "SELECT COUNT(thumbs_up) FROM review WHERE landmark_id = ? AND thumbs_up = true";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(Sql, landmarkId);
+		SqlRowSet result = jdbcTemplate.queryForRowSet(Sql, landmark.getId());
 		
 		if (result.next()) {
-			return result.getLong("count");
+			landmark.setThumbsUp(result.getLong("count"));
 		}
-		return null;
+		return landmark;
 	}
 	
-	public Long landmarkThumbsDown(Long landmarkId) {
+	public Landmark mapRowToThumbsDown(Landmark landmark) {
 		String Sql = "SELECT COUNT(thumbs_down) FROM review WHERE landmark_id = ? AND thumbs_down = true";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(Sql, landmarkId);
+		SqlRowSet result = jdbcTemplate.queryForRowSet(Sql, landmark.getId());
 		
 		if (result.next()) {
-			return result.getLong("count");
+			landmark.setThumbsDown(result.getLong("count"));
+		}
+		return landmark;
+	}
+	
+	public String dayOfWeek(Long day) {
+		if (day == 1) {
+			return "Monday";
+		} else if (day == 2) {
+			return "Tuesday";
+		} else if (day == 3) {
+			return "Wednesday";
+		} else if (day == 4) {
+			return "Thursday";
+		} else if (day == 5) {
+			return "Friday";
+		} else if (day == 6) {
+			return "Saturday";
+		} else if (day == 7) {
+			return "Sunday";
 		}
 		return null;
 	}

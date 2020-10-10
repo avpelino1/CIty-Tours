@@ -1,19 +1,16 @@
 <template>
   <div>
-    {{ landmark.id }} <br>
     {{ landmark.name }} <br>
-    {{ landmark.description }} <br>
     {{ landmark.address }} <br>
-    {{ landmark.venue_type }} <br>
-
-    <div class='business-hours' v-for='hours in landmark.business_hours' v-bind:key='hours.business_hours'>
-        console.log(hours);
-        {{ landmark.business_hours }} 
+    {{ landmark.description }} <br>
+    {{ landmark.venueType }} <br>
+    <br>
+    <div class='business-hours' v-for='hours in landmark.businessHours' v-bind:key='hours.day_of'>
+        {{ hours.day }} : {{ hours.open_time }} - {{ hours.close_time }} <br>
     </div>
-
+    <br>
     <div class='landmark-images' v-for='images in landmark.images' v-bind:key='images.imgUrl'>
-        console.log(images);
-        <img src={{ images.imgUrl }} />
+        <img v-bind:src= images.imgUrl /> <br>
         
     </div>
     
