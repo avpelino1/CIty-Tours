@@ -1,25 +1,33 @@
 import axios from 'axios';
 
 const http = axios.create({
-    baseURL: "http://localhost:8080"
+    baseURL: "http://localhost:8080/landmarks"
 });
 
 export default {
     getLandmarks(){
-        return http.get('/landmarks/all');
+        return http.get('/all');
     },
    
     createLandmark(landmark) {
 
-        return http.post('/landmarks/add', landmark);
+        return http.post('/add', landmark);
     },
 
     getOneLandmark(id) {
-        return http.get(`/landmarks/${id}`);
+        return http.get(`/${id}`);
     },
 
     pendingLandmarks() {
-        return http.get('/landmarks/pending');
+        return http.get('/pending');
+    },
+
+    landmarkThumbsUp(id) {
+        return http.get(`/thumbsUp/${id}`)
+    },
+
+    landmarkThumbsDown(id) {
+        return http.get(`/thumbsDown/${id}`)
     }
 
     }

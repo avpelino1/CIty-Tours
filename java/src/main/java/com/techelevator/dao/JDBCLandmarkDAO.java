@@ -43,6 +43,10 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 			mapRowToHours(landmark);
 			// mapping image locations of respective landmark to landmark object
 			mapRowToImages(landmark);
+			//mapping thumbsUp count to landmark
+			mapRowToThumbsUp(landmark);
+			//mapping thumbsUp count to landmark
+			mapRowToThumbsDown(landmark);
 		}
 
 		return allLandmarks;
@@ -179,24 +183,24 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 		jdbcTemplate.update(deleteHours, id);
 	}
 
-	public Long landmarkThumbsUp(Long landmarkId) {
+	public Landmark mapRowToThumbsUp(Landmark landmark) {
 		String Sql = "SELECT COUNT(thumbs_up) FROM review WHERE landmark_id = ? AND thumbs_up = true";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(Sql, landmarkId);
+		SqlRowSet result = jdbcTemplate.queryForRowSet(Sql, landmark.getId());
 		
 		if (result.next()) {
-			return result.getLong("count");
+			landmark.setThumbsUp(result.getLong("count"));
 		}
-		return null;
+		return landmark;
 	}
 	
-	public Long landmarkThumbsDown(Long landmarkId) {
+	public Landmark mapRowToThumbsDown(Landmark landmark) {
 		String Sql = "SELECT COUNT(thumbs_down) FROM review WHERE landmark_id = ? AND thumbs_down = true";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(Sql, landmarkId);
+		SqlRowSet result = jdbcTemplate.queryForRowSet(Sql, landmark.getId());
 		
 		if (result.next()) {
-			return result.getLong("count");
+			landmark.setThumbsDown(result.getLong("count"));
 		}
-		return null;
+		return landmark;
 	}
 	
 	public String dayOfWeek(Long day) {

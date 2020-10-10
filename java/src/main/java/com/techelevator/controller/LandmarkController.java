@@ -65,14 +65,4 @@ public class LandmarkController {
 		landmarkDAO.deleteLandmark(id);
 	}
 	
-	@RequestMapping(path="/thumbsUp/{id}", method=RequestMethod.GET)
-	public Long landmarkGetThumbsUp(@PathVariable Long id) {
-		return landmarkDAO.landmarkThumbsUp(id);
-	}
-	
-	@RequestMapping(path="/thumbsDown/{id}", method=RequestMethod.GET)
-	public Long landmarkGetThumbsDown(@PathVariable Long id) {
-		return landmarkDAO.landmarkThumbsDown(id);
-	}
-	
 }
