@@ -8,7 +8,7 @@
       </router-link>
       <p class='description'>{{landmark.description}}</p>
       <br><br>
-      
+      <button>Add Landmark to Itinerary<button>
     </div>
 
   </div>

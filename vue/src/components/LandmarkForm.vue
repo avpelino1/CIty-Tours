@@ -53,8 +53,6 @@ export default {
       createLandmark() {
           landmarkService.createLandmark(this.newLandmark);
       },
-
-      
   }
 }
 
