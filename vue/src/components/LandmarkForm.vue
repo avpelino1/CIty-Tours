@@ -19,14 +19,22 @@
         <input type='text' name='venue-type' v-model='newLandmark.venueType'/>
       </div>
       <div class='field'>
-        <label for = 'images'>List of Image Links (seperated by a comma)</label>
-        <input type='text' name='images' v-model='newLandmark.images'/>
-      </div>
-      <div class='field'>
-        <label for = 'business-hours'>Business Hours</label>
-        <select name='business-hours' v-model='newLandmark.businessHours'>
-          <option>12:00</option>
-        </select>
+        <label for = 'business-hours'>Business Hours</label><br>
+        <!-- <input name='business-hours' v-model='newLandmark.businessHours.value'> -->
+          <label for='1'>Monday </label>
+          <input type='text' name='Monday-open' v-model="findDay.value"> - <input type='text' name='Monday-close' v-model="findDay.value"><br>
+          <label for='2'>Tuesday </label>
+          <input type='text' name='Tuesday-open' v-model="findDay.value"> - <input type='text' name='Tuesday-close' v-model="findDay.value"><br>
+          <label for='3'>Wednesday </label>
+          <input type='text' name='Wednesday-open' v-model="findDay.value"> - <input type='text' name='Wednesday-close' v-model="findDay.value"><br>
+          <label for='4'>Thursday </label>
+          <input type='text' name='Thursday-open' v-model="findDay.value"> - <input type='text' name='Thursday-close' v-model="findDay.value"><br>
+          <label for='5'>Friday </label>
+          <input type='text' name='Friday-open' v-model="findDay.value"> - <input type='text' name='Friday-close' v-model="findDay.value"><br>
+          <label for='6'>Saturday </label>
+          <input type='text' name='Saturday-open' v-model="findDay.value"> - <input type='text' name='Saturday-close' v-model="findDay.value"><br>
+          <label for='7'>Sunday </label>
+          <input type='text' name='Sunday-open' v-model="findDay.value"> - <input type='text' name='Sunday-close' v-model="findDay.value"><br>
       </div>
       <div class='actions'>
          <button>Click here to add a Landmark!</button>
@@ -45,7 +53,8 @@ export default {
   name: 'landmark-list',
   data(){
     return{
-      newLandmark: {}
+      newLandmark: {},
+      businessHours: []
     }
   },
 
@@ -53,6 +62,9 @@ export default {
       createLandmark() {
           landmarkService.createLandmark(this.newLandmark);
       },
+      findDay: function () {
+        this.businessHours.push({value: ''});
+      }
   }
 }
 
