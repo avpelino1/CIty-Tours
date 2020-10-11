@@ -1,15 +1,16 @@
 <template>
   <div>
-      <itineraryInfo/>
+      <h1>Your Itinerary Details</h1>
+      <itineraryUpdate/>
   </div>
 </template>
 
 <script>
-import itineraryInfo from '../components/ItineraryInfo.vue';
+import itineraryUpdate from '../components/ItineraryUpdate.vue';
 export default {
     name: 'itinerary-details',
     components: {
-        itineraryInfo
+        itineraryUpdate
     },
 }
 </script>

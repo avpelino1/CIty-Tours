@@ -10,15 +10,7 @@
         User ID: {{itinerary.userId}} <br>
         Itinerary ID: {{itinerary.itineraryId}} <br>
         <p>***MAP GOES HERE***</p>
-        <p> Add/Remove Landmarks: </p>
-
-        <form>
-            <input type="checkbox"/>
-            <label for="landmark"> landmark name </label>
-        </form>
-
-        <br>
-
+        <router-link :to="{ name: 'itinerary-details'}"> Edit Itinerary </router-link><br><br>
         <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
     </div>
 

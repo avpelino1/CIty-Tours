@@ -9,6 +9,10 @@ export default {
         return http.get('/all');
     },
 
+    getOneItinerary(id){
+        return http.get(`/getOne/${id}`)
+    },
+
     getFriendsItineraries(){
         return http.get('/shared');
     },

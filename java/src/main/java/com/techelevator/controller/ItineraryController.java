@@ -31,6 +31,11 @@ public class ItineraryController {
 		return itineraryDAO.retrieveAllUserItinerary(principal.getName());
 	}
 	
+	@RequestMapping(path="/getOne/{id}", method=RequestMethod.GET)
+	public Itinerary retrieveOneItinerary(@PathVariable Long id) {
+		return itineraryDAO.retrieveItinerary(id);
+	}
+	
 	@RequestMapping(path="/destinations/{id}", method=RequestMethod.GET)
 	public List<Landmark> retrieveDestinations(@PathVariable Long id){
 		return itineraryDAO.retrieveItineraryLandmarks(id);
