@@ -49,4 +49,7 @@ export default {
 </script>
 
 <style>
+    .landmark-images {
+        display: inline-flex;
+    }
 </style>
