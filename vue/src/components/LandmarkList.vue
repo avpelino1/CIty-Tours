@@ -23,6 +23,7 @@
       <input type="checkbox"/><label name='addToItinerary'> Add to Itinerary </label>
     </div>
     </form>
+
   </div>
 </template>
 
@@ -55,11 +56,13 @@ export default {
   created() {
     landmarkService.getLandmarks().then((response)=>{
       this.landmarks=response.data;
+
     }),
     itineraryService.getMyItineraries().then((response)=> {
       this.itineraries=response.data;
     })
   }
+
 }
 
 </script>
