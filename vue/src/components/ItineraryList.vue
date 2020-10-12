@@ -64,9 +64,9 @@ export default {
     methods:{
         createItinerary() {
             itineraryService.createItinerary(this.newItinerary);
-            this.newItinerary = {
-                "username" : store.state.user
-            }
+            // this.newItinerary = {
+            //     "username" : store.state.user
+            // }
         },
         deleteItinerary(id) {
             itineraryService.deleteItinerary(id);
