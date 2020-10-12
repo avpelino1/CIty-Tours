@@ -117,12 +117,12 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		List<Long> landmarkIDs = new ArrayList<Long>();
 		
 		while(row.next()) {
-			Long landmarkID = row.getLong("landmark_id");
-			landmarkIDs.add(landmarkID);
+			Long landmarkId = row.getLong("landmark_id");
+			landmarkIDs.add(landmarkId);
 		}
 		
-		for (Long landmarkID : landmarkIDs) {
-			output.add(landmarkDAO.getLandmarkById(landmarkID));
+		for (Long landmarkId : landmarkIDs) {
+			output.add(landmarkDAO.getLandmarkById(landmarkId));
 		}
 		return output;
 	}
