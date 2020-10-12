@@ -1,4 +1,4 @@
-CREATE TABLE landmark
+/*CREATE TABLE landmark
 (
 landmark_id serial NOT NULL,
 name varchar(100) NOT NULL,
@@ -93,7 +93,7 @@ user_id int,
 CONSTRAINT fk_itinerary_id FOREIGN KEY (itinerary_id) REFERENCES itinerary,
 CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users
 
-);
+);*/
 
 
 /**************
