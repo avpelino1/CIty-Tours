@@ -9,20 +9,20 @@
 
         Add/Remove landmarks:
         <form>
-
-            <input type='checkbox'/>
-            <label/>
+            
+            <label v-for="destination in destinations" :key='destination'>{{destination}}</label>
         </form>
   </div>
 </template>
 
 <script>
 import ItineraryService from '../services/ItineraryService'
+
 export default {
     data() {
         return{
             itinerary: {},
-            landmarkIDs: []
+            destinations: [],
         }
     },
 

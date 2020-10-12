@@ -3,13 +3,13 @@
 
     <form v-on:submit.prevent='updateItinerary'>
       <label name ='selectItinerary'>Select Itinerary: </label>
-      <select v-model="updatedItinerary.name">
+      <select>
         <option v-for="itinerary in itineraries" v-bind:key='itinerary.itineraryId'> {{itinerary.name}} </option>
       </select>
 
       <div class='actions'>
     <button>Click here to update your itinerary!</button>
-</div>
+      </div>
 
     <div class='landmark-list' v-for='landmark in landmarks' v-bind:key='landmark.id'>
       <router-link v-bind:to="{name: 'landmark-details', params: {id: landmark.id} }">
@@ -20,7 +20,7 @@
 
       <p class='description'>{{landmark.description}}</p>
       <br><br>
-      <input type="checkbox"/><label name='addToItinerary'> Add to Itinerary </label>
+      <input type="checkbox" /><label name='addToItinerary'> Add to Itinerary </label>
     </div>
     </form>
 
@@ -38,16 +38,13 @@ export default {
       landmarks: [],
       newLandmark: {},
       itineraries: [],
-      updatedItinerary: {
-        name: "",
-      },
-      
+      destinations: [],
     }
   },
 
   methods: {
     updateItinerary() {
-
+      console.log(this.destinations);
 
     }
 
@@ -56,10 +53,12 @@ export default {
   created() {
     landmarkService.getLandmarks().then((response)=>{
       this.landmarks=response.data;
-
     }),
     itineraryService.getMyItineraries().then((response)=> {
       this.itineraries=response.data;
+    }),
+    itineraryService.getItineraryLandmarks().then((response)=>{
+      this.destinations=response.data;
     })
   }
 
