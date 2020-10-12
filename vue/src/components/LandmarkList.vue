@@ -11,7 +11,6 @@
       <br><br>
       <input type="checkbox"/><label name='addToItinerary'> Add to Itinerary </label>
     </div>
-    </form>
 
   </div>
 </template>
