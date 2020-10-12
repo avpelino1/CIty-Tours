@@ -1,7 +1,8 @@
 <template>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Welcome to City Tours!</h1>
+      <h3 class="sign-in">Please sign in or create an account.</h3>
       <div
         class="alert alert-danger"
         role="alert"

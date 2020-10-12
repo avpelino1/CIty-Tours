@@ -1,7 +1,5 @@
 <template>
   <div>
-    <h2 class='sub-header'>List of Landmarks</h2>
-
     <div class='landmark-list' v-for='landmark in landmarks' v-bind:key='landmark.id'>
       <router-link v-bind:to="{name: 'landmark-details', params: {id: landmark.id} }">
           <h3 class='sub-header'>{{landmark.name}}</h3> <br>

@@ -1,9 +1,9 @@
 <template>
   <div>
-    {{ landmark.name }} <br>
-    {{ landmark.address }} <br>
+    <h1 class="landmark-name"> {{ landmark.name }} </h1> 
+    <h3 class="venue-type"> {{ landmark.venueType }} </h3> <br> 
+    {{ landmark.address }} <br> <br>
     {{ landmark.description }} <br>
-    {{ landmark.venueType }} <br>
     <br>
     <div class='business-hours' v-for='hours in landmark.businessHours' v-bind:key='hours.day_of'>
         {{ hours.day }} : {{ hours.open_time }} - {{ hours.close_time }} <br>

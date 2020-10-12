@@ -27,19 +27,19 @@
     <h2>Create a New Itinerary</h2>
     <form v-on:submit.prevent='createItinerary(newItinerary)'>
       <div class='field'>
-        <label for = 'name'>Name </label>
+        <label for = 'name'>Name </label> 
         <input type='text' name='name' v-model='newItinerary.name'/>
-      </div>
+      </div> <br>
       <div class='field'>
         <label for = 'startingLocation'>Starting Address </label>
         <input type='text' name='starting-location' v-model='newItinerary.startingLocation'/>
-      </div>
+      </div> <br>
       <div class='field'>
         <label for = 'date'>Date </label>
         <input type='date' name='description' v-model='newItinerary.date'/>
-      </div>
+      </div> <br>
       <div class='actions'>
-         <button>Click here to create your Itinerary!</button>
+         <button>Create your Itinerary!</button>
       </div>
     </form>
 

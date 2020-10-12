@@ -1,6 +1,5 @@
 <template>
 <div>
-<h2> Landmark Details </h2>
 
 <individual-landmark/>
 
