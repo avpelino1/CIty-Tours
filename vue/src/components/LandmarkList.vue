@@ -9,12 +9,16 @@
 
       <p class='description'>{{landmark.description}}</p>
       <br><br>
+      <input type="checkbox"/><label name='addToItinerary'> Add to Itinerary </label>
     </div>
+    </form>
+
   </div>
 </template>
 
 <script>
 import landmarkService from '../services/LandmarkService.js';
+import itineraryService from '../services/ItineraryService.js';
 
 export default {
   name: 'landmark-list',
@@ -22,19 +26,31 @@ export default {
     return{
       landmarks: [],
       newLandmark: {},
+      itineraries: [],
+      updatedItinerary: {
+        name: "",
+      },
       
     }
   },
 
   methods: {
+    updateItinerary() {
+
+
+    }
 
   },
   
   created() {
     landmarkService.getLandmarks().then((response)=>{
       this.landmarks=response.data;
-    });
-  },
+
+    }),
+    itineraryService.getMyItineraries().then((response)=> {
+      this.itineraries=response.data;
+    })
+  }
 
 }
 
