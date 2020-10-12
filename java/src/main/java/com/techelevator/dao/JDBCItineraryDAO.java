@@ -39,9 +39,9 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		//works if the logged in user creates a itinerary, otherwise need a new way to retrieve the logged in user's name to get the id
 		Long currentUserId = (long) userDAO.findIdByUsername(itinerary.getUsername());
 		
-		String sql = "INSERT INTO itinerary(name, starting_point, date, user_id)"
-				+ " VALUES (?, ?, ?, ?) RETURNING itinerary_id";
-		SqlRowSet itinerarySql = jdbcTemplate.queryForRowSet(sql, name, startingLocation, date, currentUserId);
+		String sql = "INSERT INTO itinerary(name, starting_point, date, user_id, share)"
+				+ " VALUES (?, ?, ?, ?, ?) RETURNING itinerary_id";
+		SqlRowSet itinerarySql = jdbcTemplate.queryForRowSet(sql, name, startingLocation, date, currentUserId, itinerary.getShare());
 		
 		Long itineraryId = 0L;
 		
@@ -130,12 +130,12 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	@Override
 	public void updateItinerary(Itinerary itinerary, Long id, String username) throws IOException {
 		if (itinerary.getUsername().equals(username)) {
-		String sql = "UPDATE itinerary SET name = ?, starting_point = ?, date_of = ? WHERE itinerary_id = ?";
+		String sql = "UPDATE itinerary SET name = ?, starting_point = ?, share = ?, date_of = ? WHERE itinerary_id = ?";
 		String name = itinerary.getName();
 		String startingLocation = itinerary.getStartingLocation();
 		LocalDate date = itinerary.getDate();
 		
-		jdbcTemplate.update(sql, name, startingLocation, date, id);
+		jdbcTemplate.update(sql, name, startingLocation, itinerary.getShare(), date, id);
 		
 		jdbcTemplate.update("DELETE FROM destinations WHERE itinerary_id = ?", id);
 		
