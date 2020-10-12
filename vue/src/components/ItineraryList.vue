@@ -32,11 +32,11 @@
       </div> <br>
       <div class='field'>
         <label for = 'startingLocation'>Starting Address </label>
-        <input type='text' name='starting-location' v-model='newItinerary.startingLocation'/>
+        <input type='text' name='startingLocation' v-model='newItinerary.startingLocation'/>
       </div> <br>
       <div class='field'>
         <label for = 'date'>Date </label>
-        <input type='date' name='description' v-model='newItinerary.date'/>
+        <input type='date' name='date' v-model='newItinerary.date'/>
       </div> <br>
       <div class='actions'>
          <button>Create your Itinerary!</button>
@@ -48,7 +48,7 @@
 
 <script>
 import itineraryService from '../services/ItineraryService.js';
-import store from '../store/index';
+
 
 export default {
     name: 'itinerary-list',
@@ -57,7 +57,7 @@ export default {
             myItineraries: [],
             myFriendsItineraries: [],
             newItinerary: {
-                "username" : store.state.user,
+                "username" : this.$store.state.user.username
             }
         }
     },
@@ -65,7 +65,7 @@ export default {
         createItinerary() {
             itineraryService.createItinerary(this.newItinerary);
             this.newItinerary = {
-                "username" : store.state.user
+                "username" : this.$store.state.user.username
             }
         },
         deleteItinerary(id) {
