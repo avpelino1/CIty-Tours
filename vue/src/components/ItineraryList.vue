@@ -11,7 +11,7 @@
         Itinerary ID: {{itinerary.itineraryId}} <br>
         <p>***MAP GOES HERE***</p>
         <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> Edit Itinerary </router-link><br><br>
-        <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)' onClick="window.location.reload();"> Delete </button>
+        <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
     </div>
 
     <h2>Itineraries Shared With You</h2>
@@ -72,13 +72,12 @@ export default {
             if (
                 confirm("Are you sure you want to delete this itinerary? This action cannot be undone.")
             ) {
-                itineraryService.deleteItinerary(id).then((response) => {
-                    if (response.status === 200) {
-                        alert("Itinerary successfully deleted.");
-
-                    }
-                })
+                itineraryService.deleteItinerary(id)
+                
             }
+            window.location.reload().then(
+                    alert("Itinerary successfully deleted."));
+            
         },
         getItineraryLandmarks(id){
             itineraryService.getItineraryLandmarks(id);
