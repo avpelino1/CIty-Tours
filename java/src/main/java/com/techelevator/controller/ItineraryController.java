@@ -48,6 +48,7 @@ public class ItineraryController {
 	
 	@RequestMapping(path="/create", method=RequestMethod.POST)
 	public void createItinerary(@RequestBody Itinerary itinerary) {
+		System.out.println("You are in the controller.");
 		itineraryDAO.createItinerary(itinerary);
 	}
 	

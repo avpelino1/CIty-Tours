@@ -9,6 +9,7 @@
 
         Add/Remove landmarks:
         <form>
+
             <input type='checkbox'/>
             <label/>
         </form>
@@ -21,7 +22,7 @@ export default {
     data() {
         return{
             itinerary: {},
-            destinations: []
+            landmarkIDs: []
         }
     },
 
@@ -29,6 +30,9 @@ export default {
         ItineraryService.getOneItinerary(this.$route.params.id).then((response)=>{
             this.itinerary=response.data;
             });
+        ItineraryService.getItineraryLandmarks(this.$route.params.id).then((response)=>{
+            this.destinations=response.data;
+        });
         }
     }
 

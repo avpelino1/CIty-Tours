@@ -10,7 +10,7 @@ export default {
     },
 
     getOneItinerary(id){
-        return http.get(`/getOne/${id}`)
+        return http.get(`/getOne/${id}`);
     },
 
     getFriendsItineraries(){
@@ -22,15 +22,16 @@ export default {
     },
    
     createItinerary(itinerary) {
-        return http.post('/create', itinerary)
+        console.log("You are in itineraryService.vue");
+        return http.post('/create', itinerary);
     },
 
     updateItinerary(itinerary) {
-        return http.put(`/${itinerary.id}/update`, itinerary)
+        return http.put(`/${itinerary.id}/update`, itinerary);
     },
 
     deleteItinerary(id) {
-        return http.delete(`/${id}/delete`)
+        return http.delete(`/${id}/delete`);
     }
 
 }

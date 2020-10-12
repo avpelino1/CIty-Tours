@@ -10,8 +10,8 @@
         User ID: {{itinerary.userId}} <br>
         Itinerary ID: {{itinerary.itineraryId}} <br>
         <p>***MAP GOES HERE***</p>
-        <router-link :to="{ name: 'itinerary-details'}"> Edit Itinerary </router-link><br><br>
-        <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
+        <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> Edit Itinerary </router-link><br><br>
+        <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)' onClick="window.location.reload();"> Delete </button>
     </div>
 
     <h2>View Friends' Itineraries</h2>
@@ -64,6 +64,9 @@ export default {
     methods:{
         createItinerary() {
             itineraryService.createItinerary(this.newItinerary);
+            this.newItinerary = {
+                "username" : store.state.user
+            }
         },
         deleteItinerary(id) {
             itineraryService.deleteItinerary(id);
