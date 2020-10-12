@@ -15,7 +15,7 @@
       <router-link v-bind:to="{name: 'landmark-details', params: {id: landmark.id} }">
           <h3 class='sub-header'>{{landmark.name}}</h3> <br>
       </router-link>
-      <img class='thumbsUp' src = "https://imgur.com/LLPYyXY.png" v-on:click="addThumbsUp"/><img class='thumbsDown' src = "https://imgur.com/lKO2G1K.png" v-on:click="addThumbsDown"/> <br>
+      <img class='thumbsUp' src = "https://imgur.com/LLPYyXY.png" v-on:click="addThumbsUp(landmark.id)"/><img class='thumbsDown' src = "https://imgur.com/lKO2G1K.png" v-on:click="addThumbsDown(landmark.id)"/> <br>
           <p class='thumbsUpCount'>{{landmark.thumbsUp}}</p> <p class='thumbsDownCount'>{{landmark.thumbsDown}}</p>
 
       <p class='description'>{{landmark.description}}</p>
@@ -30,6 +30,7 @@
 <script>
 import landmarkService from '../services/LandmarkService.js';
 import itineraryService from '../services/ItineraryService.js';
+import reviewService from '../services/ReviewService.js';
 
 export default {
   name: 'landmark-list',
@@ -41,20 +42,33 @@ export default {
       updatedItinerary: {
         name: "",
       },
+      newReview: {
+
+      }
       
     }
   },
 
   methods: {
-    updateItinerary() {
+
+    addThumbsUp(id) {
+      this.newReview = {
+        "title" : "",
+        "thumbsUp" : true,
+        "landmarkId" : id
+      }
+      reviewService.createReview(this.newReview)
+      window.location.reload()
     },
 
-    addThumbsUp() {
-      alert("Thumbs up test");
-    },
-
-    addThumbsDown() {
-      alert("Thumbs down test");
+    addThumbsDown(id) {
+      this.newReview = {
+        "title" : "",
+        "thumbsDown" : true,
+        "landmarkId" : id
+      }
+      reviewService.createReview(this.newReview)
+      window.location.reload()
     }
 
   },

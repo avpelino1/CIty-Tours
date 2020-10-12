@@ -3,7 +3,7 @@
 
   <h3> Add a Review </h3>
 
-  <form v-on:submit.prevent='addReview(newReview)'>
+  <form v-on:submit='addReview(newReview)'>
       <div class='field'>
           <label for = 'title'>Title </label>
           <input type='text' name='title' v-model='newReview.title'/>
@@ -13,7 +13,7 @@
           <input type='text' name='description' v-model='newReview.description'/>
       </div><br>
      <div class='actions'>
-         <button v-on: click="showAlert" onClick="window.location.reload();">Submit your Review </button>
+         <button v-on: click="window.location.reload();">Submit your Review </button>
      </div>
   </form>
 </div> 
@@ -27,7 +27,7 @@ export default {
     data() {
         return {
             newReview: {
-    
+                "landmarkId" : this.$route.params.id
             }
 
         }
@@ -36,7 +36,12 @@ export default {
 
     methods: {
         addReview() {
-            reviewService.createReview(this.newReview);
+            reviewService.createReview(this.newReview).then(
+                alert("Thanks for your review!"));
+                this.newReview = {
+                    "landmarkId" : this.$route.params.id
+                }
+            
         },
         getReviews(id) {
             reviewService.getReviews(id);

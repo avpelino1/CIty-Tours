@@ -41,7 +41,7 @@ public class JDBCReviewDAO implements ReviewDAO {
 	@Override
 	public void addReview(Review review) {
 		
-		if (review.getTitle().isEmpty() || review.getTitle() == null) {
+		if (review.getTitle().length() == 0 || review.getTitle() == null) {
 			String sql = "INSERT INTO review(thumbs_up, thumbs_down, landmark_id) VALUES(?, ?, ?)";
 			boolean thumbsUp = false;
 			boolean thumbsDown = false;
