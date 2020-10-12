@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-link :to="{ name: 'landmark' }">Back to Landmarks</router-link>
     <h1 class="landmark-name"> {{ landmark.name }} </h1> 
     <h3 class="venue-type"> {{ landmark.venueType }} </h3> <br> 
     {{ landmark.address }} <br> <br>

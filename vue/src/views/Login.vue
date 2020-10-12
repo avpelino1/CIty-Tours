@@ -12,7 +12,7 @@
         class="alert alert-success"
         role="alert"
         v-if="this.$route.query.registration"
-      >Thank you for registering, please sign in.</div>
+      >Thank you for registering, please sign in.</div> <br>
       <label for="username" class="sr-only">Username</label>
       <input
         type="text"
