@@ -2,7 +2,7 @@
   <div>
     <h1>View Available Itineraries</h1>
 
-    <h2>View Personal Itineraries</h2>
+    <h2>Personal Itineraries</h2>
     <div class='itinerary-list' v-for='itinerary in myItineraries' v-bind:key="itinerary.itineraryId">
         <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
         Starting Location: {{itinerary.startingLocation}} <br>
@@ -14,7 +14,7 @@
         <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)' onClick="window.location.reload();"> Delete </button>
     </div>
 
-    <h2>View Friends' Itineraries</h2>
+    <h2>Itineraries Shared With You</h2>
     <div class='itinerary-list' v-for='itinerary in myFriendsItineraries' v-bind:key="itinerary.id">
         <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
         Starting Location: {{itinerary.startingLocation}} <br>
@@ -27,7 +27,7 @@
     <h2>Create a New Itinerary</h2>
     <form v-on:submit.prevent='createItinerary(newItinerary)'>
       <div class='field'>
-        <label for = 'name'>Name </label> 
+        <label for = 'name'>Itinerary Name </label> 
         <input type='text' name='name' v-model='newItinerary.name'/>
       </div> <br>
       <div class='field'>
@@ -35,11 +35,11 @@
         <input type='text' name='startingLocation' v-model='newItinerary.startingLocation'/>
       </div> <br>
       <div class='field'>
-        <label for = 'date'>Date </label>
+        <label for = 'date'>Start Date </label>
         <input type='date' name='date' v-model='newItinerary.date'/>
       </div> <br>
       <div class='actions'>
-         <button>Create your Itinerary!</button>
+         <button v-on: click="showAlert" onClick="window.location.reload();">Create your Itinerary!</button>
       </div>
     </form>
 
@@ -69,7 +69,16 @@ export default {
             }
         },
         deleteItinerary(id) {
-            itineraryService.deleteItinerary(id);
+            if (
+                confirm("Are you sure you want to delete this itinerary? This action cannot be undone.")
+            ) {
+                itineraryService.deleteItinerary(id).then((response) => {
+                    if (response.status === 200) {
+                        alert("Itinerary successfully deleted.");
+
+                    }
+                })
+            }
         },
         getItineraryLandmarks(id){
             itineraryService.getItineraryLandmarks(id);
