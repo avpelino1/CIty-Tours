@@ -2,7 +2,7 @@
   <div id="landmark" class="text-center">
        <h1 class="h3 mb-3 font-weight-normal">Explore Landmarks in Austin, TX</h1>
 
-<landmark-map/>
+<GoogleMapLoader class="GoogleMapLoader"/>
 <landmark-list/>
 <landmark-form/>
       
@@ -11,14 +11,14 @@
 
 <script>
 import LandmarkList from '@/components/LandmarkList.vue';
-import LandmarkMap from '@/components/LandmarkMap.vue';
+import GoogleMapLoader from '@/components/GoogleMapLoader.vue';
 import LandmarkForm from '@/components/LandmarkForm.vue';
 
 export default {
     name: 'landmark',
     components: {
+      GoogleMapLoader,
       LandmarkList,
-      LandmarkMap,
       LandmarkForm
     }
 }
@@ -27,5 +27,7 @@ export default {
 
 
 <style>
-
+  .GoogleMapLoader {
+    width: 50%
+  }
 </style>

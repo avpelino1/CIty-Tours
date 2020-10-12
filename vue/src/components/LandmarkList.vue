@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- <div class="landmark-map">
+    </div> -->
     <div class='landmark-list' v-for='landmark in landmarks' v-bind:key='landmark.id'>
       <router-link v-bind:to="{name: 'landmark-details', params: {id: landmark.id} }">
           <h3 class='sub-header'>{{landmark.name}}</h3> <br>
@@ -10,7 +12,6 @@
       <p class='description'>{{landmark.description}}</p>
       <br><br>
     </div>
-
   </div>
 </template>
 
@@ -35,7 +36,8 @@ export default {
     landmarkService.getLandmarks().then((response)=>{
       this.landmarks=response.data;
     });
-  }
+  },
+
 }
 
 </script>
