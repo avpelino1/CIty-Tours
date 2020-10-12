@@ -22,7 +22,6 @@ export default {
     },
    
     createItinerary(itinerary) {
-        console.log("You are in itineraryService.vue");
         return http.post('/create', itinerary);
     },
 
