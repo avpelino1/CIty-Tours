@@ -69,16 +69,7 @@ export default {
             }
         },
         deleteItinerary(id) {
-            if (
-                confirm("Are you sure you want to delete this itinerary? This action cannot be undone.")
-            ) {
-                itineraryService.deleteItinerary(id).then((response) => {
-                    if (response.status === 200) {
-                        alert("Itinerary successfully deleted.");
-
-                    }
-                })
-            }
+            itineraryService.deleteItinerary(id);
         },
         getItineraryLandmarks(id){
             itineraryService.getItineraryLandmarks(id);
