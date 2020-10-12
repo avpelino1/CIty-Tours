@@ -1,11 +1,22 @@
 <template>
 <div>
 
-
   <h3> Add a Review </h3>
 
-
-      </div> 
+  <form v-on:submit.prevent='addReview(newReview)'>
+      <div class='field'>
+          <label for = 'title'>Title </label>
+          <input type='text' name='title' v-model='newReview.title'/>
+      </div> <br>
+      <div class='field'>
+          <label for = 'description'>Description </label>
+          <input type='text' name='description' v-model='newReview.description'/>
+      </div><br>
+     <div class='actions'>
+         <button v-on: click="showAlert" onClick="window.location.reload();">Submit your Review </button>
+     </div>
+  </form>
+</div> 
 </template>
 
 <script>

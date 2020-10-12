@@ -19,7 +19,7 @@ export default {
       LandmarkList,
       LandmarkForm
     }
-}
+};
 
 </script>
 
