@@ -1,20 +1,27 @@
 <template>
   <div>
-  <div>
-    <button id='getGeoLocation' v-on:click="getLocation()">Get Current Location</button><br>
-    Enter Starting Location: <input id='userProvidedLocation' type='text' name='location' v-model='startingLocation'> <button id='manualLocation'>Submit</button>
+    <div>
+      <button id="getGeoLocation" v-on:click="getLocation()">
+        Get Current Location</button
+      ><br />
+      Enter Starting Location:
+      <input
+        id="userProvidedLocation"
+        type="text"
+        name="location"
+        v-model="startingLocation"
+      />
+      <button id="manualLocation">Submit</button>
+    </div>
+    <div id="map"></div>
   </div>
-  <div id="map">  
-    </div>
-    </div>
 </template>
 
 <script>
-import landmarkService from "@/services/LandmarkService.js"
-import landmarkList from "@/components/LandmarkList.vue"
+import landmarkService from "@/services/LandmarkService.js";
+import landmarkList from "@/components/LandmarkList.vue";
 
 let startingLocation;
-
 export default {
     name: 'Map',
     data() {
@@ -64,14 +71,13 @@ export default {
     created() {
         landmarkService.getLandmarks().then((response)=>{
       this.landmarks=response.data;
-
-    }),
-    
-    forEach(landmark in landmarks) {
-        geolocation = `https://maps.googleapis.com/maps/api/geocode/json?address=${landmark.address}+CA&key=AIzaSyBwqiIiWzxhNGZ2fxocq1tCHMz17TWEMRA`;
-        this.geoLandmarks.add(geolocation);
-    }
-    },
+    })
+    //     landmarks.forEach(geoCode(landmark),{
+    //     geoCode(landmark).then((response)=>{
+    //     geoLocation = `https://maps.googleapis.com/maps/api/geocode/json?address=${landmark.address}+CA&key=AIzaSyBwqiIiWzxhNGZ2fxocq1tCHMz17TWEMRA`
+    //     this.geoLandmarks.add(geoLocation);
+    //     })}
+    },    
     mounted() {
         this.initMap();
     }
@@ -79,7 +85,7 @@ export default {
 </script>
 
 <style>
-    #map{
-        height: 500px;
-    }
+#map {
+  height: 500px;
+}
 </style>
