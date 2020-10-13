@@ -85,6 +85,12 @@ export default {
     itineraryService.getItineraryLandmarks().then((response)=>{
       this.destinations=response.data;
     })
+  },
+
+  computed: {
+    filterSearch() {
+      return this.landmarks.filter
+    }
   }
 
 }
