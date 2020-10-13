@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.dao.ItineraryDAO;
 import com.techelevator.model.Itinerary;
+import com.techelevator.model.ItineraryWeb;
 import com.techelevator.model.Landmark;
 
 @PreAuthorize("isAuthenticated()")
@@ -47,8 +48,7 @@ public class ItineraryController {
 	}
 	
 	@RequestMapping(path="/create", method=RequestMethod.POST)
-	public void createItinerary(@RequestBody Itinerary itinerary) {
-		System.out.println("You are in the controller.");
+	public void createItinerary(@RequestBody ItineraryWeb itinerary) {
 		itineraryDAO.createItinerary(itinerary);
 	}
 	

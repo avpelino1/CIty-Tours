@@ -14,6 +14,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import com.techelevator.model.Itinerary;
+import com.techelevator.model.ItineraryWeb;
 import com.techelevator.model.Landmark;
 
 @Component
@@ -32,7 +33,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	}
 
 	@Override
-	public void createItinerary(Itinerary itinerary) {
+	public void createItinerary(ItineraryWeb itinerary) {
 		String name = itinerary.getName();
 		String startingLocation = itinerary.getStartingLocation();
 		LocalDate date = itinerary.getDate();
@@ -50,12 +51,10 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 			itineraryId = itinerarySql.getLong("itinerary_id");
 		}
 		
-		List<Long> destinations = itinerary.getDestinations();
-		
 		String destinationInsert = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (? ,?)";
 		
-		for (Long num : destinations) {
-			jdbcTemplate.update(destinationInsert, itineraryId, num);
+		for (Long landmark : itinerary.getDestinations()) {
+			jdbcTemplate.update(destinationInsert, itineraryId, landmark);
 		}
 		
 	}
@@ -109,8 +108,8 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	}
 	
 	@Override
-	public List<Long> retrieveItineraryLandmarks(Long itineraryID){
-		List<Long> output = new ArrayList<Long>();
+	public List<Landmark> retrieveItineraryLandmarks(Long itineraryID){
+		List<Landmark> output = new ArrayList<Landmark>();
 		String sql = "SELECT landmark_id FROM destinations WHERE itinerary_id = ?";
 		
 		SqlRowSet row = jdbcTemplate.queryForRowSet(sql, itineraryID);
@@ -140,7 +139,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		
 		jdbcTemplate.update("DELETE FROM destinations WHERE itinerary_id = ?", id);
 		
-		for (Long landmark : itinerary.getDestinations()) {
+		for (Landmark landmark : itinerary.getDestinations()) {
 			String destination = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (?, ?)";
 			jdbcTemplate.update(destination, id, landmark);
 		}

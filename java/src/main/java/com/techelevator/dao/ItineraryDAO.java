@@ -6,17 +6,18 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.techelevator.model.Itinerary;
+import com.techelevator.model.ItineraryWeb;
 import com.techelevator.model.Landmark;
 
 public interface ItineraryDAO {
 
-	public void createItinerary(Itinerary itinerary);
+	public void createItinerary(ItineraryWeb itinerary);
 	
 	public List<Itinerary> retrieveAllUserItinerary(String username);
 	
 	public List<Itinerary> retrieveSharedItineraries(String username);
 	
-	public List<Long> retrieveItineraryLandmarks(Long itineraryID);
+	public List<Landmark> retrieveItineraryLandmarks(Long itineraryID);
 	
 	public Itinerary retrieveItinerary(Long id);
 	

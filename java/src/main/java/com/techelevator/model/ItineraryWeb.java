@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Itinerary {
+public class ItineraryWeb {
 
 	private Long itineraryId;
 	private String name;
 	private String startingLocation;
-	private List<Landmark> destinations = new ArrayList<>();
+	private List<Long> destinations = new ArrayList<>();
 	private LocalDate date;
 	private Long userId;
 	private String username;
@@ -33,10 +33,10 @@ public class Itinerary {
 	public void setStartingLocation(String startingLocation) {
 		this.startingLocation = startingLocation;
 	}
-	public List<Landmark> getDestinations() {
+	public List<Long> getDestinations() {
 		return destinations;
 	}
-	public void setDestinations(List<Landmark> destinations) {
+	public void setDestinations(List<Long> destinations) {
 		this.destinations = destinations;
 	}
 	public LocalDate getDate() {
