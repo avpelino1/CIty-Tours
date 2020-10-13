@@ -12,7 +12,6 @@
     <br>
     <div class='landmark-images' v-for='images in landmark.images' v-bind:key='images.imgUrl'>
         <img v-bind:src= images.imgUrl /> <br>
-        
     </div>
     
   </div>
@@ -26,12 +25,14 @@ export default {
 
     data() {
        return {
-           landmark: {}
+            landmark: {},
        } 
     },
 
     methods: {
-        
+        updateItinerary(){
+
+        }
     },
 
     created() {
