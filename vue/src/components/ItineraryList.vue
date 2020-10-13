@@ -23,25 +23,6 @@
         Itinerary ID: {{itinerary.itineraryId}} <br>
         <p>***MAP GOES HERE***</p>
     </div>
-    
-    <h2>Create a New Itinerary</h2>
-    <form v-on:submit.prevent='createItinerary(newItinerary)'>
-      <div class='field'>
-        <label for = 'name'>Itinerary Name </label> 
-        <input type='text' name='name' v-model='newItinerary.name'/>
-      </div> <br>
-      <div class='field'>
-        <label for = 'startingLocation'>Starting Address </label>
-        <input type='text' name='startingLocation' v-model='newItinerary.startingLocation'/>
-      </div> <br>
-      <div class='field'>
-        <label for = 'date'>Start Date </label>
-        <input type='date' name='date' v-model='newItinerary.date'/>
-      </div> <br>
-      <div class='actions'>
-         <button v-on: click="showAlert" onClick="window.location.reload();">Create your Itinerary!</button>
-      </div>
-    </form>
 
   </div>
 </template>
@@ -56,18 +37,10 @@ export default {
         return{
             myItineraries: [],
             myFriendsItineraries: [],
-            newItinerary: {
-                "username" : this.$store.state.user.username
-            }
+        
         }
     },
     methods:{
-        createItinerary() {
-            itineraryService.createItinerary(this.newItinerary);
-            this.newItinerary = {
-                "username" : this.$store.state.user.username
-            }
-        },
         deleteItinerary(id) {
             if (
                 confirm("Are you sure you want to delete this itinerary? This action cannot be undone.")

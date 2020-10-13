@@ -18,10 +18,10 @@
         <label for = 'venue-type'>Venue Type</label>
         <input type='text' name='venue-type' v-model='newLandmark.venueType'/>
       </div>
-      <div class='field'>
-        <label for = 'business-hours'>Business Hours</label><br>
+      <!-- <div class='field'>
+        <label for = 'business-hours'>Business Hours</label><br> -->
         <!-- <input name='business-hours' v-model='newLandmark.businessHours.value'> -->
-          <label for='1'>Monday </label>
+          <!-- <label for='1'>Monday </label>
           <input type='text' name='Monday-open' v-model="findDay.value"> - <input type='text' name='Monday-close' v-model="findDay.value"><br>
           <label for='2'>Tuesday </label>
           <input type='text' name='Tuesday-open' v-model="findDay.value"> - <input type='text' name='Tuesday-close' v-model="findDay.value"><br>
@@ -35,7 +35,7 @@
           <input type='text' name='Saturday-open' v-model="findDay.value"> - <input type='text' name='Saturday-close' v-model="findDay.value"><br>
           <label for='7'>Sunday </label>
           <input type='text' name='Sunday-open' v-model="findDay.value"> - <input type='text' name='Sunday-close' v-model="findDay.value"><br>
-      </div>
+      </div> -->
       <div class='actions'>
          <button>Click here to add a Landmark!</button>
       </div>

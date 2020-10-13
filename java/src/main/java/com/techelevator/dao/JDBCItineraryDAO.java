@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -49,12 +50,12 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 			itineraryId = itinerarySql.getLong("itinerary_id");
 		}
 		
-		List<Landmark> destinations = itinerary.getDestinations();
+		List<Long> destinations = itinerary.getDestinations();
 		
 		String destinationInsert = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (? ,?)";
 		
-		for (Landmark landmark : destinations) {
-			jdbcTemplate.update(destinationInsert, itineraryId, landmark.getId());
+		for (Long num : destinations) {
+			jdbcTemplate.update(destinationInsert, itineraryId, num);
 		}
 		
 	}
@@ -108,8 +109,8 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	}
 	
 	@Override
-	public List<Landmark> retrieveItineraryLandmarks(Long itineraryID){
-		List<Landmark> output = new ArrayList<Landmark>();
+	public List<Long> retrieveItineraryLandmarks(Long itineraryID){
+		List<Long> output = new ArrayList<Long>();
 		String sql = "SELECT landmark_id FROM destinations WHERE itinerary_id = ?";
 		
 		SqlRowSet row = jdbcTemplate.queryForRowSet(sql, itineraryID);
@@ -139,9 +140,9 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		
 		jdbcTemplate.update("DELETE FROM destinations WHERE itinerary_id = ?", id);
 		
-		for (Landmark landmark : itinerary.getDestinations()) {
+		for (Long landmark : itinerary.getDestinations()) {
 			String destination = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (?, ?)";
-			jdbcTemplate.update(destination, id, landmark.getId());
+			jdbcTemplate.update(destination, id, landmark);
 		}
 		} else {
 			throw new IOException();

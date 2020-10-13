@@ -20,7 +20,7 @@
 
       <p class='description'>{{landmark.description}}</p>
       <br><br>
-      <input type="checkbox" /><label name='addToItinerary'> Add to Itinerary </label>
+      <input type="checkbox" v-on:click="addLandmark(landmark.id)"/><label name='addToItinerary'> Add to Itinerary </label>
     </div>
     </form>
 
@@ -42,9 +42,8 @@ export default {
       updatedItinerary: {
         name: "",
       },
-      newReview: {
-
-      }
+      newReview: {},
+      selectedLandmarks: this.$store.state.selectedLandmarks
       
     }
   },
@@ -69,6 +68,9 @@ export default {
       }
       reviewService.createReview(this.newReview)
       window.location.reload()
+    },
+    addLandmark(id) {
+      this.selectedLandmarks.push(id);
     }
 
   },

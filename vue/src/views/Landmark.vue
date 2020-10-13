@@ -4,6 +4,7 @@
 
 <googleMaps/>
 <landmark-list/>
+<create-itinerary/>
 <landmark-form/>
       
   </div>
@@ -12,14 +13,16 @@
 <script>
 import LandmarkList from '@/components/LandmarkList.vue';
 import LandmarkForm from '@/components/LandmarkForm.vue';
-import GoogleMaps from '@/components/GoogleMaps.vue'
+import GoogleMaps from '@/components/GoogleMaps.vue';
+import CreateItinerary from '@/components/CreateItinerary.vue';
 
 export default {
     name: 'landmark',
     components: {
       GoogleMaps,
       LandmarkList,
-      LandmarkForm
+      LandmarkForm,
+      CreateItinerary
     }
 };
 

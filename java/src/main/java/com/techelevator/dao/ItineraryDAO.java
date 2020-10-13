@@ -16,7 +16,7 @@ public interface ItineraryDAO {
 	
 	public List<Itinerary> retrieveSharedItineraries(String username);
 	
-	public List<Landmark> retrieveItineraryLandmarks(Long itineraryID);
+	public List<Long> retrieveItineraryLandmarks(Long itineraryID);
 	
 	public Itinerary retrieveItinerary(Long id);
 	
