@@ -29,17 +29,15 @@ export default {
     data(){
         return{
             newItinerary: {
-                "username" : this.$store.state.user.username,
-                "destinations" : this.$store.state.selectedLandmarks
+              "username" : this.$store.state.user.username,
+              "destinations" : this.$store.state.selectedLandmarks,
             }
         }
     },
     methods:{
-        createItinerary() {
-            itineraryService.createItinerary(this.newItinerary);
-            this.newItinerary = {
-                "username" : this.$store.state.user.username
-            }
+      createItinerary() {
+        itineraryService.createItinerary(this.newItinerary);
+            this.$store.state.selectedLandmarks = [];
             window.location.href = "http://localhost:8081/itinerary"
         },
 

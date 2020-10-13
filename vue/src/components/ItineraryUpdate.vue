@@ -7,10 +7,10 @@
         User ID: {{itinerary.userId}} <br>
         Itinerary ID: {{itinerary.itineraryId}} <br><br>
 
-        Add/Remove landmarks:
-        <form>
-            
-            <label v-for="destination in destinations" :key='destination'>{{destination}}</label>
+        Remove landmarks:
+        <form v-for="destination in destinations" v-bind:key='destination.id'>
+            <input type='checkbox'/>
+            <label >{{destination.name}}<br></label>
         </form>
   </div>
 </template>
