@@ -9,16 +9,21 @@
 
         <h3>Current Landmarks:</h3>
         <form v-for='destination in destinations' :key='destination.description'>
+            <button v-on:click='removeLandmark(itinerary.itineraryId, destination.id)'>-</button>
             {{destination.name}}
-            <button v-on:click='removeLandmark(itinerary.id, destination.id)'>-</button>
         </form> <br>
 
         <h3>Add Landmarks to Your Itinerary:</h3>
 
         <form v-for='landmark in landmarks' v-bind:key='landmark.id'>
+            <button v-on:click.prevent='addLandmark(itinerary.itineraryId, landmark.id)'>+</button>
             {{landmark.name}}
-            <button v-on:click='addLandmark(itinerary.id, landmark.id)'>+</button>
         </form>
+       
+
+        <!-- <button v-for='landmark in landmarks' v-bind:key='landmark.id'
+        v-on:click.prevent='addLandmark(itinerary.itineraryId, landmark.id)'  
+        >+ {{landmark.name}} </button> -->
   </div>
 </template>
 
@@ -40,9 +45,20 @@ export default {
             ItineraryService.removeLandmark(itineraryID, landmarkID);
             window.location.reload();
         },
+
         addLandmark(itineraryID, landmarkID){
+            let notFound = true;
+           for (let i = 0; i < this.destinations.length; i++) {
+                if (this.destinations[i].id == landmarkID) {
+                notFound = false;
+                window.alert("You already have this landmark in your current itinerary!")
+                break;
+                } 
+            }
+            if (notFound) {
             ItineraryService.addLandmark(itineraryID, landmarkID);
             window.location.reload();
+            }
         }
     },
 
