@@ -23,6 +23,10 @@ public interface ItineraryDAO {
 	
 	public void updateItinerary(Itinerary itinerary, Long id, String username) throws IOException;
 	
+	public void removeLandmark(Long itineraryID, Long landmarkID) throws IOException;
+	
+	public void addLandmark(Long itineraryID, Long landmarkID) throws IOException;
+	
 	public void deleteItinerary(Long id, String username) throws IOException;
 	
 	public void shareItinerary(Long itineraryId, String shareUsername, String username) throws IOException;
