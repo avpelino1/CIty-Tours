@@ -52,6 +52,16 @@ public class ItineraryController {
 		itineraryDAO.createItinerary(itinerary);
 	}
 	
+	@RequestMapping(path="/{itineraryID}/{landmarkID}/remove", method=RequestMethod.DELETE)
+	public void removeLandmark(@PathVariable Long itineraryID, @PathVariable Long landmarkID) throws IOException {
+		itineraryDAO.removeLandmark(itineraryID, landmarkID);
+	}
+	
+	@RequestMapping(path="/{itineraryID}/{landmarkID}/add", method=RequestMethod.POST)
+	public void addLandmark(@PathVariable Long itineraryID, @PathVariable Long landmarkID) throws IOException {
+		itineraryDAO.addLandmark(itineraryID, landmarkID);
+	}
+	
 	@RequestMapping(path="/{id}/update", method=RequestMethod.PUT)
 	public Boolean updateItinerary(@RequestBody Itinerary newItinerary, @PathVariable Long id, Principal principal) {
 		try {

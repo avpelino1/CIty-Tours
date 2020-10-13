@@ -149,6 +149,18 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 	}
 
 	@Override
+	public void removeLandmark(Long itineraryID, Long landmarkID) throws IOException {
+		String sql = "DELETE FROM destinations WHERE itinerary_id = ? AND landmark_id = ?";
+		jdbcTemplate.update(sql, itineraryID, landmarkID);
+	}
+	
+	@Override
+	public void addLandmark(Long itineraryID, Long landmarkID) throws IOException {
+		String sql = "INSERT INTO destinations (itinerary_id, landmark_id) VALUES (?, ?)";
+		jdbcTemplate.update(sql, itineraryID, landmarkID);
+	}
+
+	@Override
 	public void deleteItinerary(Long itineraryId, String username) throws IOException {
 		if (retrieveItinerary(itineraryId).getUserId() == (userDAO.findIdByUsername(username))) {
 		
@@ -207,4 +219,5 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		
 		return itinerary;
 	}
+
 }
