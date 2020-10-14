@@ -16,6 +16,8 @@ public class Landmark {
 	private boolean pendingApproval;
 	private Long thumbsUp;
 	private Long thumbsDown;
+	private Double lat;
+	private Double lng;
 	
 	public Long getId() {
 		return id;
@@ -76,6 +78,18 @@ public class Landmark {
 	}
 	public void setThumbsDown(Long thumbsDown) {
 		this.thumbsDown = thumbsDown;
+	}
+	public Double getLat() {
+		return lat;
+	}
+	public void setLat(Double lat) {
+		this.lat = lat;
+	}
+	public Double getLng() {
+		return lng;
+	}
+	public void setLng(Double lng) {
+		this.lng = lng;
 	}
 	
 	
