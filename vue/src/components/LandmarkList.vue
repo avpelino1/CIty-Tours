@@ -25,6 +25,7 @@
       <br><br>
       <input type="checkbox" v-on:click="addLandmark(landmark.id)"/><label name='addToItinerary'> Add to Itinerary </label>
     </div>
+    </form>
 
   </div>
 </template>
@@ -83,16 +84,8 @@ export default {
   created() {
     landmarkService.getLandmarks().then((response)=>{
       this.landmarks=response.data;
-    })
-    // ,
-  
-    // itineraryService.getMyItineraries().then((response) => {
-    //   this.itineraries=response.data;
-    // }),
-
-    // itineraryService.getItineraryLandmarks().then((response)=> {
-    //   this.destinations=response.data;
-    // })
+    }
+     )
   },
 
   computed: {
