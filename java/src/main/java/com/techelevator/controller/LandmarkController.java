@@ -41,7 +41,6 @@ public class LandmarkController {
 	@RequestMapping(path="/add", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public void addLandmark(@RequestBody Landmark landmark) {
-		System.out.println(landmark.getName());
 		landmarkDAO.addLandmark(landmark);
 	}
 	

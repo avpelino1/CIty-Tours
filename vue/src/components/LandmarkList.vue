@@ -27,6 +27,7 @@
 <script>
 import landmarkService from '../services/LandmarkService.js';
 import reviewService from '../services/ReviewService.js';
+// import itineraryService from '@/services/ItineraryService.js';
 
 export default {
   name: 'landmark-list',
@@ -78,6 +79,15 @@ export default {
     landmarkService.getLandmarks().then((response)=>{
       this.landmarks=response.data;
     })
+    // ,
+  
+    // itineraryService.getMyItineraries().then((response) => {
+    //   this.itineraries=response.data;
+    // }),
+
+    // itineraryService.getItineraryLandmarks().then((response)=> {
+    //   this.destinations=response.data;
+    // })
   },
 
   computed: {

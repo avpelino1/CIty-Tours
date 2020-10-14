@@ -23,7 +23,8 @@ export default new Vuex.Store({
     landmarkMap: [],
     destinations: [],
     geocoded: [],
-    startingLocation: ''
+    startingLocation: '',
+    selectedLandmarks: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
