@@ -1,6 +1,7 @@
 <template>
   <div>
      <h2>Create a New Itinerary</h2>
+     <p>Check the boxes of the landmarks you want to add to your itinerary above; then submit this form!</p>
     <form v-on:submit.prevent='createItinerary(newItinerary)'>
       <div class='field'>
         <label for = 'name'>Itinerary Name </label> 

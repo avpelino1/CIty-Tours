@@ -2,6 +2,10 @@
   <div>
     <h1>View Available Itineraries</h1>
 
+      <div class="grid-container">
+
+          <div class="grid-child-personal">
+
     <h2>Personal Itineraries</h2>
     <div class='itinerary-list' v-for='itinerary in myItineraries' v-bind:key="itinerary.itineraryId">
         <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
@@ -9,10 +13,12 @@
         Date: {{itinerary.date}} <br><br>
         User ID: {{itinerary.userId}} <br>
         Itinerary ID: {{itinerary.itineraryId}} <br>
-        <p>***MAP GOES HERE***</p>
         <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> Edit Itinerary </router-link><br><br>
         <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
     </div>
+            </div>
+
+            <div class="grid-child-shared">
 
     <h2>Itineraries Shared With You</h2>
     <div class='itinerary-list' v-for='itinerary in myFriendsItineraries' v-bind:key="itinerary.id">
@@ -23,7 +29,8 @@
         Itinerary ID: {{itinerary.itineraryId}} <br>
         <p>***MAP GOES HERE***</p>
     </div>
-
+    </div>
+      </div>
   </div>
 </template>
 
@@ -76,4 +83,11 @@ export default {
         width: 500px;
         background-color: lavender;
     }
+     .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
+
+   
 </style>

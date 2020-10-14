@@ -2,7 +2,9 @@
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
       <h1 class="h3 mb-3 font-weight-normal">Welcome to City Tours!</h1>
-      <h3 class="sign-in">Please sign in or create an account.</h3>
+      <p>If you would like to view a list of landmarks in Austin, TX, click the link below!</p>
+      <router-link :to="{ name: 'landmark' }">LANDMARKS</router-link>
+      <h3 class ='sign-in'>If you would like to create an Itinerary for your trip to Austin, please sign in or create an account.</h3>
       <div
         class="alert alert-danger"
         role="alert"
@@ -34,7 +36,6 @@
       />
       <button type="submit">Sign in </button> <br> <br>
       <router-link :to="{ name: 'register' }">Need an account?</router-link> <br> <br>
-      <router-link :to="{ name: 'landmark' }">View Landmarks</router-link>
     </form>
   </div>
 </template>

@@ -2,6 +2,7 @@
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
       <h1 class="h3 mb-3 font-weight-normal">Create Your City Tours Account</h1>
+      <h3>For security purposes, your password should contain at least 1 uppercase and 1 lowercase letter.</h3>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
