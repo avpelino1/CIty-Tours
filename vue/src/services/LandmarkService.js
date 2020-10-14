@@ -10,7 +10,6 @@ export default {
     },
    
     createLandmark(landmark) {
-
         return http.post('/add', landmark);
     },
 
