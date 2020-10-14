@@ -129,7 +129,9 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 
 	@Override
 	public void updateItinerary(Itinerary itinerary, Long id, String username) throws IOException {
-		if (itinerary.getUsername().equals(username)) {
+		System.out.println(username);
+		System.out.println(userDAO.getUserById(retrieveItinerary(itinerary.getItineraryId()).getUserId()).getUsername());
+		if (userDAO.getUserById(retrieveItinerary(itinerary.getItineraryId()).getUserId()).getUsername().equals(username)) {
 		String sql = "UPDATE itinerary SET name = ?, starting_point = ?, share = ?, date_of = ? WHERE itinerary_id = ?";
 		String name = itinerary.getName();
 		String startingLocation = itinerary.getStartingLocation();
@@ -137,12 +139,12 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		
 		jdbcTemplate.update(sql, name, startingLocation, itinerary.getShare(), date, id);
 		
-		jdbcTemplate.update("DELETE FROM destinations WHERE itinerary_id = ?", id);
+//		jdbcTemplate.update("DELETE FROM destinations WHERE itinerary_id = ?", id);
 		
-		for (Landmark landmark : itinerary.getDestinations()) {
-			String destination = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (?, ?)";
-			jdbcTemplate.update(destination, id, landmark);
-		}
+//		for (Landmark landmark : itinerary.getDestinations()) {
+//			String destination = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (?, ?)";
+//			jdbcTemplate.update(destination, id, landmark);
+//		}
 		} else {
 			throw new IOException();
 		}

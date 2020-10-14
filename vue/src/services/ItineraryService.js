@@ -26,7 +26,7 @@ export default {
     },
 
     updateItinerary(itinerary) {
-        return http.put(`/${itinerary.id}/update`, itinerary);
+        return http.put(`/${itinerary.itineraryId}/update`, itinerary);
     },
 
     deleteItinerary(id) {

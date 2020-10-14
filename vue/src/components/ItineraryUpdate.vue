@@ -1,11 +1,23 @@
 <template>
   <div>
-      <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
-        Starting Location: {{itinerary.startingLocation}} <br>
-        Date: {{itinerary.date}} <br><br>
-
-        Your User ID: {{itinerary.userId}} <br>
-        Itinerary ID: {{itinerary.itineraryId}} <br><br>
+      <h2 class = 'sub-header'>{{itinerary.name}}</h2>
+        <form v-on:submit.prevent='updateItinerary(itinerary)'>
+        <div class='field'>
+            <label for = 'name'>Name: </label>
+            <input type='text' name='name' v-model='itinerary.name'/>
+        </div> <br>
+        <div class='field'>
+            <label for = 'startingLocation'>Starting Address: </label>
+            <input type='text' name='startingLocation' v-model='itinerary.startingLocation'/>
+        </div> <br>
+        <div class='field'>
+            <label for = 'date'>Date: </label>
+            <input type='date' name='date' v-model='itinerary.date'/>
+        </div> <br>
+        <div class='actions'>
+            <button>Submit</button>
+        </div>
+        </form>
 
         <h3>Current Landmarks:</h3>
         <form v-for='destination in destinations' :key='destination.description'>
@@ -59,6 +71,12 @@ export default {
             ItineraryService.addLandmark(itineraryID, landmarkID);
             window.location.reload();
             }
+        },
+
+        updateItinerary(itinerary){
+            console.log(itinerary);
+            ItineraryService.updateItinerary(itinerary);
+           // window.location.reload();
         }
     },
 
