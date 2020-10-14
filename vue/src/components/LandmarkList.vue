@@ -1,15 +1,20 @@
 <template>
   <div> <br>
-      <!-- <div>
-        <select id="categoryFilter" v-for='landmark in filteredList'>
-          <option value="parksAndGardens">Parks & Gardens</option>
-          <option value="museumsAndHistoricalSites">Museums & Historical Sites</option>
-          <option value="restaurants">Restaurants</option>
-          <option value="shopping">Shopping</option>
-          <option value="kidFriendly">Kid-Friendly</option>
+      <form>
+        <p>View Landmarks By Category:</p>
+        <select id="categoryFilter" v-model='filter.venueType'>
+          <option value="viewAll">View All</option>
+          <option value="Parks & Gardens">Parks & Gardens</option>
+          <option value="Museums & Historical Sites">Museums & Historical Sites</option>
+          <option value="Restaurants">Restaurants</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Kid-Friendly">Kid-Friendly</option>
         </select>
-      </div> -->
-    <div class='landmark-list' v-for='landmark in landmarks' v-bind:key='landmark.id'>
+        <div>
+
+        </div>
+      </form>
+    <div class='landmark-list' v-for='landmark in filteredList' v-bind:key='landmark.id'>
       <router-link v-bind:to="{name: 'landmark-details', params: {id: landmark.id} }">
           <h3 class='sub-header'>{{landmark.name}}</h3> <br>
       </router-link>
@@ -92,12 +97,16 @@ export default {
 
   computed: {
     filteredList(){
-      return this.landmarks.filter(landmark=>{
-        return landmark.indexOf(this.filter) > -1;
+      if(this.filter.venueType=='viewAll'){
+        return this.landmarks;
+      }
+      else {
+        return this.landmarks.filter(landmark=>{
+          return Object.values(landmark).includes(this.filter.venueType);
       });
     }
   }
-
+  }
 }
 
 </script>
