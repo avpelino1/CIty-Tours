@@ -1,16 +1,6 @@
 <template>
   <div>
 
-    <form v-on:submit.prevent='updateItinerary'>
-      <label name ='selectItinerary'>Select Itinerary: </label> 
-      <select v-model="updatedItinerary.name">
-        <option v-for="itinerary in itineraries" v-bind:key='itinerary.itineraryId'> {{itinerary.name}} </option>
-      </select> <br> <br>
-
-      <div class='actions'>
-    <button>Click here to update your itinerary!</button> <br>
-      </div>
-
     <div class='landmark-list' v-for='landmark in landmarks' v-bind:key='landmark.id'>
       <router-link v-bind:to="{name: 'landmark-details', params: {id: landmark.id} }">
           <h3 class='sub-header'>{{landmark.name}}</h3> <br>
@@ -78,21 +68,8 @@ export default {
   created() {
     landmarkService.getLandmarks().then((response)=>{
       this.landmarks=response.data;
-<<<<<<< HEAD
     }
      )
-=======
-    })
-    // ,
-  
-    // itineraryService.getMyItineraries().then((response) => {
-    //   this.itineraries=response.data;
-    // }),
-
-    // itineraryService.getItineraryLandmarks().then((response)=> {
-    //   this.destinations=response.data;
-    // })
->>>>>>> f349fe08f5ea16adfa19561ea04222f52e91bd70
   },
 
   // computed: {
