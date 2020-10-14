@@ -27,7 +27,7 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 		List<Landmark> allLandmarks = new ArrayList<>();
 
 		// SQL Select to retrieve all the landmarks that have been approved.
-		String sql = "SELECT * FROM landmark WHERE pending_approval = false";
+		String sql = "SELECT * FROM landmark JOIN coordinates ON coordinates.landmark_id = landmark.landmark_id WHERE landmark.pending_approval = false";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
 		// Populate list of landmarks
@@ -60,6 +60,8 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 		landmark.setDescription(results.getString("description"));
 		landmark.setVenueType(results.getString("venue_type"));
 		landmark.setPendingApproval(results.getBoolean("pending_approval"));
+		landmark.setLat(results.getDouble("lat"));
+		landmark.setLng(results.getDouble("lng"));
 
 		return landmark;
 	}
