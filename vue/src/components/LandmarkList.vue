@@ -30,6 +30,7 @@
 <script>
 import landmarkService from '../services/LandmarkService.js';
 import reviewService from '../services/ReviewService.js';
+// import itineraryService from '@/services/ItineraryService.js';
 
 export default {
   name: 'landmark-list',
@@ -77,8 +78,21 @@ export default {
   created() {
     landmarkService.getLandmarks().then((response)=>{
       this.landmarks=response.data;
+<<<<<<< HEAD
     }
      )
+=======
+    })
+    // ,
+  
+    // itineraryService.getMyItineraries().then((response) => {
+    //   this.itineraries=response.data;
+    // }),
+
+    // itineraryService.getItineraryLandmarks().then((response)=> {
+    //   this.destinations=response.data;
+    // })
+>>>>>>> f349fe08f5ea16adfa19561ea04222f52e91bd70
   },
 
   // computed: {

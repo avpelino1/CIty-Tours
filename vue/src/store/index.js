@@ -20,6 +20,10 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
+    landmarkMap: [],
+    destinations: [],
+    geocoded: [],
+    startingLocation: '',
     selectedLandmarks: []
   },
   mutations: {
