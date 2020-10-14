@@ -6,7 +6,8 @@
     <googleMaps />
 
     <router-link :to="{ name: 'landmark'}"> View a List of Landmarks in Austin, TX  </router-link><br><br>
-    <router-link :to="{ name: 'itinerary'}"> View or Create an Itinerary </router-link>
+    <router-link :to="{ name: 'landmark'}"> Create a New Itinerary  </router-link><br><br>
+    <router-link :to="{ name: 'itinerary'}"> View or Edit Your Existing Itineraries </router-link>
   </div>
 </template>
 
