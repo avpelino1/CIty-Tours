@@ -5,6 +5,8 @@
       <h4>Welcome, {{this.$store.state.user.username}}!</h4> 
     </div>
 
+    <div></div>
+
     <googleMaps />
 
     
@@ -19,9 +21,7 @@ import GoogleMaps from '@/components/GoogleMaps.vue'
 
 export default {
   name: "home",
-  components: {
-  GoogleMaps
-  }
+  components: GoogleMaps
 };
 </script>
 
