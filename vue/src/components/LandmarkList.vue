@@ -1,5 +1,14 @@
 <template>
-  <div>
+  <div> <br>
+      <!-- <div>
+        <select id="categoryFilter" v-for='landmark in filteredList'>
+          <option value="parksAndGardens">Parks & Gardens</option>
+          <option value="museumsAndHistoricalSites">Museums & Historical Sites</option>
+          <option value="restaurants">Restaurants</option>
+          <option value="shopping">Shopping</option>
+          <option value="kidFriendly">Kid-Friendly</option>
+        </select>
+      </div> -->
     <div class='landmark-list' v-for='landmark in landmarks' v-bind:key='landmark.id'>
       <router-link v-bind:to="{name: 'landmark-details', params: {id: landmark.id} }">
           <h3 class='sub-header'>{{landmark.name}}</h3> <br>
@@ -30,13 +39,16 @@ export default {
         name: "",
       },
       newReview: {},
-      selectedLandmarks: this.$store.state.selectedLandmarks
+      selectedLandmarks: this.$store.state.selectedLandmarks,
+      filter: {
+        venueType: {},
+        
+      }
       
     }
   },
 
   methods: {
-
     addThumbsUp(id) {
       this.newReview = {
         "title" : "",
@@ -69,8 +81,10 @@ export default {
   },
 
   computed: {
-    filterSearch() {
-      return this.landmarks.filter
+    filteredList(){
+      return this.landmarks.filter(landmark=>{
+        return landmark.indexOf(this.filter) > -1;
+      });
     }
   }
 
