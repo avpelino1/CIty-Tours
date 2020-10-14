@@ -20,7 +20,10 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    selectedLandmarks: []
+    landmarkMap: [],
+    destinations: [],
+    geocoded: [],
+    startingLocation: ''
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {

@@ -10,7 +10,7 @@
 
 <script>
 import IndividualLandmark from "@/components/IndividualLandmark";
-import Reviews from "@/components/Reviews";
+import Reviews from "@/components/Reviews.vue";
 
 export default {
     components: {

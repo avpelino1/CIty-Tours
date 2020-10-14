@@ -1,5 +1,11 @@
 <template>
 <div>
+    <h2>Reviews</h2>
+    <div class='review' v-for='review in reviews' v-bind:key='review.id'>
+        <h3 id='reviewTitle'>{{review.title}}   </h3><img class='thumb' v-if="review.thumbsUp==true" src = "https://imgur.com/LLPYyXY.png"/><img class='thumb' v-if="review.thumbsDown==true" src = "https://imgur.com/lKO2G1K.png"/>
+        <p id='reviewDescription'>{{review.description}}</p>
+    </div>
+
 
   <h3> Add a Review </h3>
 
@@ -28,8 +34,8 @@ export default {
         return {
             newReview: {
                 "landmarkId" : this.$route.params.id
-            }
-
+            },
+            reviews:[]
         }
 
     },
@@ -42,19 +48,28 @@ export default {
                     "landmarkId" : this.$route.params.id
                 }
             
-        },
-        getReviews(id) {
-            reviewService.getReviews(id);
         }
 
     },
 
     created() {
-
+        reviewService.getReviews(this.$route.params.id).then((response) => {
+            this.reviews = response.data
+        })
     }
 }
 </script>
 
 <style>
+
+    .thumb {
+        display: inline-flex;
+        width: 1%;
+        padding-left: 10px;        
+    }
+
+    #reviewTitle {
+        display:inline-flex
+    }
 
 </style>

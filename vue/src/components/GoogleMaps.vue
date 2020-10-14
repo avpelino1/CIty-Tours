@@ -19,9 +19,12 @@
 
 <script>
 import landmarkService from "@/services/LandmarkService.js";
-import landmarkList from "@/components/LandmarkList.vue";
+import axios from 'axios';
 
-let startingLocation;
+const http = axios.create({
+    baseURL: "https://maps.googleapis.com/maps/api/geocode/json?address="
+});
+
 export default {
     name: 'Map',
     data() {
@@ -30,8 +33,9 @@ export default {
             location: null,
             gettingLocation: false,
             errorStr: null,
-            landmarks: [],
-            geoLandmarks: [],
+            landmarks:[],
+            points: [],
+            startingLocation: ''
         }
 
     },
@@ -59,27 +63,36 @@ export default {
         // get position
         navigator.geolocation.getCurrentPosition(pos => {
         this.gettingLocation = false;
-        this.location = pos;
-        startingLocation = pos;
+        this.location = this.startingLocation || pos;
         console.log(pos);
         }, err => {
         this.gettingLocation = false;
         this.errorStr = err.message;
         })
+        },
+
+        setMarker(points) {
+          let markers = new window.google.maps.Marker({
+            setposition : points,
+            map: this.map,
+          })
         }
     },
+    
     created() {
         landmarkService.getLandmarks().then((response)=>{
-      this.landmarks=response.data;
+        this.landmarks=response.data;
     })
-    //     landmarks.forEach(geoCode(landmark),{
-    //     geoCode(landmark).then((response)=>{
-    //     geoLocation = `https://maps.googleapis.com/maps/api/geocode/json?address=${landmark.address}+CA&key=AIzaSyBwqiIiWzxhNGZ2fxocq1tCHMz17TWEMRA`
-    //     this.geoLandmarks.add(geoLocation);
-    //     })}
+        this.landmarks.forEach(landmark => {
+          http.get(`${landmark.address}+CA&key=AIzaSyBwqiIiWzxhNGZ2fxocq1tCHMz17TWEMRA`).then((response)=>{
+            this.points.push(response.data)
+          })
+        })
+
     },    
     mounted() {
         this.initMap();
+        this.setMarker(this.points);
     }
 }
 </script>
