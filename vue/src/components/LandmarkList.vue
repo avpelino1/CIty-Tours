@@ -1,7 +1,7 @@
 <template>
   <div> <br>
       <form>
-        <p>View Landmarks By Category:</p>
+        <p>View Landmarks by Category:</p>
         <select id="categoryFilter" v-model='filter.venueType'>
           <option value="viewAll">View All</option>
           <option value="Parks & Gardens">Parks & Gardens</option>

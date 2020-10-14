@@ -1,6 +1,7 @@
 <template>
   <div>
       <h2 class = 'sub-header'>{{itinerary.name}}</h2>
+      <p>You can change the name, starting address, or date below!</p>
         <form v-on:submit.prevent='updateItinerary(itinerary)'>
         <div class='field'>
             <label for = 'name'>Name: </label>
@@ -15,7 +16,7 @@
             <input type='date' name='date' v-model='itinerary.date'/>
         </div> <br>
         <div class='actions'>
-            <button>Submit</button>
+            <button>Submit Changes</button>
         </div>
         </form>
 
@@ -26,7 +27,6 @@
         </form> <br>
 
         <h3>Add Landmarks to Your Itinerary:</h3>
-
         <form v-for='landmark in landmarks' v-bind:key='landmark.id'>
             <button v-on:click.prevent='addLandmark(itinerary.itineraryId, landmark.id)'>+</button>
             {{landmark.name}}
