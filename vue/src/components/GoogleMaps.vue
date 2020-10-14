@@ -22,7 +22,7 @@ import landmarkService from "@/services/LandmarkService.js";
 import axios from 'axios';
 
 const http = axios.create({
-    baseURL: "https://maps.googleapis.com/maps/api/geocode/json?address="
+    baseURL: "https://maps.googleapis.com/maps/api/geocode"
 });
 
 export default {
@@ -82,12 +82,26 @@ export default {
     created() {
         landmarkService.getLandmarks().then((response)=>{
         this.landmarks=response.data;
+        console.log(this.landmarks);
+
+        let place = this.landmarks[0];
+        console.log(encodeURIComponent(place.address));
+        // const headers = {'Access-Control-Allow-Headers' : "*", 'Access-Control-Allow-Origin' : '*'}
+        http.get('json?address=' + encodeURIComponent(place.address)+`CA&key=AIzaSyBwqiIiWzxhNGZ2fxocq1tCHMz17TWEMRA`).then(
+          (response) => {
+          console.log(response.data.results.gemoetry.location.lat);
+          console.log(response.data.results.gemoetry.location.lng);
+          }
+        )
+
+        // this.landmarks.forEach(landmark => {
+        //   http.get(encodeURIComponent(landmark.address)+`CA&key=AIzaSyBwqiIiWzxhNGZ2fxocq1tCHMz17TWEMRA`).then((response)=>{
+        //     this.points.push(response.data.results.geometry.location)
+        //     console.log(response.data.results.gemoetry.location.lat)
+        //     console.log(response.data.results.gemoetry.location.lng)
+        //   })
+        // })
     })
-        this.landmarks.forEach(landmark => {
-          http.get(`${landmark.address}+CA&key=AIzaSyBwqiIiWzxhNGZ2fxocq1tCHMz17TWEMRA`).then((response)=>{
-            this.points.push(response.data)
-          })
-        })
 
     },    
     mounted() {
