@@ -27,7 +27,7 @@
         Date: {{itinerary.date}} <br><br>
         User ID: {{itinerary.userId}} <br>
         Itinerary ID: {{itinerary.itineraryId}} <br>
-        <p>***MAP GOES HERE***</p>
+        
     </div>
     </div>
       </div>
