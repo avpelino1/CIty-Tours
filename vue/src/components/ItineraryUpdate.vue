@@ -32,10 +32,6 @@
             {{landmark.name}}
         </form>
        
-
-        <!-- <button v-for='landmark in landmarks' v-bind:key='landmark.id'
-        v-on:click.prevent='addLandmark(itinerary.itineraryId, landmark.id)'  
-        >+ {{landmark.name}} </button> -->
   </div>
 </template>
 

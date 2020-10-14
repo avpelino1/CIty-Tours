@@ -1,7 +1,20 @@
 <template>
-  <div>
+  <div> <br>
+      <form>
+        <p>View Landmarks By Category:</p>
+        <select id="categoryFilter" v-model='filter.venueType'>
+          <option value="viewAll">View All</option>
+          <option value="Parks & Gardens">Parks & Gardens</option>
+          <option value="Museums & Historical Sites">Museums & Historical Sites</option>
+          <option value="Restaurants">Restaurants</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Kid-Friendly">Kid-Friendly</option>
+        </select>
+        <div>
 
-    <div class='landmark-list' v-for='landmark in landmarks' v-bind:key='landmark.id'>
+        </div>
+      </form>
+    <div class='landmark-list' v-for='landmark in filteredList' v-bind:key='landmark.id'>
       <router-link v-bind:to="{name: 'landmark-details', params: {id: landmark.id} }">
           <h3 class='sub-header'>{{landmark.name}}</h3> <br>
       </router-link>
@@ -33,13 +46,16 @@ export default {
         name: "",
       },
       newReview: {},
-      selectedLandmarks: this.$store.state.selectedLandmarks
+      selectedLandmarks: this.$store.state.selectedLandmarks,
+      filter: {
+        venueType: {},
+        
+      }
       
     }
   },
 
   methods: {
-
     addThumbsUp(id) {
       this.newReview = {
         "title" : "",
@@ -72,12 +88,18 @@ export default {
      )
   },
 
-  // computed: {
-  //   filterSearch() {
-  //     return this.landmarks.filter        // Need to be able to filter by venue type, name, etc.
-  //   }
-  // }
-
+  computed: {
+    filteredList(){
+      if(this.filter.venueType=='viewAll'){
+        return this.landmarks;
+      }
+      else {
+        return this.landmarks.filter(landmark=>{
+          return Object.values(landmark).includes(this.filter.venueType);
+      });
+    }
+  }
+  }
 }
 
 </script>
