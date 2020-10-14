@@ -10,10 +10,8 @@
           <option value="Shopping">Shopping</option>
           <option value="Kid-Friendly">Kid-Friendly</option>
         </select>
-        <div>
-
-        </div>
-
+    
+<div class="grid-container">
     <div class='landmark-list' v-for='landmark in filteredList' v-bind:key='landmark.id'>
       <router-link v-bind:to="{name: 'landmark-details', params: {id: landmark.id} }">
           <h3 class='sub-header'>{{landmark.name}}</h3> <br>
@@ -25,6 +23,7 @@
       <br><br>
       <input type="checkbox" v-on:click="addLandmark(landmark.id)"/><label name='addToItinerary'> Add to Itinerary </label>
     </div>
+</div>
     </form>
 
   </div>
@@ -137,5 +136,16 @@ export default {
     .thumbsDownCount {
       display: inline-flex;
       padding-left: 6%
+    }
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      padding: 10px;
+    }
+    .thumbsUp:hover {
+      cursor: pointer;
+    }
+    .thumbsDown:hover {
+      cursor: pointer;
     }
 </style>
