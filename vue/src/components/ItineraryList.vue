@@ -13,7 +13,6 @@
         Date: {{itinerary.date}} <br><br>
         User ID: {{itinerary.userId}} <br>
         Itinerary ID: {{itinerary.itineraryId}} <br>
-        <p>***MAP GOES HERE***</p>
         <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> Edit Itinerary </router-link><br><br>
         <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
     </div>
