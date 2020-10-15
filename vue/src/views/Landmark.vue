@@ -50,16 +50,17 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
-  justify-content: space-between;
+  flex-grow: 2;
+  justify-content: flex-start;
 
 }
 .landmark-form {
   background: white;
 }
-.landmark-grid-container {
+/* .landmark-grid-container {
   display: grid;
   grid-template-columns: auto auto;
   justify-content: start;
   padding: 30px;
-}
+} */
 </style>
