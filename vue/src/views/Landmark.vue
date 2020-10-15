@@ -1,13 +1,9 @@
 <template>
   <div id="landmark" class="text-center">
-<<<<<<< HEAD
-       <h1 class="h3 mb-3 font-weight-normal">Explore Landmarks in Austin, TX</h1>
-=======
     <div class="header">
       <h1>Explore Landmarks in Austin, TX</h1>
     </div>
 <googleMaps/>
->>>>>>> bb85cf243ee74fac28ee02ee670492c425bfb9fd
 <landmark-list/>
 
   <div class='components'>
