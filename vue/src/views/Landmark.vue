@@ -2,7 +2,7 @@
 
   <div id="landmark" class="text-center">
     <div class="header">
-      <h1>Explore Landmarks in Austin, TX</h1>
+      <h1 id='header-names'>Explore Landmarks in Austin, TX</h1>
   </div>
 
 <googleMaps/>
@@ -45,6 +45,13 @@ export default {
   background-color: lavender;
   padding-top: 1px;
   font-family: 'Ubuntu', sans-serif;
+}
+#header-names{
+  background-color: lavenderblush;
+  border-radius: 40px;
+  opacity: 0.75;
+  margin-left: 700px;
+  margin-right: 700px;
 }
 .components{
   padding-left: 10px;
