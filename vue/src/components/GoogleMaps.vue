@@ -20,22 +20,17 @@
 
 <script>
 import landmarkService from "@/services/LandmarkService.js";
-// import axios from 'axios';
-
-// const http = axios.create({
-//     baseURL: "https://maps.googleapis.com/maps/api/geocode"
-// });
 
 export default {
   name: "Map",
   props: ["pointsToDisplay"],
   watch: {
     pointsToDisplay: function (newVal, oldVal) {
-      console.log("watch is working");
+     
       for (let i = 0; i < this.$markerReferences.length; i++) {
         this.$markerReferences[i].setMap(null);
       }
-      //  window.google.maps.setMapOnAll(null);
+
       for (let i = 0; i < newVal.length; i++) {
         let marker = new window.google.maps.Marker({
           position: { lat: newVal[i].lat, lng: newVal[i].lng },
@@ -43,13 +38,40 @@ export default {
         });
         this.$markerReferences.push(marker);
       }
-      console.log(this.$markerReferences);
-      // for (let i = 0; i < newVal.length; i++) {
-      //   let marker = new window.google.maps.Marker({
-      //     position: { lat: newVal[i].lat, lng: newVal[i].lng },
-      //     map: this.map,
-      //   });
-      // }
+
+  //     let dS = new window.google.maps.DirectionsService();
+
+  //     let request= {
+  //       origin : 'Detroit',
+  //       destination : 'Cleveland',
+  //       travelMode: window.google.maps.TravelMode.WALKING
+  //     }
+
+  //     dS.route(request, function(response, status) {
+  //   if (status == window.google.maps.DirectionsStatus.OK) {
+  //     map.fitBounds(response.routes[0].bounds);
+  //   }
+
+  //     var line = new window.google.maps.Polyline({
+  //     path: directionResult.routes[0].overview_path,
+  //     strokeColor: '#FF0000',
+  //     strokeOpacity: 0.5,
+  //     strokeWeight: 4
+  // });
+
+  // line.setMap(this.map);
+
+  // let dR  = new window.google.maps.DirectionsRenderer({
+  //         preserveViewport: true,
+  //         suppressMarkers: true
+  //       });
+
+
+
+
+  // });
+
+
     },
   },
   data() {
