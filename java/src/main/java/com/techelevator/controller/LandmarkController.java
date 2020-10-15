@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.techelevator.dao.LandmarkDAO;
 import com.techelevator.model.Landmark;
 
@@ -40,7 +42,7 @@ public class LandmarkController {
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(path="/add", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public void addLandmark(@RequestBody Landmark landmark) {
+	public void addLandmark(@RequestBody Landmark landmark) throws JsonMappingException, JsonProcessingException {
 		landmarkDAO.addLandmark(landmark);
 	}
 	

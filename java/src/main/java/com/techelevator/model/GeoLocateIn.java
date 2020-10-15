@@ -16,6 +16,5 @@ public void setAddresses(List<String> addresses) {
 	this.addresses = addresses;
 }
 
-
 	
 }

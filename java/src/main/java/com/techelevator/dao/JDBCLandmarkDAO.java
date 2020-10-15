@@ -10,14 +10,18 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.techelevator.model.BusinessHours;
 import com.techelevator.model.Images;
 import com.techelevator.model.Landmark;
+import com.techelevator.services.GoogleMaps;
 
 @Component
 public class JDBCLandmarkDAO implements LandmarkDAO {
 
 	private JdbcTemplate jdbcTemplate;
+	private GoogleMaps googleMaps;
 
 	public JDBCLandmarkDAO(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -129,7 +133,7 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 		return null;
 	}
 
-	public void addLandmark(Landmark landmark) {
+	public void addLandmark(Landmark landmark) throws JsonMappingException, JsonProcessingException {
 		//SQL statement to insert new landmark object from user -- pending_approval is set to true as it needs to be approved before it will be displayed
 		String landmarkInsert = "INSERT INTO landmark (name, description, address, venue_type, pending_approval) VALUES (?, ?, ?, ?, true) RETURNING landmark_id";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(landmarkInsert, landmark.getName(), landmark.getDescription(),
@@ -148,6 +152,11 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 			jdbcTemplate.update(landmarkHoursInsert, landmarkId, hours.getDay(), hours.getOpen_time(),
 					hours.getClose_time());
 		}
+		
+		Landmark landmarkLatLng = googleMaps.geoLocate(landmark.getAddress());
+		String insertLatLng = "INSERT INTO coordinates (landmark_id, lat, lng) VALUES (?, ?, ?)";
+		
+		jdbcTemplate.update(insertLatLng, landmarkId, landmarkLatLng.getLat(), landmarkLatLng.getLng());
 	}
 
 	public List<Landmark> getPendingLandmarks() {

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.techelevator.model.Landmark;
 
 public interface LandmarkDAO {
@@ -12,7 +14,7 @@ public interface LandmarkDAO {
 	
 	public Landmark getLandmarkById(Long id);
 	
-	public void addLandmark(Landmark landmark);
+	public void addLandmark(Landmark landmark) throws JsonMappingException, JsonProcessingException;
 
 	public List<Landmark> getPendingLandmarks();
 	

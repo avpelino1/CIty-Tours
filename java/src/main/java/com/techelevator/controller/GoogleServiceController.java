@@ -20,7 +20,7 @@ public class GoogleServiceController {
 //		System.out.println(body.getAddresses());
 		
 		GoogleMaps maps = new GoogleMaps();
-		maps.geoLocate(body.getAddresses());
+//		maps.geoLocate(body.getAddresses());
 		
 		
 		
