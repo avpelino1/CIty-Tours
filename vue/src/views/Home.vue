@@ -59,7 +59,7 @@ export default {
   #skyline{
     width: 100%;
   }
-  h3{
+  .weird{
     font-style: italic;
     text-align: center;
   }

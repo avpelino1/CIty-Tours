@@ -23,22 +23,30 @@
         </form>
       </div>
 
-        <div class='column-names'>
-            <h3>Current Landmarks:</h3>
-            <h3>Add Landmarks to Your Itinerary:</h3>
-        </div>
+        <div class='itinerary-details-grid'>
 
-        <div class='landmark-add-remove'>
-        <form v-for='destination in destinations' :key='destination.description'>
+        <div class='landmark-remove-add'>
+        <div class='landmark-remove'>
+            <h3>Current Landmarks:</h3>
+        <form class='landmark-remove-form' v-for='destination in destinations' :key='destination.description'>
             <button v-on:click='removeLandmark(itinerary.itineraryId, destination.id)'>-</button>
             {{destination.name}}
         </form>
-
-        <form v-for='landmark in landmarks' v-bind:key='landmark.id'>
+        </div>
+        <br>
+        <div class='landmark-add'>
+            <h3>Add Landmarks to Your Itinerary:</h3>
+        <form class='landmark-add-form' v-for='landmark in landmarks' v-bind:key='landmark.id'>
             <button v-on:click.prevent='addLandmark(itinerary.itineraryId, landmark.id)'>+</button>
             {{landmark.name}}
         </form>
+        </div>
+        </div>
+
+        <img id='itinerary-img' src='https://cdn.pixabay.com/photo/2015/04/21/13/53/downtown-733286_1280.jpg'/>
+
        </div>
+
   </div>
 </template>
 
@@ -105,6 +113,7 @@ export default {
     margin-top: 60px;
     margin-right: 500px;
     margin-left: 500px;
+    margin-bottom: 60px;
     padding: 20px;
     background-image: linear-gradient(to bottom right, lavender, lightblue);
     border-radius: 70px;
@@ -112,13 +121,20 @@ export default {
 .itinerary-update {
     font-family: 'Ubuntu', sans-serif;
 }
-.column-names{
+.itinerary-details-grid{
     display: grid;
-    grid-template-columns: auto auto;
-    margin-top: 40px;
+    grid-template-columns: auto 500px;
+    grid-template-areas:
+        "landmark-remove-add itinerary-img"
+    ;
+    margin-right: 100px;
+    margin-left: 100px;
 }
-.landmark-add-remove{
-    display: flex;
-    flex-grow: 2;
+
+#itinerary-img{
+    max-width: 100%;
+    height: auto;
+    border-radius: 200px;
+    justify-content: right;
 }
 </style>

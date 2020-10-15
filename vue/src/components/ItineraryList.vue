@@ -8,7 +8,7 @@
 
           <div class="grid-child-personal">
 
-    <h2>Personal Itineraries</h2>
+    <h2 class='itinerary-header'>Personal Itineraries</h2>
     <div class='itinerary-list' v-for='itinerary in myItineraries' v-bind:key="itinerary.itineraryId">
         <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
         <b>Starting Location: </b> {{itinerary.startingLocation}} <br><br>
@@ -20,7 +20,7 @@
 
             <div class="grid-child-shared">
 
-    <h2>Itineraries Shared With You</h2>
+    <h2 class='itinerary-header'>Itineraries Shared With You</h2>
     <div class='itinerary-list' v-for='itinerary in myFriendsItineraries' v-bind:key="itinerary.id">
         <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
         Starting Location: {{itinerary.startingLocation}} <br>
@@ -77,16 +77,18 @@ export default {
 
 <style>
     .itinerary-list{
-        padding: 5px;
+        padding: 20px;
         margin: 5px;
         border: 1px;
         width: 500px;
-        background-color: lavender;
+        background-image: linear-gradient(to bottom right, lavender, lightblue);
+        border-radius: 40px;
     }
      .grid-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 20px;
+        grid-gap: 200px;
+        justify-content: center;
     }
     .sub-header{
         color: navy;
@@ -94,5 +96,7 @@ export default {
     .itinerary-div {
         font-family: 'Ubuntu', sans-serif;
     }
-   
+   .itinerary-header{
+       text-align: center;
+   }
 </style>
