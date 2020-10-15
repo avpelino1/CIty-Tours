@@ -1,6 +1,6 @@
 <template>
 
- <div class="grid-container-ci">
+ <!-- <div class="grid-container-ci"> -->
 
   <div class='contact-form'>
 <br>
@@ -22,7 +22,7 @@
     </form>
 
   </div>
-  </div>
+  <!-- </div> -->
 
 </template>
 
@@ -111,9 +111,9 @@ input[type="submit"]:hover, button:hover {
   background: thistle;
 }
 
-.grid-container-ci {
+/* .grid-container-ci {
   display: grid;
   grid-template-columns: 1fr 1fr;
-}
+} */
 
 </style>
