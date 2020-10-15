@@ -18,7 +18,8 @@
 
 <div class="main">
 
-  <p class="sign" align="center">Welcome to City Tours!</p>
+  <p class="sign" align="center">Welcome to City Tours</p>
+  <p id="city-tours-description">Plan your trip to Austin, TX!</p>
 
       <input class="un"
         type="text"
@@ -47,7 +48,7 @@
 </div>
     </form>
     <div id="ViewList" align="center">
-      <router-link :to="{ name: 'landmark' }">View List of Landmarks</router-link>
+      <router-link :to="{ name: 'landmark' }">Explore landmarks without signing in!</router-link>
     </div>
   </div>
 </template>
@@ -149,6 +150,20 @@ export default {
     font-family: 'Ubuntu', sans-serif;
     }
 
+    #city-tours-description {
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 20px;
+    border: none;
+    margin-bottom: 50px;
+    /* margin-left: 5px; */
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+    }
+
     .submit {
       cursor: pointer;
         border-radius: 5em;
@@ -170,7 +185,7 @@ export default {
         text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
         color: #E1BEE7;
         font-weight: 700;
-        font-size: 28px;
+        font-size: 18px;
         letter-spacing: 1px;
         font-family: 'Ubuntu', sans-serif;
   }
