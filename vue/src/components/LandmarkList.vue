@@ -141,6 +141,7 @@ export default {
       display: grid;
       grid-template-columns: auto auto auto;
       padding: 10px;
+  
     }
     .thumbsUp:hover {
       cursor: pointer;
