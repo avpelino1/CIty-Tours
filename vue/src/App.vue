@@ -20,7 +20,4 @@ h1{
   display: flex;
   justify-content: flex-end;
 }
-/* #app{
-  justify-content: right;
-} */
 </style>

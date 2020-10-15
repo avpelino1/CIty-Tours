@@ -4,7 +4,7 @@
       <h1>City Tour of Austin, TX</h1>
       <h4>Welcome, {{this.$store.state.user.username}}!</h4>
     </div>
-        <div class="container">
+    <div class="container">
       <router-link :to="{ name: 'landmark'}"> View a List of Landmarks in Austin, TX  </router-link>
       <router-link :to="{ name: 'landmark'}"> Create a New Itinerary  </router-link>
       <router-link :to="{ name: 'itinerary'}"> View or Edit Your Existing Itineraries </router-link>

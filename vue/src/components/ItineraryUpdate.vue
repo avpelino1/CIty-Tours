@@ -1,6 +1,7 @@
 <template>
   <div>
-      <h2 class = 'sub-header'>{{itinerary.name}}</h2>
+      <div class='details-form'>
+      <h2 class = 'sub-header'>Details for {{itinerary.name}}</h2>
       <p>You can change the name, starting address, or date below!</p>
         <form v-on:submit.prevent='updateItinerary(itinerary)'>
         <div class='field'>
@@ -19,7 +20,8 @@
             <button>Submit Changes</button>
         </div>
         </form>
-
+      </div>
+        <div class='landmark-add-remove'>
         <h3>Current Landmarks:</h3>
         <form v-for='destination in destinations' :key='destination.description'>
             <button v-on:click='removeLandmark(itinerary.itineraryId, destination.id)'>-</button>
@@ -31,7 +33,7 @@
             <button v-on:click.prevent='addLandmark(itinerary.itineraryId, landmark.id)'>+</button>
             {{landmark.name}}
         </form>
-       
+       </div>
   </div>
 </template>
 
@@ -92,5 +94,10 @@ export default {
 </script>
 
 <style>
-
+.details-form{
+    text-align: center;
+}
+.landmark-add-remove{
+    
+}
 </style>

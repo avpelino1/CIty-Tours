@@ -1,7 +1,8 @@
 <template>
   <div> <br>
       <form>
-        <p>View Landmarks by Category:</p>
+        <div class='dropdown'>
+        <h2>View Landmarks by Category:</h2>
         <select id="categoryFilter" v-model='filter.venueType'>
           <option value="viewAll">View All</option>
           <option value="Parks & Gardens">Parks & Gardens</option>
@@ -10,6 +11,7 @@
           <option value="Shopping">Shopping</option>
           <option value="Kid-Friendly">Kid-Friendly</option>
         </select>
+        </div>
     
 <div class="grid-container">
     <div class='landmark-list' v-for='landmark in filteredList' v-bind:key='landmark.id'>
@@ -141,12 +143,14 @@ export default {
       display: grid;
       grid-template-columns: auto auto auto;
       padding: 10px;
-  
     }
     .thumbsUp:hover {
       cursor: pointer;
     }
     .thumbsDown:hover {
       cursor: pointer;
+    }
+    .dropdown{
+      text-align: center;
     }
 </style>
