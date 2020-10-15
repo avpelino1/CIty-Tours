@@ -97,9 +97,7 @@ export default {
 .details-form{
     text-align: center;
 }
-.landmark-add-remove{
-    
-}
+
 .itinerary-update {
     font-family: 'Ubuntu', sans-serif;
 }

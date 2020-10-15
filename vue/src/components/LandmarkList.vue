@@ -11,6 +11,7 @@
           <option value="Shopping">Shopping</option>
           <option value="Kid-Friendly">Kid-Friendly</option>
         </select>
+        </div>
     
 <div class="grid-container">
     <div class='landmark-list' v-for='landmark in filteredList' v-bind:key='landmark.id'>
