@@ -1,6 +1,9 @@
 <template>
   <div>
+
     <h2>Want to add a landmark? Fill out this form!</h2>
+
+    
     <form v-on:submit.prevent='createLandmark'>
       <div class='field'>
         <label for = 'name'>Name</label>
