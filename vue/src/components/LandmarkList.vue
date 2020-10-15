@@ -1,9 +1,10 @@
 <template>
   <div> <br>
+  <GoogleMaps v-bind:pointsToDisplay="filteredList"/>
       <form>
         <p>View Landmarks by Category:</p>
-        <select id="categoryFilter" v-model='filter.venueType'>
-          <option value="viewAll">View All</option>
+        <select id="categoryFilter" v-model='filter.venueType' v-on:change='changeSelectedLandmarks($event.target.value)'>
+          <option value="viewAll" default>View All</option>
           <option value="Parks & Gardens">Parks & Gardens</option>
           <option value="Museums & Historical Sites">Museums & Historical Sites</option>
           <option value="Restaurants">Restaurants</option>
@@ -33,9 +34,14 @@
 import landmarkService from '../services/LandmarkService.js';
 import reviewService from '../services/ReviewService.js';
 // import itineraryService from '@/services/ItineraryService.js';
+import GoogleMaps from '@/components/GoogleMaps.vue';
 
 export default {
   name: 'landmark-list',
+  components : {
+    GoogleMaps
+  },
+ 
   data(){
     return{
       landmarks: [],
@@ -45,7 +51,6 @@ export default {
         name: "",
       },
       newReview: {},
-      selectedLandmarks: this.$store.state.selectedLandmarks,
       filter: {
         venueType: {},
         
@@ -76,6 +81,10 @@ export default {
     },
     addLandmark(id) {
       this.selectedLandmarks.push(id);
+    },
+    changeSelectedLandmarks(value){
+      this.$store.commit("ASSIGN_LANDMARKS", this.filteredList)
+      console.log(this.$store.state.selectedLandmarks)
     }
 
   },
@@ -83,6 +92,8 @@ export default {
   created() {
     landmarkService.getLandmarks().then((response)=>{
       this.landmarks=response.data;
+      // this.filteredList = this.landmarks;
+      // this.$store.commit("ASSIGN_LANDMARKS", this.landmarks)
     }
      )
   },

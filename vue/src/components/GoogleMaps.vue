@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="map"></div>
-        <div class='location'>
+    <div class="location">
       Enter Starting Location:
       <input
         id="userProvidedLocation"
@@ -10,9 +10,10 @@
         v-model="startingLocation"
       />
       <button id="manualLocation">Submit</button>
-      OR 
+      OR
       <button id="getGeoLocation" v-on:click="getLocation()">
-      Get Current Location</button><br>
+        Get Current Location</button
+      ><br />
     </div>
   </div>
 </template>
@@ -26,94 +27,115 @@ import landmarkService from "@/services/LandmarkService.js";
 // });
 
 export default {
-    name: 'Map',
-    data() {
-        return {
-            map:null,
-            location: null,
-            gettingLocation: false,
-            errorStr: null,
-            landmarks:[],
-            points: [],
-            startingLocation: ''
-        }
+  name: "Map",
+  props: ["pointsToDisplay"],
+  watch: {
+    pointsToDisplay: function (newVal, oldVal) {
 
+
+     window.google.maps.setMapOnAll(null);
+
+      for (let i = 0; i < newVal.length; i++) {
+        let marker = new window.google.maps.Marker({
+          position: { lat: newVal[i].lat, lng: newVal[i].lng },
+          map: this.map,
+        });
+      }
+
+      // for (let i = 0; i < newVal.length; i++) {
+      //   let marker = new window.google.maps.Marker({
+      //     position: { lat: newVal[i].lat, lng: newVal[i].lng },
+      //     map: this.map,
+      //   });
+      // }
     },
-    methods: {
-        initMap() {
-            this.map = new window.google.maps.Map(document.getElementById('map'),{
-                center: {lat:30.2672, lng:-97.7431},
-                zoom: 11,
-                maxZoom: 20,
-                minZoom: 3,
-                streetViewControl: true,
-                mapTypeControl: true,
-                fullscreenControl: true,
-                zoomControl: true
-            })
-        },
-        getLocation() {
-        //do we support geolocation
-        if(!("geolocation" in navigator)) {
-        this.errorStr = 'Geolocation is not available.';
+  },
+  data() {
+    return {
+      map: null,
+      location: null,
+      gettingLocation: false,
+      errorStr: null,
+      landmarks: [],
+      points: [],
+      startingLocation: "",
+    };
+  },
+  methods: {
+    initMap() {
+      this.map = new window.google.maps.Map(document.getElementById("map"), {
+        center: { lat: 30.2672, lng: -97.7431 },
+        zoom: 11,
+        maxZoom: 20,
+        minZoom: 3,
+        streetViewControl: true,
+        mapTypeControl: true,
+        fullscreenControl: true,
+        zoomControl: true,
+      });
+    },
+    getLocation() {
+      //do we support geolocation
+      if (!("geolocation" in navigator)) {
+        this.errorStr = "Geolocation is not available.";
         return;
-        }
+      }
 
-        this.gettingLocation = true;
-        // get position
-        navigator.geolocation.getCurrentPosition(pos => {
-        this.gettingLocation = false;
-        this.location = this.startingLocation || pos;
-        console.log(pos);
-        }, err => {
-        this.gettingLocation = false;
-        this.errorStr = err.message;
-        })
+      this.gettingLocation = true;
+      // get position
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          this.gettingLocation = false;
+          this.location = this.startingLocation || pos;
+          console.log(pos);
         },
-
-        setMarker(points) {
-          let marker = new window.google.maps.Marker({
-            setposition : points,
-            map: this.map,
-          })
+        (err) => {
+          this.gettingLocation = false;
+          this.errorStr = err.message;
         }
+      );
     },
-    
-    created() {
-        landmarkService.getLandmarks().then((response)=>{
-        this.landmarks=response.data;
 
-        // let place = this.landmarks[0];
-        // console.log(encodeURIComponent(place.address));
-        // // const headers = {'Access-Control-Allow-Headers' : "*", 'Access-Control-Allow-Origin' : '*'}
-        // http.get('json?address=' + encodeURIComponent(place.address)+`CA&key=AIzaSyBwqiIiWzxhNGZ2fxocq1tCHMz17TWEMRA`).then(
-        //   (response) => {
-        //   console.log(response.data.results.gemoetry.location.lat);
-        //   console.log(response.data.results.gemoetry.location.lng);
-        //   }
-        // )
+    setMarker(points) {
+      for (let i = 0; i < points.length; i++) {
+        let marker = new window.google.maps.Marker({
+          position: { lat: points[i].lat, lng: points[i].lng },
+          map: this.map,
+        });
+      }
+    },
+  },
 
-        this.landmarks.forEach(landmark => {
-          this.points.push({
-            "lat" : landmark.lat,
-            "lng" : landmark.lng
-          })
-          })
-          })
-    console.log(this.points)
-    },    
-    mounted() {
-        this.initMap();
-        this.setMarker(this.points);
-    }
-}
+  created() {
+    // landmarkService.getLandmarks().then((response) => {
+    //   this.landmarks = response.data;
+
+    //   this.landmarks.forEach((landmark) => {
+    //     this.points.push({
+    //       lat: landmark.lat,
+    //       lng: landmark.lng,
+    //     });
+    //   });
+
+    //   this.setMarker(this.points);
+
+    // });
+
+    let filteredList = this.$store.state.selectedLandmarks;
+    console.log("test");
+    console.log(filteredList);
+  },
+  mounted() {
+    this.initMap();
+  },
+};
 </script>
 
 <style>
 #map {
   height: 500px;
 }
-.location{
+.location {
   text-align: center;
   padding-top: 10px;
 }

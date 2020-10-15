@@ -24,7 +24,8 @@ export default new Vuex.Store({
     destinations: [],
     geocoded: [],
     startingLocation: '',
-    selectedLandmarks: []
+    selectedLandmarks: [],
+    points: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -42,6 +43,10 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    ASSIGN_LANDMARKS(state, filteredList) {
+      state.selectedLandmarks = {};
+      state.selectedLandmarks = filteredList;
     }
   }
 })
