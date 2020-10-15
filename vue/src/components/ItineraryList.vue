@@ -26,8 +26,7 @@
         <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
         Starting Location: {{itinerary.startingLocation}} <br>
         Date: {{itinerary.date}} <br><br>
-        User ID: {{itinerary.userId}} <br>
-        Itinerary ID: {{itinerary.itineraryId}} <br>
+        <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> View Itinerary </router-link> 
         
     </div>
     </div>
