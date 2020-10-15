@@ -9,16 +9,17 @@
 </template>
 
 <style>
-h1{
-  text-align: center
-}
 #nav{
   background-color: lavender;
-  padding-top: 10px;
+  border-radius: 40px;
+  padding-top: 12px;
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 15px;
+  padding-bottom: 12px;
+  margin-left: 1750px;
   display: flex;
   justify-content: flex-end;
   font-family: 'Ubuntu', sans-serif;
+
 }
 </style>
