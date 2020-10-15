@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="map"></div>
-    <div class="location">
+    <!-- <div class="location">
       Enter Starting Location:
       <input
         id="userProvidedLocation"
@@ -14,12 +14,11 @@
       <button id="getGeoLocation" v-on:click="getLocation()">
         Get Current Location</button
       ><br />
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import landmarkService from "@/services/LandmarkService.js";
 
 export default {
   name: "Map",
@@ -88,8 +87,9 @@ export default {
   methods: {
     initMap() {
       this.map = new window.google.maps.Map(document.getElementById("map"), {
-        center: { lat: 30.2672, lng: -97.7431 },
-        zoom: 11,
+        // center: { lat: 30.2672, lng: -97.7431 },
+        center: {lat:30.3734125, lng: -97.744081},
+        zoom: 10,
         maxZoom: 20,
         minZoom: 3,
         streetViewControl: true,
