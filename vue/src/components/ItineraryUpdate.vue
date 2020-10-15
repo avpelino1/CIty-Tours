@@ -1,7 +1,8 @@
 <template>
   <div class="itinerary-update">
+      
       <div class='details-form'>
-      <h2 class = 'sub-header'>Details for {{itinerary.name}}</h2>
+      <h2 class = 'sub-header'>Update Details for Your Trip</h2>
       <p>You can change the name, starting address, or date below!</p>
         <form v-on:submit.prevent='updateItinerary(itinerary)'>
         <div class='field'>
@@ -21,14 +22,18 @@
         </div>
         </form>
       </div>
+
+        <div class='column-names'>
+            <h3>Current Landmarks:</h3>
+            <h3>Add Landmarks to Your Itinerary:</h3>
+        </div>
+
         <div class='landmark-add-remove'>
-        <h3>Current Landmarks:</h3>
         <form v-for='destination in destinations' :key='destination.description'>
             <button v-on:click='removeLandmark(itinerary.itineraryId, destination.id)'>-</button>
             {{destination.name}}
-        </form> <br>
+        </form>
 
-        <h3>Add Landmarks to Your Itinerary:</h3>
         <form v-for='landmark in landmarks' v-bind:key='landmark.id'>
             <button v-on:click.prevent='addLandmark(itinerary.itineraryId, landmark.id)'>+</button>
             {{landmark.name}}
@@ -96,9 +101,24 @@ export default {
 <style>
 .details-form{
     text-align: center;
+    justify-content: center;
+    margin-top: 60px;
+    margin-right: 500px;
+    margin-left: 500px;
+    padding: 20px;
+    background-image: linear-gradient(to bottom right, lavender, lightblue);
+    border-radius: 70px;
 }
-
 .itinerary-update {
     font-family: 'Ubuntu', sans-serif;
+}
+.column-names{
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 40px;
+}
+.landmark-add-remove{
+    display: flex;
+    flex-grow: 2;
 }
 </style>
