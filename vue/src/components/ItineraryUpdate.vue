@@ -129,8 +129,8 @@ export default {
     grid-template-areas:
         "landmark-remove-add itinerary-img"
     ;
-    margin-right: 100px;
-    margin-left: 100px;
+    margin-right: 200px;
+    margin-left: 200px;
 }
 
 #itinerary-img{
@@ -140,6 +140,12 @@ export default {
     justify-content: right;
 }
 .landmark-remove-add{
-    
+    background-image: linear-gradient(to bottom left, lightblue, lavender);
+    margin-right: 200px;
+    margin-bottom: 75px;
+    padding-left: 40px;
+    padding-bottom: 40px;
+    padding-top: 20px;
+    border-radius: 20px
 }
 </style>
