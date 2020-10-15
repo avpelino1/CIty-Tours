@@ -55,7 +55,7 @@ export default {
 }
 .components{
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 150px;
   display: flex;
   flex-grow: 2;
   justify-content: flex-start;
