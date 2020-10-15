@@ -1,15 +1,24 @@
 <template>
+
   <div id="landmark" class="text-center">
     <div class="header">
       <h1>Explore Landmarks in Austin, TX</h1>
+<<<<<<< HEAD
+  </div>
+
+<googleMaps/>
+
+=======
     </div>
+>>>>>>> 4f511ecb7be0cfd5d8bc55906b1b699544bca51b
 <landmark-list/>
 
   <div class='components'>
-    <create-itinerary/>
-    <div class='landmark-form'>
-      <landmark-form/>
-    </div>
+        <create-itinerary/>
+  <!-- <div class='landmark-form'>
+        <landmark-form/>
+    </div> -->
+
 </div>
   </div>
 </template>
@@ -24,7 +33,7 @@ export default {
     name: 'landmark',
     components: {
       LandmarkList,
-      LandmarkForm,
+      //LandmarkForm,
       CreateItinerary
     }
 };
@@ -44,6 +53,9 @@ export default {
   display: flex;
   flex-grow: 2;
   justify-content: space-between;
-  background: lavenderblush;
+
+}
+.landmark-form {
+  background: white;
 }
 </style>
