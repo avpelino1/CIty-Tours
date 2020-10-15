@@ -1,5 +1,5 @@
 <template>
-  <div> <br>
+  <div class="landmark-main-div"> <br>
       <form>
         <div class='dropdown'>
         <h2>View Landmarks by Category:</h2>
@@ -152,5 +152,8 @@ export default {
     }
     .dropdown{
       text-align: center;
+    }
+    .landmark-main-div {
+       font-family: 'Ubuntu', sans-serif;
     }
 </style>

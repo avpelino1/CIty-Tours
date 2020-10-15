@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="itinerary-div">
     <div class='header'>
     <h1>Your Itinerary Details</h1>
     <router-link :to="{ name: 'itinerary'}">Back to All Itineraries</router-link>
@@ -19,5 +19,9 @@ export default {
 </script>
 
 <style>
+
+.itinerary-div {
+  font-family: 'Ubuntu', sans-serif;
+}
 
 </style>

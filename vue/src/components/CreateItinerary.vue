@@ -48,4 +48,8 @@ export default {
 
 <style>
 
+.create-itinerary {
+  font-family: 'Ubuntu', sans-serif;
+}
+
 </style>

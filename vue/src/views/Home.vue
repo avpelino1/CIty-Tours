@@ -63,4 +63,7 @@ export default {
     font-style: italic;
     text-align: center;
   }
+  .home {
+     font-family: 'Ubuntu', sans-serif;
+  }
 </style>

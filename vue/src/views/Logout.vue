@@ -1,5 +1,7 @@
 <template>
+<div class="logout-div">
   <h1>Logout</h1>
+</div>
 </template>
 
 <script>
@@ -10,3 +12,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.logout-div {
+  font-family: 'Ubuntu', sans-serif;
+}
+</style>

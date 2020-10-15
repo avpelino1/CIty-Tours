@@ -38,6 +38,7 @@ export default {
 .header{
   background-color: lavender;
   padding-top: 1px;
+  font-family: 'Ubuntu', sans-serif;
 }
 .components{
   padding-left: 10px;

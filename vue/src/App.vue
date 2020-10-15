@@ -19,5 +19,6 @@ h1{
   padding-right: 10px;
   display: flex;
   justify-content: flex-end;
+  font-family: 'Ubuntu', sans-serif;
 }
 </style>

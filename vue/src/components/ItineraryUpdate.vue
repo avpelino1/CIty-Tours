@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="itinerary-update">
       <div class='details-form'>
       <h2 class = 'sub-header'>Details for {{itinerary.name}}</h2>
       <p>You can change the name, starting address, or date below!</p>
@@ -99,5 +99,8 @@ export default {
 }
 .landmark-add-remove{
     
+}
+.itinerary-update {
+    font-family: 'Ubuntu', sans-serif;
 }
 </style>

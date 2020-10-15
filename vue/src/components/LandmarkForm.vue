@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="landmark-form">
 
     <h2>Want to add a landmark? Fill out this form!</h2>
 
@@ -86,4 +86,8 @@ export default {
     .description{
       color:darkslategray;
     }
+    .landmark-form {
+      font-family: 'Ubuntu', sans-serif;
+    }
+    
 </style>

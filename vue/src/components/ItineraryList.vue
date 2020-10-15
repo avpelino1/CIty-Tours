@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="itinerary-div">
     <div class='header'>
         <h1>View Available Itineraries</h1>
     </div>
@@ -92,6 +92,9 @@ export default {
     }
     .sub-header{
         color: navy;
+    }
+    .itinerary-div {
+        font-family: 'Ubuntu', sans-serif;
     }
    
 </style>
