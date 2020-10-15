@@ -64,6 +64,8 @@ export default {
   methods: {
       createLandmark() {
           landmarkService.createLandmark(this.newLandmark);
+          event.target.reset();
+          alert("Landmark submitted for approval.");
       },
       findDay: function () {
         this.businessHours.push({value: ''});
