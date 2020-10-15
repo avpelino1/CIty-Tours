@@ -13,7 +13,8 @@
         <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
         <b>Starting Location: </b> {{itinerary.startingLocation}} <br><br>
         <b>Date:</b> {{itinerary.date}} <br><br>
-        <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> Edit Itinerary </router-link><br><br>
+        <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> Edit Itinerary </router-link> 
+        <a href="#" id="drivingDirections" getItineraryLandmark(itinerary.itineraryId)>Get Driving Directions!</a><br><br>
         <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
     </div>
             </div>
@@ -36,7 +37,9 @@
 
 <script>
 import itineraryService from '../services/ItineraryService.js';
+import landmarkService from '../services/LandmarkService.js';
 
+let baseDirURL = "http://wwww.google.com/maps/dir/"
 
 export default {
     name: 'itinerary-list',
@@ -44,7 +47,8 @@ export default {
         return{
             myItineraries: [],
             myFriendsItineraries: [],
-        
+            itineraryLandmarks: [],
+            landmarks: []
         }
     },
     methods:{
@@ -60,7 +64,9 @@ export default {
             
         },
         getItineraryLandmarks(id){
-            itineraryService.getItineraryLandmarks(id);
+            itineraryService.getItineraryLandmarks(id).then((response)=> {
+                itineraryLandmarks = response.data;
+            });
         }
 
     },
@@ -71,7 +77,13 @@ export default {
         itineraryService.getFriendsItineraries().then((response)=>{
             this.myFriendsItineraries=response.data;
         });
-    }
+        landmarkService.getLandmarks().then((response) => {
+            this.landmarks = response.data;
+        })
+    },
+    computed: {
+        
+    },
 }
 </script>
 
