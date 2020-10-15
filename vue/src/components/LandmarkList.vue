@@ -1,7 +1,7 @@
 <template>
-  <div> <br>
+  <div class="landmark-main-div"> <br>
   <GoogleMaps v-bind:pointsToDisplay="filteredList"/>
-      <div class="landmark-main-div">
+      <div>
         <p>View Landmarks by Category:</p>
         <select id="categoryFilter" v-model='filter.venueType' v-on:change='changeSelectedLandmarks($event.target.value)'>
           <option value="viewAll" default>View All</option>
@@ -159,5 +159,8 @@ export default {
     }
     .thumbsDown:hover {
       cursor: pointer;
+    }
+    .landmark-main-div {
+      font-family: 'Ubuntu', sans-serif;
     }
 </style>
