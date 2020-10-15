@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="map"></div>
-    <div class="location">
+    <!-- <div class="location">
       Enter Starting Location:
       <input
         id="userProvidedLocation"
@@ -14,7 +14,7 @@
       <button id="getGeoLocation" v-on:click="getLocation()">
         Get Current Location</button
       ><br />
-    </div>
+    </div> -->
   </div>
 </template>
 
