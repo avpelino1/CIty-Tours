@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div>
-      <button id="getGeoLocation" v-on:click="getLocation()">
-        Get Current Location</button
-      ><br />
+    <div id="map"></div>
+        <div class='location'>
       Enter Starting Location:
       <input
         id="userProvidedLocation"
@@ -12,8 +10,10 @@
         v-model="startingLocation"
       />
       <button id="manualLocation">Submit</button>
+      OR 
+      <button id="getGeoLocation" v-on:click="getLocation()">
+      Get Current Location</button><br>
     </div>
-    <div id="map"></div>
   </div>
 </template>
 
@@ -112,5 +112,9 @@ export default {
 <style>
 #map {
   height: 500px;
+}
+.location{
+  text-align: center;
+  padding-top: 10px;
 }
 </style>

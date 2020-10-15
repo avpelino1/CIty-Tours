@@ -1,18 +1,16 @@
 <template>
   <div class="home">
     <div class="header">
-      <h1>Home</h1>
-      <h4>Welcome, {{this.$store.state.user.username}}!</h4> 
+      <h1>City Tour of Austin, TX</h1>
+      <h4>Welcome, {{this.$store.state.user.username}}!</h4>
     </div>
-
-    <div></div>
-
-    <googleMaps />
-
+        <div class="container">
+      <router-link :to="{ name: 'landmark'}"> View a List of Landmarks in Austin, TX  </router-link>
+      <router-link :to="{ name: 'landmark'}"> Create a New Itinerary  </router-link>
+      <router-link :to="{ name: 'itinerary'}"> View or Edit Your Existing Itineraries </router-link>
+    </div>
     
-    <router-link :to="{ name: 'landmark'}"> View a List of Landmarks in Austin, TX  </router-link><br><br>
-    <router-link :to="{ name: 'landmark'}"> Create a New Itinerary  </router-link><br><br>
-    <router-link :to="{ name: 'itinerary'}"> View or Edit Your Existing Itineraries </router-link>
+    <googleMaps />
   </div>
 </template>
 
@@ -21,8 +19,10 @@ import GoogleMaps from '@/components/GoogleMaps.vue'
 
 export default {
   name: "home",
-  components: GoogleMaps
-};
+  components: {
+    GoogleMaps
+}
+}
 </script>
 
 <style>
@@ -37,9 +37,17 @@ export default {
   }
   .header {
     width: 100%;
-    padding:60px 0;
+    padding-top:20px;
+    padding-bottom: 20px;
     text-align: center;
     background: lavender;
     color: navy;
+  }
+  .container {
+    display: flex;
+    flex-grow: 3;
+    justify-content: space-between;
+    background: lavender;
+    padding-bottom: 10px;
   }
 </style>
