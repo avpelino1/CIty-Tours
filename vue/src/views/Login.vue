@@ -43,12 +43,12 @@
       <router-link :to="{ name: 'register' }">Need an account?</router-link> <br> <br>
     </div>
 
-    <div class="forgot" align="center">
-      <router-link :to="{ name: 'landmark' }">View List of Landmarks</router-link>
-    </div>
 
 </div>
     </form>
+    <div id="ViewList" align="center">
+      <router-link :to="{ name: 'landmark' }">View List of Landmarks</router-link>
+    </div>
   </div>
 </template>
 
@@ -166,12 +166,11 @@ export default {
 
     }
 
-  .forgot {
+  #ViewList {
         text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
         color: #E1BEE7;
-        padding-top: 15px;
         font-weight: 700;
-        font-size: 14px;
+        font-size: 28px;
         letter-spacing: 1px;
         font-family: 'Ubuntu', sans-serif;
   }
@@ -189,8 +188,5 @@ export default {
         font-family: 'Ubuntu', sans-serif;
         text-align: center;
     }
-
-
-
 
 </style>
