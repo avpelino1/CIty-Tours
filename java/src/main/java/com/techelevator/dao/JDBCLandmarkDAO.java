@@ -158,7 +158,7 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 		Landmark landmarkLatLng = googleMaps.geoLocate(landmark.getAddress());
 		String insertLatLng = "INSERT INTO coordinates (landmark_id, lat, lng) VALUES (?, ?, ?)";
 		
-		jdbcTemplate.update(insertLatLng, landmarkId, landmarkLatLng.getLat(), landmarkLatLng.getLng());
+//		jdbcTemplate.update(insertLatLng, landmarkId, landmarkLatLng.getLat(), landmarkLatLng.getLng());
 	}
 
 	public List<Landmark> getPendingLandmarks() {
