@@ -2,7 +2,7 @@
 
   <div id="landmark" class="text-center">
     <div class="header">
-      <h1 id='header-names'>Explore Landmarks in Austin, TX</h1>
+      <br><br><h1 id='header-names'>Explore Landmarks in Austin, TX</h1>
   </div>
 
 <googleMaps/>
