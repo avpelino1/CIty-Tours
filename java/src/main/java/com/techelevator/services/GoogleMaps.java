@@ -29,15 +29,18 @@ public class GoogleMaps {
 		
 		JsonNode jsonNode = objectMapper.readTree(response.getBody());
 		
-		String latitude = jsonNode.path("results").path("geometry").path("location").path("lat").toString();
-		String longitude =  jsonNode.path("results").path("geometry").path("location").path("lng").toString();
+//		System.out.println(response.getBody());
+		System.out.println(jsonNode.path("results/geometry/location/lat"));
+		
+		String latitude = jsonNode.path("results").path("geometry").path("location").path("lat").asText();
+		String longitude =  jsonNode.path("results").path("geometry").path("location").path("lng").asText();
 		
 		Landmark landmark = new Landmark();
 		
 		landmark.setLat(Double.parseDouble(latitude));
 		landmark.setLng(Double.parseDouble(longitude));
 				
-		return landmark;
+		return null;
 	}
 
 }
