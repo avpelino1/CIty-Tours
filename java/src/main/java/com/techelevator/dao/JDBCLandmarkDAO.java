@@ -155,8 +155,8 @@ public class JDBCLandmarkDAO implements LandmarkDAO {
 					hours.getClose_time());
 		}
 		
-		Landmark landmarkLatLng = googleMaps.geoLocate(landmark.getAddress());
-		String insertLatLng = "INSERT INTO coordinates (landmark_id, lat, lng) VALUES (?, ?, ?)";
+//		Landmark landmarkLatLng = googleMaps.geoLocate(landmark.getAddress());
+//		String insertLatLng = "INSERT INTO coordinates (landmark_id, lat, lng) VALUES (?, ?, ?)";
 		
 //		jdbcTemplate.update(insertLatLng, landmarkId, landmarkLatLng.getLat(), landmarkLatLng.getLng());
 	}
