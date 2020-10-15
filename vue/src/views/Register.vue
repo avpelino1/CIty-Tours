@@ -40,7 +40,7 @@
       /> 
 
       
-      <button class="submit" align="center" type="submit">Create Account</button> <br> <br>
+      <button class="submit-button" align="center" type="submit">Create Account</button> <br> <br>
 
       <div class="forgot" align="center">
       <router-link :to="{ name: 'login' }">Already have an account?</router-link>
@@ -161,7 +161,7 @@ export default {
     font-family: 'Ubuntu', sans-serif;
     }
 
-  .submit {
+  .submit-button {
         cursor: pointer;
         border-radius: 5em;
         color: #fff;
