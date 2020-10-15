@@ -17,7 +17,7 @@
       <h4>The city of Austin is a beautiful place, full of diversity. Regardless of which landmarks you choose to visit, you are sure to have a wonderful time!</h4>
       <h3 class='weird'>Keep Austin Weird!</h3>
       </div>
-    <img class='skyline' src='https://storage.needpix.com/rsynced_images/austin-4064427_1280.jpg'/>
+    <!-- <img class='skyline' src='https://storage.needpix.com/rsynced_images/austin-4064427_1280.jpg'/> -->
     </div>
 
   </div>
@@ -113,11 +113,12 @@ export default {
   }
   .home-description{
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto;
     grid-template-areas:
       "blurb skyline"
       ;
-    margin-top: 50px;
+    /* margin-top: 50px; */
+    justify-content: center;
   }
   .blurb{
     padding: 50px;
