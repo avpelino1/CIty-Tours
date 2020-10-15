@@ -2,7 +2,9 @@
   <div class="itinerary-update">
       
       <div class='details-form'>
-      <h2 class = 'sub-header'>Update Details for Your Trip</h2>
+
+      <h2 class = 'sub-header'>Details for: {{itinerary.name}}</h2>
+
       <p>You can change the name, starting address, or date below!</p>
         <form v-on:submit.prevent='updateItinerary(itinerary)'>
         <div class='field'>
@@ -25,18 +27,18 @@
 
         <div class='itinerary-details-grid'>
 
-        <div class='landmark-remove-add'>
-        <div class='landmark-remove'>
-            <h3>Current Landmarks:</h3>
-        <form class='landmark-remove-form' v-for='destination in destinations' :key='destination.description'>
+        <div class='landmark-add-remove'>
+
+        <h3 class="itinerary-h3">Current Landmarks:</h3>
+
+        <form v-for='destination in destinations' :key='destination.description'>
             <button v-on:click='removeLandmark(itinerary.itineraryId, destination.id)'>-</button>
             {{destination.name}}
         </form>
-        </div>
-        <br>
-        <div class='landmark-add'>
-            <h3>Add Landmarks to Your Itinerary:</h3>
-        <form class='landmark-add-form' v-for='landmark in landmarks' v-bind:key='landmark.id'>
+
+        <h3 class="itinerary-h3">Add Landmarks to Your Itinerary:</h3>
+
+        <form v-for='landmark in landmarks' v-bind:key='landmark.id'>
             <button v-on:click.prevent='addLandmark(itinerary.itineraryId, landmark.id)'>+</button>
             {{landmark.name}}
         </form>
@@ -88,6 +90,7 @@ export default {
             console.log(itinerary);
             ItineraryService.updateItinerary(itinerary);
            // window.location.reload();
+           alert("Itinerary updated!");
         }
     },
 
@@ -121,7 +124,11 @@ export default {
 .itinerary-update {
     font-family: 'Ubuntu', sans-serif;
 }
-.itinerary-details-grid{
+.itinerary-h3 {
+    text-align: left;
+}
+
+.column-names{
     display: grid;
     grid-template-columns: auto 500px;
     grid-template-areas:
@@ -130,11 +137,9 @@ export default {
     margin-right: 100px;
     margin-left: 100px;
 }
+.landmark-add-remove{
+    display: flex;
+    flex-grow: 2;
 
-#itinerary-img{
-    max-width: 100%;
-    height: auto;
-    border-radius: 200px;
-    justify-content: right;
 }
 </style>

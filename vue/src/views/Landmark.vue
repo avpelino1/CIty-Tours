@@ -3,7 +3,10 @@
   <div id="landmark" class="text-center">
     <div class="header">
       <h1>Explore Landmarks in Austin, TX</h1>
-    </div>
+  </div>
+
+<googleMaps/>
+
 <landmark-list/>
 
   <div class='components'>
@@ -18,7 +21,7 @@
 
 <script>
 import LandmarkList from '@/components/LandmarkList.vue';
-import LandmarkForm from '@/components/LandmarkForm.vue';
+//import LandmarkForm from '@/components/LandmarkForm.vue';
 //import GoogleMaps from '@/components/GoogleMaps.vue';
 import CreateItinerary from '@/components/CreateItinerary.vue';
 
