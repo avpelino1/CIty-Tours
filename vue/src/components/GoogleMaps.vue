@@ -31,17 +31,19 @@ export default {
   props: ["pointsToDisplay"],
   watch: {
     pointsToDisplay: function (newVal, oldVal) {
-
-
-     window.google.maps.setMapOnAll(null);
-
+      console.log("watch is working");
+      for (let i = 0; i < this.$markerReferences.length; i++) {
+        this.$markerReferences[i].setMap(null);
+      }
+      //  window.google.maps.setMapOnAll(null);
       for (let i = 0; i < newVal.length; i++) {
         let marker = new window.google.maps.Marker({
           position: { lat: newVal[i].lat, lng: newVal[i].lng },
           map: this.map,
         });
+        this.$markerReferences.push(marker);
       }
-
+      console.log(this.$markerReferences);
       // for (let i = 0; i < newVal.length; i++) {
       //   let marker = new window.google.maps.Marker({
       //     position: { lat: newVal[i].lat, lng: newVal[i].lng },
