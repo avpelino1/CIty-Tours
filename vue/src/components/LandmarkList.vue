@@ -1,7 +1,7 @@
 <template>
   <div> <br>
   <GoogleMaps v-bind:pointsToDisplay="filteredList"/>
-      <form>
+      <div class="landmark-main-div">
         <p>View Landmarks by Category:</p>
         <select id="categoryFilter" v-model='filter.venueType' v-on:change='changeSelectedLandmarks($event.target.value)'>
           <option value="viewAll" default>View All</option>
@@ -25,7 +25,6 @@
       <input type="checkbox" v-on:click="addLandmark(landmark.id)"/><label name='addToItinerary'> Add to Itinerary </label>
     </div>
 </div>
-    </form>
 
   </div>
 </template>

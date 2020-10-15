@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="reviews">
     <h2>Reviews</h2>
     <div class='review' v-for='review in reviews' v-bind:key='review.id'>
         <h3 id='reviewTitle'>{{review.title}}   </h3><img class='thumb' v-if="review.thumbsUp==true" src = "https://imgur.com/LLPYyXY.png"/><img class='thumb' v-if="review.thumbsDown==true" src = "https://imgur.com/lKO2G1K.png"/>
@@ -70,6 +70,9 @@ export default {
 
     #reviewTitle {
         display:inline-flex
+    }
+    .reviews {
+         font-family: 'Ubuntu', sans-serif;
     }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="individual-landmark">
     <router-link :to="{ name: 'landmark' }">Back to Landmarks</router-link>
     <h1 class="landmark-name"> {{ landmark.name }} </h1> 
 
@@ -71,6 +71,9 @@ export default {
     height: 400px;
     background-size: cover;
     justify-content: center;
+}
+.individual-landmark {
+    font-family: 'Ubuntu', sans-serif;
 }
 
 </style>

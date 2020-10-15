@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <h1>View Available Itineraries</h1>
+  <div class="itinerary-div">
+    <div class='header'>
+        <h1>View Available Itineraries</h1>
+    </div>
 
       <div class="grid-container">
 
@@ -88,6 +90,11 @@ export default {
         grid-template-columns: 1fr 1fr;
         grid-gap: 20px;
     }
-
+    .sub-header{
+        color: navy;
+    }
+    .itinerary-div {
+        font-family: 'Ubuntu', sans-serif;
+    }
    
 </style>

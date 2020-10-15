@@ -1,41 +1,53 @@
 <template>
+
   <div id="login" class="text-center">
+
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Welcome to City Tours!</h1>
-      <p>If you would like to view a list of landmarks in Austin, TX, click the link below!</p>
-      <router-link :to="{ name: 'landmark' }">LANDMARKS</router-link>
-      <h3 class ='sign-in'>If you would like to create an Itinerary for your trip to Austin, please sign in or create an account.</h3>
+
       <div
         class="alert alert-danger"
         role="alert"
         v-if="invalidCredentials"
       >Invalid username and password!</div>
+
       <div
         class="alert alert-success"
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div> <br>
-      <label for="username" class="sr-only">Username</label>
-      <input
+
+<div class="main">
+
+  <p class="sign" align="center">Welcome to City Tours!</p>
+
+      <input class="un"
         type="text"
-        id="username"
-        class="form-control"
+        align="center"
         placeholder="Username"
         v-model="user.username"
         required
         autofocus
       />
-      <label for="password" class="sr-only">Password</label>
-      <input
+      
+      <input class="pass"
         type="password"
-        id="password"
-        class="form-control"
+        align= "center"
         placeholder="Password"
         v-model="user.password"
         required
       />
-      <button type="submit">Sign in </button> <br> <br>
+
+      <button class="submit" type="submit">Sign in </button> <br> <br>
+
+    <div class="forgot" align="center">
       <router-link :to="{ name: 'register' }">Need an account?</router-link> <br> <br>
+    </div>
+
+    <div class="forgot" align="center">
+      <router-link :to="{ name: 'landmark' }">View List of Landmarks</router-link>
+    </div>
+
+</div>
     </form>
   </div>
 </template>
@@ -77,3 +89,108 @@ export default {
   }
 };
 </script>
+
+<style>
+
+.main {
+  background-color: #FFFFFF;
+  width: 400px;
+  height: 400px;
+  margin: 7em auto;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0,0,0,0.14);
+}
+
+.sign {
+  padding-top: 40px;
+  color: #8C5AAA;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+}
+
+.un {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.pass {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+    }
+
+    .submit {
+      cursor: pointer;
+        border-radius: 5em;
+        color: #fff;
+        background: linear-gradient(to right, #9C27B0, #E040FB);
+        border: 0;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        font-family: 'Ubuntu', sans-serif;
+        margin-left: 35%;
+        font-size: 13px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+
+    }
+
+  .forgot {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        color: #E1BEE7;
+        padding-top: 15px;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+        font-family: 'Ubuntu', sans-serif;
+  }
+
+  .un:focus, .pass:focus {
+        border: 2px solid rgba(0, 0, 0, 0.18) !important;
+        
+    }
+    .alert {
+        color: #E1BEE7;
+        padding-top: 15px;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 1px;
+        font-family: 'Ubuntu', sans-serif;
+        text-align: center;
+    }
+
+
+
+
+</style>
