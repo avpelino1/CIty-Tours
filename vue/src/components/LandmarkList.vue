@@ -3,7 +3,7 @@
   <GoogleMaps v-bind:pointsToDisplay="filteredList"/>
       <div>
         <p>View Landmarks by Category:</p>
-        <select id="categoryFilter" v-model='filter.venueType' v-on:change='changeSelectedLandmarks($event.target.value)'>
+        <select id="categoryFilter" v-model='filter.venueType' v-on:change='changeSelectedLandmarks'>
           <option value="viewAll" default>View All</option>
           <option value="Parks & Gardens">Parks & Gardens</option>
           <option value="Museums & Historical Sites">Museums & Historical Sites</option>
@@ -82,8 +82,9 @@ export default {
     addLandmark(id) {
       this.selectedLandmarks.push(id);
     },
-    changeSelectedLandmarks(value){
+    changeSelectedLandmarks(){
       this.$store.commit("ASSIGN_LANDMARKS", this.filteredList)
+      console.log("this is what the state looks like after I toggle the list of landmark tyhpes")
       console.log(this.$store.state.selectedLandmarks)
     }
 
