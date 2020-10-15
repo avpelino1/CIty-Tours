@@ -4,23 +4,23 @@
     <h2>Want to add a landmark? Fill out this form!</h2>
 
     
-    <form v-on:submit.prevent='createLandmark'>
+    <form class ='landmark-form' v-on:submit.prevent='createLandmark'>
       <div class='field'>
-        <label for = 'name'>Name</label>
+        <label for = 'name'>Name </label>
         <input type='text' name='name' v-model='newLandmark.name'/>
-      </div>
+      </div><br>
       <div class='field'>
-        <label for = 'address'>Address</label>
+        <label for = 'address'>Address </label>
         <input type='text' name='address' v-model='newLandmark.address'/>
-      </div>
+      </div><br>
       <div class='field'>
-        <label for = 'description'>Description</label>
+        <label for = 'description'>Description </label>
         <input type='text' name='description' v-model='newLandmark.description'/>
-      </div>
+      </div><br>
       <div class='field'>
-        <label for = 'venue-type'>Venue Type</label>
+        <label for = 'venue-type'>Venue Type </label>
         <input type='text' name='venue-type' v-model='newLandmark.venueType'/>
-      </div>
+      </div><br>
       <!-- <div class='field'>
         <label for = 'business-hours'>Business Hours</label><br> -->
         <!-- <input name='business-hours' v-model='newLandmark.businessHours.value'> -->
@@ -80,6 +80,8 @@ export default {
         border: 1px;
         width: 500px;
         background-color: lavender;
+        padding-left: 10px;
+        padding-right: 10px;
     }
     .description{
       color:darkslategray;
