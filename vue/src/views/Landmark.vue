@@ -9,19 +9,22 @@
 
 <landmark-list/>
 
-  <div class='components'>
-        <create-itinerary/>
-  <!-- <div class='landmark-form'>
-        <landmark-form/>
-    </div> -->
+<div class="landmark-grid-container">
 
+  <div class='components'>
+
+        <create-itinerary/>
+        <landmark-form/>
+  
+  </div>
 </div>
+
   </div>
 </template>
 
 <script>
 import LandmarkList from '@/components/LandmarkList.vue';
-//import LandmarkForm from '@/components/LandmarkForm.vue';
+import LandmarkForm from '@/components/LandmarkForm.vue';
 //import GoogleMaps from '@/components/GoogleMaps.vue';
 import CreateItinerary from '@/components/CreateItinerary.vue';
 
@@ -29,7 +32,7 @@ export default {
     name: 'landmark',
     components: {
       LandmarkList,
-      //LandmarkForm,
+      LandmarkForm,
       CreateItinerary
     }
 };
@@ -47,11 +50,16 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
-  flex-grow: 2;
   justify-content: space-between;
 
 }
 .landmark-form {
   background: white;
+}
+.landmark-grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: start;
+  padding: 30px;
 }
 </style>

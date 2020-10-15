@@ -13,7 +13,7 @@
         </select>
         </div>
     
-<div class="grid-container">
+<div class="grid-container-landmark">
     <div class='landmark-list' v-for='landmark in filteredList' v-bind:key='landmark.id'>
       <router-link v-bind:to="{name: 'landmark-details', params: {id: landmark.id} }">
           <h3 class='sub-header'>{{landmark.name}}</h3> <br>
@@ -148,7 +148,7 @@ export default {
       display: inline-flex;
       padding-left: 6%
     }
-    .grid-container {
+    .grid-container-landmark {
       display: grid;
       grid-template-columns: auto auto auto;
       padding: 10px;

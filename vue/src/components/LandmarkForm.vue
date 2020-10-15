@@ -1,50 +1,24 @@
 <template>
-  <div class="landmark-form">
+  <div class='contact-form'>
 
-    <h2>Want to add a landmark? Fill out this form!</h2>
+    <h2 class="h2-create">Add a Landmark</h2>
 
+         <p class="p-create">Want to add a landmark not on this list? Fill out this form!</p>
     
-    <form class ='landmark-form' v-on:submit.prevent='createLandmark'>
-      <div class='field'>
-        <label for = 'name'>Name </label>
-        <input type='text' name='name' v-model='newLandmark.name'/>
-      </div><br>
-      <div class='field'>
-        <label for = 'address'>Address </label>
-        <input type='text' name='address' v-model='newLandmark.address'/>
-      </div><br>
-      <div class='field'>
-        <label for = 'description'>Description </label>
-        <input type='text' name='description' v-model='newLandmark.description'/>
-      </div><br>
-      <div class='field'>
-        <label for = 'venue-type'>Venue Type </label>
-        <input type='text' name='venue-type' v-model='newLandmark.venueType'/>
-      </div><br>
-      <!-- <div class='field'>
-        <label for = 'business-hours'>Business Hours</label><br> -->
-        <!-- <input name='business-hours' v-model='newLandmark.businessHours.value'> -->
-          <!-- <label for='1'>Monday </label>
-          <input type='text' name='Monday-open' v-model="findDay.value"> - <input type='text' name='Monday-close' v-model="findDay.value"><br>
-          <label for='2'>Tuesday </label>
-          <input type='text' name='Tuesday-open' v-model="findDay.value"> - <input type='text' name='Tuesday-close' v-model="findDay.value"><br>
-          <label for='3'>Wednesday </label>
-          <input type='text' name='Wednesday-open' v-model="findDay.value"> - <input type='text' name='Wednesday-close' v-model="findDay.value"><br>
-          <label for='4'>Thursday </label>
-          <input type='text' name='Thursday-open' v-model="findDay.value"> - <input type='text' name='Thursday-close' v-model="findDay.value"><br>
-          <label for='5'>Friday </label>
-          <input type='text' name='Friday-open' v-model="findDay.value"> - <input type='text' name='Friday-close' v-model="findDay.value"><br>
-          <label for='6'>Saturday </label>
-          <input type='text' name='Saturday-open' v-model="findDay.value"> - <input type='text' name='Saturday-close' v-model="findDay.value"><br>
-          <label for='7'>Sunday </label>
-          <input type='text' name='Sunday-open' v-model="findDay.value"> - <input type='text' name='Sunday-close' v-model="findDay.value"><br>
-      </div> -->
-      <div class='actions'>
-         <button>Click here to add a Landmark!</button>
-      </div>
+    <form class ="create-itinerary-form" v-on:submit.prevent='createLandmark'>
+
+        <label class="label-1"> <span></span><input id="name-input" name='name' v-model='newLandmark.name' placeholder="Landmark Name"/> </label>
+
+        <label class="label-1"> <span></span><input id="address-input" name='address' v-model='newLandmark.address' placeholder="Landmark Address"/></label>
+      
+        <label class="label-1"> <span></span><input id="description-input" name='description' v-model='newLandmark.description' placeholder="Landmark Description"/></label>
+     
+        <label class="label-1"> <span></span><input id="venue-type-description" name='venue-type' v-model='newLandmark.venueType' placeholder="Venue Type"/></label>
+
+      
+         <button class="create-itinerary-button">Click here to add a Landmark!</button>
+  
     </form>
-
-
 
   </div>
 </template>
@@ -91,5 +65,63 @@ export default {
     .landmark-form {
       font-family: 'Ubuntu', sans-serif;
     }
+
+    .contact-form {
+      font-family: 'Ubuntu', sans-serif;
+      max-width: 1208px;
+      margin: 0 auto;
+      text-align: left;
+}
+
+  .h2-create {
+    margin: 0;
+    color: navy;
+    font-size: 2em;
+    font-weight: 300;
+    text-align: left;
+}
+  .p-create {
+    font-size: 12px;
+    color: navy;
+}
+
+  .create-itinerary-button {
+    position: relative;
+}
+
+  .label-1 {
+    display: block;
+}
+
+  .label > span {
+    display: none;
+}
+
+  #address-input, #name-input, #description-input, #venue-type-description, .create-itinerary-button {
+    width: 100%; 
+   padding: 0.5em;
+   border: none;
+    font: 300 100%/1.2 Ubuntu, sans-serif;
+}
+
+#address-input, #name-input, #description-input, #venue-type-description {
+  margin: 0 0 1em;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+textarea {
+  height: 6em;
+}
+
+/* input[type="submit"], .create-itinerary-button {
+  background: lavender;
+  color: #333;
+  width: 100%;
+}
+
+input[type="submit"]:hover, button:hover {
+  background: thistle;
+} */
     
 </style>
