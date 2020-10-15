@@ -15,7 +15,7 @@
         <br>
     </div>
     <div class='business-hours' v-for='hours in landmark.businessHours' v-bind:key='hours.day_of'>
-        <p class='day'>{{ hours.day }}</p> {{ hours.open_time }} {{ hours.close_time }} <br>
+        <p class='day'>{{ hours.day }}</p> {{ hours.open_time }} <br> {{ hours.close_time }} <br>
     </div>
     <br>
     </div>
