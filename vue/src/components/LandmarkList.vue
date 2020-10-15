@@ -1,8 +1,8 @@
 <template>
   <div class="landmark-main-div"> <br>
   <GoogleMaps v-bind:pointsToDisplay="filteredList"/>
-      <div>
-        <p>View Landmarks by Category:</p>
+      <div class='category-dropdown'>
+        <p>View Landmarks by Category: </p>
         <select id="categoryFilter" v-model='filter.venueType' v-on:change='changeSelectedLandmarks'>
           <option value="viewAll" default>View All</option>
           <option value="Parks & Gardens">Parks & Gardens</option>
@@ -116,12 +116,18 @@ export default {
 </script>
 
 <style>
+  .category-dropdown{
+    display: flex;
+    flex-grow: 2;
+    justify-content: center;
+    margin: 10px;
+  }
     .landmark-list{
         padding: 5px;
         margin: 5px;
-        border: 1px;
         width: 500px;
-        background-color: lavender;
+        background-image: linear-gradient(to bottom right, lightblue, lavender);
+        border-radius: 20px;
     }
     .description{
       color:darkslategray;
@@ -153,6 +159,7 @@ export default {
       display: grid;
       grid-template-columns: auto auto auto;
       padding: 10px;
+      margin-left: 75px;
   
     }
     .thumbsUp:hover {
