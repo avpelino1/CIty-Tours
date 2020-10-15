@@ -14,8 +14,8 @@
         <b>Starting Location: </b> {{itinerary.startingLocation}} <br><br>
         <b>Date:</b> {{itinerary.date}} <br><br>
         <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> Edit Itinerary </router-link> 
-        <a href="#" id="drivingDirections" getItineraryLandmark(itinerary.itineraryId)>Get Driving Directions!</a><br><br>
-        <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
+  <!--      <a href="#" id="drivingDirections" getItineraryLandmark(itinerary.itineraryId)>Get Driving Directions!</a><br><br>  -->
+        <br><br><button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
     </div>
             </div>
 
@@ -39,7 +39,7 @@
 import itineraryService from '../services/ItineraryService.js';
 import landmarkService from '../services/LandmarkService.js';
 
-let baseDirURL = "http://wwww.google.com/maps/dir/"
+//let baseDirURL = "http://wwww.google.com/maps/dir/"
 
 export default {
     name: 'itinerary-list',
@@ -63,11 +63,11 @@ export default {
                     alert("Itinerary successfully deleted."));
             
         },
-        getItineraryLandmarks(id){
-            itineraryService.getItineraryLandmarks(id).then((response)=> {
-                itineraryLandmarks = response.data;
-            });
-        }
+        // getItineraryLandmarks(id){
+        //     itineraryService.getItineraryLandmarks(id).then((response)=> {
+        //         this.itineraryLandmarks = response.data;
+        //     });
+        // }
 
     },
     created(){
@@ -98,6 +98,7 @@ export default {
     .itinerary-list{
         padding: 20px;
         margin-left: 150px;
+        margin-bottom: 30px;
         border: 1px;
         width: 500px;
         background-image: linear-gradient(to bottom right, lavender, lightblue);
