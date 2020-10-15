@@ -1,7 +1,7 @@
 <template>
   <div class="itinerary-div">
     <div class='header'>
-        <h1>View Available Itineraries</h1>
+        <br><br><h1 class='header-name'>View Available Itineraries</h1>
     </div>
 
       <div class="grid-container">
@@ -88,13 +88,21 @@ export default {
 </script>
 
 <style>
+    .header-name{
+        background: lavenderblush;
+        opacity: .75;
+        border-radius: 100px;
+        margin-left: 700px;
+        margin-right: 700px;
+    }
     .itinerary-list{
         padding: 20px;
-        margin: 5px;
+        margin-left: 150px;
         border: 1px;
         width: 500px;
         background-image: linear-gradient(to bottom right, lavender, lightblue);
         border-radius: 40px;
+        justify-content: center;
     }
      .grid-container {
         display: grid;

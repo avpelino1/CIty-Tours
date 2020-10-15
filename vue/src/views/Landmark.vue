@@ -2,7 +2,7 @@
 
   <div id="landmark" class="text-center">
     <div class="header">
-      <h1>Explore Landmarks in Austin, TX</h1>
+      <br><br><h1 id='header-names'>Explore Landmarks in Austin, TX</h1>
   </div>
 
 <googleMaps/>
@@ -46,20 +46,28 @@ export default {
   padding-top: 1px;
   font-family: 'Ubuntu', sans-serif;
 }
+#header-names{
+  background-color: lavenderblush;
+  border-radius: 40px;
+  opacity: 0.75;
+  margin-left: 700px;
+  margin-right: 700px;
+}
 .components{
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 150px;
   display: flex;
-  justify-content: space-between;
+  flex-grow: 2;
+  justify-content: flex-start;
 
 }
 .landmark-form {
   background: white;
 }
-.landmark-grid-container {
+/* .landmark-grid-container {
   display: grid;
   grid-template-columns: auto auto;
   justify-content: start;
   padding: 30px;
-}
+} */
 </style>

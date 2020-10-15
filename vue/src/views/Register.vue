@@ -30,6 +30,7 @@
         v-model="user.password"
         required
       />
+      
 
       <input class="pass"
         type="password"
