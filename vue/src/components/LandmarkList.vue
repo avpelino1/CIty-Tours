@@ -23,7 +23,7 @@
 
       <p class='description'>{{landmark.description}}</p>
       <br><br>
-      <input type="checkbox" v-on:click="addLandmark(landmark.id)"/><label name='addToItinerary'> Add to Itinerary </label>
+      <input class="checkbox" type="checkbox" v-on:click="addLandmark(landmark.id)"/><label name='addToItinerary'> Add to Itinerary </label>
     </div>
 </div>
 
@@ -163,4 +163,5 @@ export default {
     .landmark-main-div {
       font-family: 'Ubuntu', sans-serif;
     }
+   
 </style>

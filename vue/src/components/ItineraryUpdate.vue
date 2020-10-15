@@ -1,7 +1,7 @@
 <template>
   <div class="itinerary-update">
       <div class='details-form'>
-      <h2 class = 'sub-header'>Details for {{itinerary.name}}</h2>
+      <h2 class = 'sub-header'>Details for: {{itinerary.name}}</h2>
       <p>You can change the name, starting address, or date below!</p>
         <form v-on:submit.prevent='updateItinerary(itinerary)'>
         <div class='field'>
@@ -22,13 +22,13 @@
         </form>
       </div>
         <div class='landmark-add-remove'>
-        <h3>Current Landmarks:</h3>
+        <h3 class="itinerary-h3">Current Landmarks:</h3>
         <form v-for='destination in destinations' :key='destination.description'>
             <button v-on:click='removeLandmark(itinerary.itineraryId, destination.id)'>-</button>
             {{destination.name}}
         </form> <br>
 
-        <h3>Add Landmarks to Your Itinerary:</h3>
+        <h3 class="itinerary-h3">Add Landmarks to Your Itinerary:</h3>
         <form v-for='landmark in landmarks' v-bind:key='landmark.id'>
             <button v-on:click.prevent='addLandmark(itinerary.itineraryId, landmark.id)'>+</button>
             {{landmark.name}}
@@ -75,6 +75,7 @@ export default {
             console.log(itinerary);
             ItineraryService.updateItinerary(itinerary);
            // window.location.reload();
+           alert("Itinerary updated!");
         }
     },
 
@@ -100,5 +101,8 @@ export default {
 
 .itinerary-update {
     font-family: 'Ubuntu', sans-serif;
+}
+.itinerary-h3 {
+    text-align: left;
 }
 </style>
