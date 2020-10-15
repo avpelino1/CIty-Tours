@@ -10,17 +10,21 @@
       <router-link :to="{ name: 'itinerary'}"> View or Edit Your Existing Itineraries </router-link>
     </div>
     
-    <googleMaps />
+    <img id='skyline' src='https://aquilacommercial.com/wp-content/uploads/2019/05/city-of-austin-skyline.jpg'/>
+
+    <h4>The city of Austin is a beautiful place, full of diversity. Regardless of which landmarks you choose to visit, you are sure to have a wonderful time!</h4>
+    <h3 class='weird'>Keep Austin Weird!</h3>
+
   </div>
 </template>
 
 <script>
-import GoogleMaps from '@/components/GoogleMaps.vue'
+
 
 export default {
   name: "home",
   components: {
-    GoogleMaps
+    
 }
 }
 </script>
@@ -37,7 +41,7 @@ export default {
   }
   .header {
     width: 100%;
-    padding-top:20px;
+    padding-top: 5px;
     padding-bottom: 20px;
     text-align: center;
     background: lavender;
@@ -49,5 +53,14 @@ export default {
     justify-content: space-between;
     background: lavender;
     padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #skyline{
+    width: 100%;
+  }
+  h3{
+    font-style: italic;
+    text-align: center;
   }
 </style>

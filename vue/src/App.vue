@@ -12,4 +12,15 @@
 h1{
   text-align: center
 }
+#nav{
+  background-color: lavender;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+/* #app{
+  justify-content: right;
+} */
 </style>
