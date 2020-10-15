@@ -11,10 +11,8 @@
     <h2>Personal Itineraries</h2>
     <div class='itinerary-list' v-for='itinerary in myItineraries' v-bind:key="itinerary.itineraryId">
         <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
-        Starting Location: {{itinerary.startingLocation}} <br>
-        Date: {{itinerary.date}} <br><br>
-        User ID: {{itinerary.userId}} <br>
-        Itinerary ID: {{itinerary.itineraryId}} <br>
+        <b>Starting Location: </b> {{itinerary.startingLocation}} <br><br>
+        <b>Date:</b> {{itinerary.date}} <br><br>
         <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> Edit Itinerary </router-link><br><br>
         <button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
     </div>
