@@ -3,7 +3,6 @@
     <div class="header">
       <h1>Explore Landmarks in Austin, TX</h1>
     </div>
-<googleMaps/>
 <landmark-list/>
 
   <div class='components'>
