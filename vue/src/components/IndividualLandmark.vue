@@ -1,16 +1,11 @@
 <template>
   <div class="individual-landmark">
 
-    <div class='header'>
-        <router-link :to="{ name: 'landmark' }">Back to Landmarks</router-link>
+    <div class='header'><br>
+        <router-link class='header-link' :to="{ name: 'landmark' }">Back to Landmarks</router-link>
         <h1 class="landmark-name"> {{ landmark.name }} </h1> 
     </div>
 
-    <div class="row">
-    <div class='landmark-images' v-for='images in landmark.images' v-bind:key='images.imgUrl'>
-        <img class="landmark-photos" v-bind:src= images.imgUrl /> <br>
-    </div>
-    </div>
 
     <div class='landmark-info'>
         <h3 class="venue-type"> <br>{{ landmark.venueType }} </h3> 
@@ -25,6 +20,11 @@
     <br>
     </div>
 
+    <div class="row">
+    <div class='landmark-images' v-for='images in landmark.images' v-bind:key='images.imgUrl'>
+        <img class="landmark-photos" v-bind:src= images.imgUrl /> <br>
+    </div>
+    </div>
 
     
   </div>
@@ -63,12 +63,28 @@ export default {
 </script>
 
 <style>
+.header-link{
+    background-color: lavenderblush;
+    padding: 10px;
+    border-radius: 100px;
+    opacity: .85;
+    margin-top: 20px;
+}
+.landmark-name{
+    background-color: lavenderblush;
+    padding: 20px;
+    margin-right: 750px;
+    margin-left: 750px;
+    border-radius: 100px;
+    opacity: .85;
+}
 .row {
     display: flex;
 }
 .landmark-images {
     flex: 33.33%;
     padding: 5px;
+    margin-bottom: 20px;
 }
 .landmark-photos {
     float: left;
@@ -83,9 +99,6 @@ export default {
     background: lavender;
     padding-left: 10px;
 }
-.header{
-    background-color: lavender;
-}
 .business-hours{
     padding: 20px;
     font-weight: bold;
@@ -96,7 +109,6 @@ export default {
     display: flex;
     flex-grow: 2;
     justify-content: space-between;
-
 }
 .landmark-details{
     padding-right: 20px;
@@ -110,6 +122,7 @@ export default {
     border-radius: 40px;
     background-color:white;
     color: navy;
+    text-align:center;
 }
 .address{
     font-weight: bold;

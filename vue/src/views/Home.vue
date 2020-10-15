@@ -39,6 +39,7 @@ export default {
     text-align: center;
     padding: 10px 0;
     font-weight: 800;
+    color: navy;
   }
   h4{
     text-align: center;
