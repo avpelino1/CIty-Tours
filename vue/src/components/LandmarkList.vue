@@ -21,11 +21,12 @@
 <div class="grid-container-landmark">
     <div class='landmark-list' v-for='landmark in filteredList' v-bind:key='landmark.id'>
       <router-link v-bind:to="{name: 'landmark-details', params: {id: landmark.id} }">
-          <h3 class='sub-header'>{{landmark.name}}</h3> <br>
+          <h3 class='sub-header'>{{landmark.name}}</h3> 
       </router-link>
-      <img class='thumbsUp' src = "https://imgur.com/LLPYyXY.png" v-on:click="addThumbsUp(landmark.id)"/><img class='thumbsDown' src = "https://imgur.com/lKO2G1K.png" v-on:click="addThumbsDown(landmark.id)"/> <br>
+      <div class="thumbs">
+      <img class='thumbsUp' src = "https://imgur.com/LLPYyXY.png" v-on:click="addThumbsUp(landmark.id)"/><img class='thumbsDown' src = "https://imgur.com/lKO2G1K.png" v-on:click="addThumbsDown(landmark.id)"/><br>
           <p class='thumbsUpCount'>{{landmark.thumbsUp}}</p> <p class='thumbsDownCount'>{{landmark.thumbsDown}}</p>
-
+      </div>
       <p class='description'>{{landmark.description}}</p>
       <br><br>
       <input class="checkbox" type="checkbox" v-on:click="addLandmark(landmark.id)"/><label name='addToItinerary'> Add to Itinerary </label>
@@ -38,7 +39,7 @@
 <script>
 import landmarkService from '../services/LandmarkService.js';
 import reviewService from '../services/ReviewService.js';
-// import itineraryService from '@/services/ItineraryService.js';
+import itineraryService from '@/services/ItineraryService.js';
 import GoogleMaps from '@/components/GoogleMaps.vue';
 
 export default {
@@ -85,7 +86,7 @@ export default {
       window.location.reload()
     },
     addLandmark(id) {
-      this.selectedLandmarks.push(id);
+      this.$stroe.state.selectedItineraryLandmarks.push(id);
     },
     changeSelectedLandmarks(){
       this.$store.commit("ASSIGN_LANDMARKS", this.filteredList)
@@ -145,24 +146,37 @@ export default {
 
     .sub-header {
       display: inline-flex;
+      flex-wrap: wrap;
+      width: 75%;
+    }
+
+    .thumbs{
+      /* display: inline-flex; */
+      flex-wrap: wrap;
     }
     .thumbsUp {
+      display: inline-flex;
+      justify-content: flex-end;
       padding-right: 10px;
-      width: 5%;
+      width: 5%; 
     }
 
     .thumbsDown {
-      padding-left: 10px;
+      display: inline-flex;
+      justify-content: flex-end;
+      padding-left: 10px; 
       width: 5%;
     }
 
     .thumbsUpCount {
       display: inline-flex;
+      justify-content:end;
       padding-left: 2.5%
     }
 
     .thumbsDownCount {
       display: inline-flex;
+      justify-content: end;
       padding-left: 6%
     }
     .grid-container-landmark {

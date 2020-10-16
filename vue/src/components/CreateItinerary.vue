@@ -15,7 +15,7 @@
 
         <label class="label-1"><span></span><input id="address-input" name="startingLocation" v-model='newItinerary.startingLocation' type="text" placeholder="Starting Address"/></label>
       
-        <label class="label-1"><span></span><input id="date-input" type="date" name="date" v-model='newItinerary.date'></textarea></label>
+        <label class="label-1"><span></span><input id="date-input" type="date" name="date" v-model='newItinerary.date'></label>
     
          <button class="create-itinerary-button">Create your Itinerary!</button>
      
@@ -43,7 +43,7 @@ export default {
     methods:{
       createItinerary() {
         itineraryService.createItinerary(this.newItinerary);
-            this.$store.state.selectedLandmarks = [];
+            this.$store.state.selectedItineraryLandmarks = [];
             window.location.href = "http://localhost:8081/itinerary"
         },
 

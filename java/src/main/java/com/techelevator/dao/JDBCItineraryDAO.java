@@ -44,7 +44,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		String sql = "INSERT INTO itinerary(name, starting_point, date_of, user_id, share)"
 				+ " VALUES (?, ?, ?, ?, ?) RETURNING itinerary_id";
 		SqlRowSet itinerarySql = jdbcTemplate.queryForRowSet(sql, name, startingLocation, date, currentUserId, itinerary.getShare());
-		
+		System.out.println("*******HERE****" + name + startingLocation +  date +  currentUserId + itinerary.getShare());
 		Long itineraryId = 0L;
 		
 		if (itinerarySql.next()) {
