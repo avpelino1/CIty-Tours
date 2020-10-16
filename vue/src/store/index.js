@@ -27,6 +27,7 @@ export default new Vuex.Store({
     geocoded: [],
     startingLocation: '',
     selectedLandmarks: [],
+    selectedItineraryLandmarks: [],
     points: []
   },
   mutations: {

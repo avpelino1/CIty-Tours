@@ -31,14 +31,14 @@ export default {
         return{
             newItinerary: {
               "username" : this.$store.state.user.username,
-              "destinations" : this.$store.state.selectedLandmarks,
+              "destinations" : this.$store.state.selectedItineraryLandmarks,
             }
         }
     },
     methods:{
       createItinerary() {
         itineraryService.createItinerary(this.newItinerary);
-            this.$store.state.selectedLandmarks = [];
+            this.$store.state.selectedItineraryLandmarks = [];
             window.location.href = "http://localhost:8081/itinerary"
         },
 

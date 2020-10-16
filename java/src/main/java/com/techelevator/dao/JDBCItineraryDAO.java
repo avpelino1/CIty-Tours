@@ -55,6 +55,7 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		
 		for (Long landmark : itinerary.getDestinations()) {
 			jdbcTemplate.update(destinationInsert, itineraryId, landmark);
+			System.out.println(landmark);
 		}
 		System.out.println("***NOW HERE***");
 		
