@@ -72,11 +72,20 @@ export default {
 }
 .landmark-name{
     background-color: lavenderblush;
-    padding: 20px;
-    margin-right: 750px;
-    margin-left: 750px;
     border-radius: 100px;
     opacity: .85;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    margin-left: 200px;
+  /* background-color: lavenderblush; */
+    margin-left: 620px;
+    margin-right: 620px;
+    padding: 50px;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 0.25vw;
+    text-transform: uppercase;
+    text-align: center;
 }
 .row {
     display: flex;

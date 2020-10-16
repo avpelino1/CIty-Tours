@@ -13,8 +13,8 @@
         <h3 class = 'sub-header'>Name: {{itinerary.name}} </h3> <br>
         <b>Starting Location: </b> {{itinerary.startingLocation}} <br><br>
         <b>Date:</b> {{itinerary.date}} <br><br>
-        <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> Edit Itinerary </router-link> 
-        <button id="drivingDirections" v-on:click='generateDrivingLink(itinerary.itineraryId, itinerary.startingLocation)'>Get Driving Directions!</button><br><br> 
+        <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> Edit Itinerary </router-link> <br> <br>
+        <button id="drivingDirections" v-on:click='generateDrivingLink(itinerary.itineraryId, itinerary.startingLocation)'>Get Driving Directions!</button>
         <br><br><button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
     </div>
             </div>
