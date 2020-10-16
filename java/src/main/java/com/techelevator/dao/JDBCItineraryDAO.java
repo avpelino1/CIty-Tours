@@ -41,21 +41,22 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		//works if the logged in user creates a itinerary, otherwise need a new way to retrieve the logged in user's name to get the id
 		Long currentUserId = (long) userDAO.findIdByUsername(itinerary.getUsername());
 		
-		String sql = "INSERT INTO itinerary(name, starting_point, date_of, user_id, share)"
-				+ " VALUES (?, ?, ?, ?, ?) RETURNING itinerary_id";
-		SqlRowSet itinerarySql = jdbcTemplate.queryForRowSet(sql, name, startingLocation, date, currentUserId, itinerary.getShare());
-		System.out.println("*******HERE****" + name + startingLocation +  date +  currentUserId + itinerary.getShare());
+		String sql = "INSERT INTO itinerary(name, starting_point, date_of, user_id)"
+				+ " VALUES (?, ?, ?, ?) RETURNING itinerary_id";
+		SqlRowSet itinerarySql = jdbcTemplate.queryForRowSet(sql, name, startingLocation, date, currentUserId);
+		System.out.println("*******HERE****" + name + startingLocation +  date +  currentUserId);
 		Long itineraryId = 0L;
 		
 		if (itinerarySql.next()) {
 			itineraryId = itinerarySql.getLong("itinerary_id");
 		}
-		
+		System.out.println(itineraryId);
 		String destinationInsert = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (? ,?)";
 		
 		for (Long landmark : itinerary.getDestinations()) {
 			jdbcTemplate.update(destinationInsert, itineraryId, landmark);
 		}
+		System.out.println("***NOW HERE***");
 		
 	}
 

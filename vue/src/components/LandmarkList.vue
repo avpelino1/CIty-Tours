@@ -3,11 +3,8 @@
   <GoogleMaps v-bind:pointsToDisplay="filteredList"/>
       
       <div class='category-dropdown'>
-        <!-- <p id="category-paragraph">View Landmarks by Category:  </p> -->
         <label> View Landmarks by Category: 
         <select id="categoryFilter" v-model='filter.venueType' v-on:change='changeSelectedLandmarks'>
-      
-
           <option value="viewAll" default>View All</option>
           <option value="Parks & Gardens">Parks & Gardens</option>
           <option value="Museums & Historical Sites">Museums & Historical Sites</option>
@@ -86,7 +83,7 @@ export default {
       window.location.reload()
     },
     addLandmark(id) {
-      this.$stroe.state.selectedItineraryLandmarks.push(id);
+      this.$store.state.selectedLandmarks.push(id);
     },
     changeSelectedLandmarks(){
       this.$store.commit("ASSIGN_LANDMARKS", this.filteredList)
