@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import java.util.List;
 
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,4 +23,5 @@ public interface LandmarkDAO {
 	
 	public void deleteLandmark(Long id);
 
+	public Landmark mapRowToLandmark(SqlRowSet results);
 }

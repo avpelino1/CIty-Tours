@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.techelevator.model.Itinerary;
 import com.techelevator.model.ItineraryWeb;
@@ -41,21 +42,23 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		//works if the logged in user creates a itinerary, otherwise need a new way to retrieve the logged in user's name to get the id
 		Long currentUserId = (long) userDAO.findIdByUsername(itinerary.getUsername());
 		
-		String sql = "INSERT INTO itinerary(name, starting_point, date_of, user_id, share)"
-				+ " VALUES (?, ?, ?, ?, ?) RETURNING itinerary_id";
-		SqlRowSet itinerarySql = jdbcTemplate.queryForRowSet(sql, name, startingLocation, date, currentUserId, itinerary.getShare());
-		
+		String sql = "INSERT INTO itinerary(name, starting_point, date_of, user_id)"
+				+ " VALUES (?, ?, ?, ?) RETURNING itinerary_id";
+		SqlRowSet itinerarySql = jdbcTemplate.queryForRowSet(sql, name, startingLocation, date, currentUserId);
+		System.out.println("*******HERE****" + name + startingLocation +  date +  currentUserId);
 		Long itineraryId = 0L;
 		
 		if (itinerarySql.next()) {
 			itineraryId = itinerarySql.getLong("itinerary_id");
 		}
-		
+		System.out.println(itineraryId);
 		String destinationInsert = "INSERT INTO destinations(itinerary_id, landmark_id) VALUES (? ,?)";
 		
 		for (Long landmark : itinerary.getDestinations()) {
 			jdbcTemplate.update(destinationInsert, itineraryId, landmark);
+			System.out.println(landmark);
 		}
+		System.out.println("***NOW HERE***");
 		
 	}
 
@@ -222,4 +225,24 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		return itinerary;
 	}
 
+	@Override
+	public List<Landmark> getLandmarkAddresses(@PathVariable Long id) {
+		List<Landmark> LandmarkAddresses = new ArrayList<>();
+		
+		String sqlStr = "SELECT * FROM itinerary "
+				+ "JOIN destinations ON destinations.itinerary_id = itinerary.itinerary_id "
+				+ "JOIN landmark ON landmark.landmark_id = destinations.landmark_id "
+				+ "WHERE itinerary.itinerary_id = ?";
+		
+		SqlRowSet output = jdbcTemplate.queryForRowSet(sqlStr, id);
+		
+		while(output.next()) {
+			Landmark landmark = new Landmark();
+			landmark.setId(output.getLong("landmark_id"));
+			landmark.setAddress(output.getString("address"));
+			LandmarkAddresses.add(landmark);
+		}
+		
+		return LandmarkAddresses;
+	}
 }

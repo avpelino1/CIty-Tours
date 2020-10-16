@@ -119,4 +119,9 @@ public class ItineraryController {
 			//if null then unauthorized
 		}
 	}
+	
+	@RequestMapping(path="/getLandmarkAddresses/{id}", method=RequestMethod.GET)
+	public List<Landmark> getLandmarkAddresses(@PathVariable Long id) {
+		return itineraryDAO.getLandmarkAddresses(id);
+	}
 }

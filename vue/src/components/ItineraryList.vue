@@ -14,7 +14,7 @@
         <b>Starting Location: </b> {{itinerary.startingLocation}} <br><br>
         <b>Date:</b> {{itinerary.date}} <br><br>
         <router-link :to="{ name: 'itinerary-details', params: {id: itinerary.itineraryId}}"> Edit Itinerary </router-link> 
-  <!--      <a href="#" id="drivingDirections" getItineraryLandmark(itinerary.itineraryId)>Get Driving Directions!</a><br><br>  -->
+        <button id="drivingDirections" v-on:click='generateDrivingLink(itinerary.itineraryId, itinerary.startingLocation)'>Get Driving Directions!</button><br><br> 
         <br><br><button v-on:click.prevent='deleteItinerary(itinerary.itineraryId)'> Delete </button>
     </div>
             </div>
@@ -38,7 +38,7 @@
 import itineraryService from '../services/ItineraryService.js';
 import landmarkService from '../services/LandmarkService.js';
 
-//let baseDirURL = "http://wwww.google.com/maps/dir/"
+let baseDirURL = "http://wwww.google.com/maps/dir/startinglocation/"
 
 export default {
     name: 'itinerary-list',
@@ -47,7 +47,8 @@ export default {
             myItineraries: [],
             myFriendsItineraries: [],
             itineraryLandmarks: [],
-            landmarks: []
+            landmarks: [],
+            googleDirections : '',
         }
     },
     methods:{
@@ -62,11 +63,18 @@ export default {
                     alert("Itinerary successfully deleted."));
             
         },
-        // getItineraryLandmarks(id){
-        //     itineraryService.getItineraryLandmarks(id).then((response)=> {
-        //         this.itineraryLandmarks = response.data;
-        //     });
-        // }
+        generateDrivingLink(id, startingLocation){
+            itineraryService.getLandmarkAddresses(id).then((response)=> {
+                this.itineraryLandmarks = response.data;
+        this.itineraryLandmarks.forEach((landmark)=>{
+            this.googleDirections = this.googleDirections + landmark.address + "/"
+        })
+        this.googleDirections = "http://www.google.com/maps/dir/"+ startingLocation + "/" + this.googleDirections
+        window.open(this.googleDirections)
+        this.googleDirections = ''
+            });
+
+        }
 
     },
     created(){

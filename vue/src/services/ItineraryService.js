@@ -39,6 +39,10 @@ export default {
 
     addLandmark(itineraryID, landmarkID){
         return http.post(`/${itineraryID}/${landmarkID}/add`);
+    },
+
+    getLandmarkAddresses(id){
+        return http.get(`/getLandmarkAddresses/${id}`)
     }
 
 }

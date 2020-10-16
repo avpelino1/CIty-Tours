@@ -68,7 +68,7 @@ export default {
 
     .thumb {
         display: inline-flex;
-        width: 1%;
+        width: 5%;
         padding-left: 10px;        
     }
     #reviewTitle {

@@ -27,6 +27,7 @@ export default new Vuex.Store({
     geocoded: [],
     startingLocation: '',
     selectedLandmarks: [],
+    selectedItineraryLandmarks: [],
     points: []
   },
   mutations: {
@@ -49,6 +50,12 @@ export default new Vuex.Store({
     ASSIGN_LANDMARKS(state, filteredList) {
       state.selectedLandmarks = {};
       state.selectedLandmarks = filteredList;
+    },
+    ADD_ITINERARY_LANDMARK(state, id) {
+      state.selectedItineraryLandmarks.push(id);
+    },
+    CLEAR_ITINERARY_LANDMARK() {
+      state.selectedItineraryLandmarks = [];
     }
   }
 })
