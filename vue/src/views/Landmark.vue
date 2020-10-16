@@ -15,6 +15,7 @@
 
         <create-itinerary/>
         <landmark-form/>
+        
   
   </div>
 </div>
@@ -44,14 +45,18 @@ export default {
 .header{
   background-color: lavender;
   padding-top: 1px;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 #header-names{
-  background-color: lavenderblush;
+  /* background-color: lavenderblush; */
   border-radius: 40px;
   opacity: 0.75;
-  margin-left: 700px;
-  margin-right: 700px;
+  margin-left: 560px;
+  margin-right: 560px;
+  padding-bottom: 50px;
+  font-weight: 600;
+  letter-spacing: 0.25vw;
+  text-transform: uppercase;
 }
 .components{
   padding-left: 10px;
@@ -63,6 +68,11 @@ export default {
 }
 .landmark-form {
   background: white;
+}
+
+
+#landmark {
+  margin: 15px;
 }
 /* .landmark-grid-container {
   display: grid;

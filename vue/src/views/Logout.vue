@@ -15,6 +15,6 @@ export default {
 
 <style>
 .logout-div {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 </style>

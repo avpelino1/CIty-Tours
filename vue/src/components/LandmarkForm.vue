@@ -76,9 +76,11 @@ export default {
   .h2-create {
     margin: 0;
     color: navy;
-    font-size: 2em;
-    font-weight: 300;
     text-align: left;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 800;
 }
   .p-create {
     font-size: 12px;
@@ -101,7 +103,7 @@ export default {
     width: 100%; 
    padding: 0.5em;
    border: none;
-    font: 300 100%/1.2 Ubuntu, sans-serif;
+    font: 300 100%/1.2 'Open Sans', sans-serif;
 }
 
 #address-input, #name-input, #description-input, #venue-type-description {
@@ -114,14 +116,5 @@ textarea {
   height: 6em;
 }
 
-/* input[type="submit"], .create-itinerary-button {
-  background: lavender;
-  color: #333;
-  width: 100%;
-}
-
-input[type="submit"]:hover, button:hover {
-  background: thistle;
-} */
     
 </style>

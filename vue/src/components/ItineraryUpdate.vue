@@ -121,7 +121,7 @@ export default {
     border-radius: 70px;
 }
 .itinerary-update {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 .itinerary-details-grid{
     display: grid;

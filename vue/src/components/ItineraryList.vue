@@ -1,7 +1,7 @@
 <template>
   <div class="itinerary-div">
-    <div class='header'>
-        <br><br><h1 class='header-name'>View Available Itineraries</h1>
+    <div class="heading">
+        <br><br><h1 class='header-name-it'>View Available Itineraries</h1>
     </div>
 
       <div class="grid-container">
@@ -87,13 +87,26 @@ export default {
 </script>
 
 <style>
-    .header-name{
-        background: lavenderblush;
-        opacity: .75;
-        border-radius: 100px;
-        margin-left: 700px;
-        margin-right: 700px;
-    }
+.heading{
+  background-color: lavender;
+  padding-top: 1px;
+  
+}
+.header-name-it{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    margin-left: 200px;
+  /* background-color: lavenderblush; */
+  border-radius: 40px;
+  opacity: 0.75;
+  margin-left: 660px;
+  margin-right: 660px;
+  padding-bottom: 50px;
+  justify-content: center;
+  font-weight: 600;
+  letter-spacing: 0.25vw;
+  text-transform: uppercase;
+}
     .itinerary-list{
         padding: 20px;
         margin-left: 150px;
@@ -114,7 +127,7 @@ export default {
         color: navy;
     }
     .itinerary-div {
-        font-family: 'Ubuntu', sans-serif;
+        font-family: 'Open Sans', sans-serif;
     }
    .itinerary-header{
        text-align: center;

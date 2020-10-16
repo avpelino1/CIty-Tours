@@ -54,7 +54,7 @@ export default {
 <style>
 
 .contact-form {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   max-width: 1208px;
   margin: 0 auto;
   text-align: left;
@@ -63,9 +63,10 @@ export default {
 .h2-create {
   margin: 0;
   color: navy;
-  font-size: 2em;
-  font-weight: 300;
-  text-align: left;
+ font-size: 16x;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 800;
 }
 .p-create {
   font-size: 12px;
@@ -88,7 +89,7 @@ export default {
   width: 100%;
   padding: 0.5em;
   border: none;
-  font: 300 100%/1.2 Ubuntu, sans-serif;
+  font: 300 100%/1.2 'Open Sans', sans-serif;
 }
 
 #address-input, #name-input {

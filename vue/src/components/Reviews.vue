@@ -21,7 +21,7 @@
           <input class ='description-field' type='text' name='description' v-model='newReview.description'/>
       </div><br>
      <div class='actions'>
-         <button v-on: click="window.location.reload();">Submit your Review </button>
+         <button v-on: click="window.location.reload();">Submit Review </button>
      </div>
   </form>
 
@@ -76,7 +76,7 @@ export default {
         text-align: center;
     }
     .reviews {
-         font-family: 'Ubuntu', sans-serif;
+         font-family: 'Open Sans', sans-serif;
     }
     .reviews-header{
         color: navy;

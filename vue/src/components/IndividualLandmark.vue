@@ -95,7 +95,7 @@ export default {
     border-radius: 150px;
 }
 .individual-landmark {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     background: lavender;
     padding-left: 10px;
 }

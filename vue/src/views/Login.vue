@@ -105,7 +105,7 @@ export default {
 .sign {
   padding-top: 40px;
   color: #8C5AAA;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   font-size: 23px;
 }
@@ -127,7 +127,7 @@ export default {
     margin-left: 46px;
     text-align: center;
     margin-bottom: 27px;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .pass {
@@ -147,7 +147,7 @@ export default {
     margin-left: 46px;
     text-align: center;
     margin-bottom: 27px;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     }
 
     #city-tours-description {
@@ -161,7 +161,7 @@ export default {
     /* margin-left: 5px; */
     text-align: center;
     margin-bottom: 27px;
-    font-family: 'Ubuntu', sans-serif;
+   font-family: 'Open Sans', sans-serif;
     }
 
     .submit {
@@ -174,7 +174,7 @@ export default {
         padding-right: 40px;
         padding-bottom: 10px;
         padding-top: 10px;
-        font-family: 'Ubuntu', sans-serif;
+        font-family: 'Open Sans', sans-serif;
         margin-left: 35%;
         font-size: 13px;
         box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
@@ -187,7 +187,7 @@ export default {
         font-weight: 700;
         font-size: 18px;
         letter-spacing: 1px;
-        font-family: 'Ubuntu', sans-serif;
+        font-family: 'Open Sans', sans-serif;
   }
 
   .un:focus, .pass:focus {
@@ -200,7 +200,7 @@ export default {
         font-weight: 700;
         font-size: 14px;
         letter-spacing: 1px;
-        font-family: 'Ubuntu', sans-serif;
+        font-family: 'Open Sans', sans-serif;
         text-align: center;
     }
 

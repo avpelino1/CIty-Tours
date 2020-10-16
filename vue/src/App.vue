@@ -18,7 +18,7 @@
   margin-left: 1750px;
   display: flex;
   justify-content: flex-end;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 
 }
 </style>

@@ -3,7 +3,7 @@
   <GoogleMaps v-bind:pointsToDisplay="filteredList"/>
       
       <div class='category-dropdown'>
-        <!-- <p id="category-paragraph">View Landmarks by Category:  </p> -->
+       
         <label> View Landmarks by Category: 
         <select id="categoryFilter" v-model='filter.venueType' v-on:change='changeSelectedLandmarks'>
       
@@ -38,7 +38,6 @@
 <script>
 import landmarkService from '../services/LandmarkService.js';
 import reviewService from '../services/ReviewService.js';
-// import itineraryService from '@/services/ItineraryService.js';
 import GoogleMaps from '@/components/GoogleMaps.vue';
 
 export default {
@@ -98,8 +97,7 @@ export default {
   created() {
     landmarkService.getLandmarks().then((response)=>{
       this.landmarks=response.data;
-      // this.filteredList = this.landmarks;
-      // this.$store.commit("ASSIGN_LANDMARKS", this.landmarks)
+ 
     }
      )
   },
@@ -179,7 +177,7 @@ export default {
       cursor: pointer;
     }
     .landmark-main-div {
-      font-family: 'Ubuntu', sans-serif;
+      font-family: 'Open Sans', sans-serif;
     }
    
 </style>
