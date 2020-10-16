@@ -38,8 +38,8 @@ export default {
     methods:{
       createItinerary() {
         itineraryService.createItinerary(this.newItinerary);
-            this.$store.state.selectedItineraryLandmarks = [];
             window.location.href = "http://localhost:8081/itinerary"
+            this.$store.commit("CLEAR_ITINERARY_LANDMARK");
         },
 
 }

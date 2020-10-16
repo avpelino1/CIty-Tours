@@ -83,7 +83,7 @@ export default {
       window.location.reload()
     },
     addLandmark(id) {
-      this.$store.state.selectedItineraryLandmarks.push(id);
+      this.$store.commit("ADD_ITINERARY_LANDMARK", id);
     },
     changeSelectedLandmarks(){
       this.$store.commit("ASSIGN_LANDMARKS", this.filteredList)

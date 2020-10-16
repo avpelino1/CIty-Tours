@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.techelevator.model.Itinerary;
 import com.techelevator.model.ItineraryWeb;
@@ -224,4 +225,24 @@ public class JDBCItineraryDAO implements ItineraryDAO {
 		return itinerary;
 	}
 
+	@Override
+	public List<Landmark> getLandmarkAddresses(@PathVariable Long id) {
+		List<Landmark> LandmarkAddresses = new ArrayList<>();
+		
+		String sqlStr = "SELECT * FROM itinerary "
+				+ "JOIN destinations ON destinations.itinerary_id = itinerary.itinerary_id "
+				+ "JOIN landmark ON landmark.landmark_id = destinations.landmark_id "
+				+ "WHERE itinerary.itinerary_id = ?";
+		
+		SqlRowSet output = jdbcTemplate.queryForRowSet(sqlStr, id);
+		
+		while(output.next()) {
+			Landmark landmark = new Landmark();
+			landmark.setId(output.getLong("landmark_id"));
+			landmark.setAddress(output.getString("address"));
+			LandmarkAddresses.add(landmark);
+		}
+		
+		return LandmarkAddresses;
+	}
 }
